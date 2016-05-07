@@ -3,4 +3,7 @@
     <color name="colorPrimary">#F84790</color>
     <color name="colorPrimaryDark">#F84790</color>
     <color name="colorAccent">#F6468F</color>
+
+    <color name="disable_mask">#4DFFFFFF</color>
+    <color name="bg_animation_item_cur">#4D000000</color>
 </resources>

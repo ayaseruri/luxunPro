@@ -1,12 +1,15 @@
-package pro.luxun.luxunanimation.presenter.adapter;
+package pro.luxun.luxunanimation.presenter.presenter;
 
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.model.IMainActivityModel;
 import pro.luxun.luxunanimation.model.MainActivityModel;
 import pro.luxun.luxunanimation.utils.RxUtils;
+import pro.luxun.luxunanimation.utils.SerializeUtils;
 import pro.luxun.luxunanimation.view.activity.IMainActivity;
 import rx.Subscriber;
 import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by wufeiyang on 16/5/7.
@@ -22,8 +25,16 @@ public class MainActivityPresenter {
     }
 
     public void getMainJsonNet(){
-        mainActivityModel.getMainJsonNet().compose(RxUtils.<MainJson>applySchedulers())
-            .subscribe(new Subscriber<MainJson>() {
+        mainActivityModel.getMainJsonNet().subscribeOn(Schedulers.io())
+                .map(new Func1<MainJson, MainJson>() {
+                    @Override
+                    public MainJson call(MainJson mainJson) {
+                        SerializeUtils.serialization(SerializeUtils.TAG_MAIN_JSON, mainJson);
+                        return mainJson;
+                    }
+                })
+                .compose(RxUtils.<MainJson>applySchedulers())
+                .subscribe(new Subscriber<MainJson>() {
                 @Override
                 public void onCompleted() {
 

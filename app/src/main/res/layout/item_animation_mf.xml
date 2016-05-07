@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/disable_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/disable_mask"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_narrow">
+        <TextView
+            android:id="@+id/cur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_narrow"
+            android:text="00"
+            android:textSize="@dimen/text_szie_small"
+            android:textColor="@android:color/white"
+            android:background="@color/bg_animation_item_cur"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="标题"
+            android:textSize="@dimen/text_szie_normal"
+            android:textColor="@android:color/white"
+            android:layout_alignParentBottom="true"/>
+
+        <RadioButton
+            android:id="@+id/favrite"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+</merge>

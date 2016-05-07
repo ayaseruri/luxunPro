@@ -223,7 +223,7 @@ public class MainJson {
          * cur : 12
          */
 
-        private List<BangumisEntity> bangumis;
+        private List<UpdatingEntity> bangumis;
 
         public String getQuarter() {
             return quarter;
@@ -241,149 +241,13 @@ public class MainJson {
             this.url = url;
         }
 
-        public List<BangumisEntity> getBangumis() {
+        public List<UpdatingEntity> getBangumis() {
             return bangumis;
         }
 
-        public void setBangumis(List<BangumisEntity> bangumis) {
+        public void setBangumis(List<UpdatingEntity> bangumis) {
             this.bangumis = bangumis;
         }
 
-        public static class BangumisEntity {
-            private String original;
-            private String title;
-            private int week;
-            private String cover;
-            private String color;
-            private String text;
-            private int type;
-            private int preview;
-            private int license;
-            private int modified;
-            private String cur;
-            /**
-             * url : %5BJYFanSub%5D%5BGirls_Beyond_The_Wilds%5D%5B01%5D%5BBIG5%5D%5B720p%5D.mp4
-             * set : 01
-             */
-
-            private List<SetsEntity> sets;
-
-            public String getOriginal() {
-                return original;
-            }
-
-            public void setOriginal(String original) {
-                this.original = original;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public int getWeek() {
-                return week;
-            }
-
-            public void setWeek(int week) {
-                this.week = week;
-            }
-
-            public String getCover() {
-                return cover;
-            }
-
-            public void setCover(String cover) {
-                this.cover = cover;
-            }
-
-            public String getColor() {
-                return color;
-            }
-
-            public void setColor(String color) {
-                this.color = color;
-            }
-
-            public String getText() {
-                return text;
-            }
-
-            public void setText(String text) {
-                this.text = text;
-            }
-
-            public int getType() {
-                return type;
-            }
-
-            public void setType(int type) {
-                this.type = type;
-            }
-
-            public int getPreview() {
-                return preview;
-            }
-
-            public void setPreview(int preview) {
-                this.preview = preview;
-            }
-
-            public int getLicense() {
-                return license;
-            }
-
-            public void setLicense(int license) {
-                this.license = license;
-            }
-
-            public int getModified() {
-                return modified;
-            }
-
-            public void setModified(int modified) {
-                this.modified = modified;
-            }
-
-            public String getCur() {
-                return cur;
-            }
-
-            public void setCur(String cur) {
-                this.cur = cur;
-            }
-
-            public List<SetsEntity> getSets() {
-                return sets;
-            }
-
-            public void setSets(List<SetsEntity> sets) {
-                this.sets = sets;
-            }
-
-            public static class SetsEntity {
-                private String url;
-                private String set;
-
-                public String getUrl() {
-                    return url;
-                }
-
-                public void setUrl(String url) {
-                    this.url = url;
-                }
-
-                public String getSet() {
-                    return set;
-                }
-
-                public void setSet(String set) {
-                    this.set = set;
-                }
-            }
-        }
     }
 }

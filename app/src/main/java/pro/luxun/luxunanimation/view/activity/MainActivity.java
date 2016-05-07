@@ -22,7 +22,7 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
-import pro.luxun.luxunanimation.presenter.adapter.MainActivityPresenter;
+import pro.luxun.luxunanimation.presenter.presenter.MainActivityPresenter;
 import pro.luxun.luxunanimation.view.fragment.MainFragment_;
 
 @EActivity(R.layout.activity_main)
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         mAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         mAlertDialog.setTitleText(mLoadingStr);
 
-        mMainActivityPresenter.getMainJsonNet();
+        mMainActivityPresenter.getMainJsonCache();
     }
 
     @Override
