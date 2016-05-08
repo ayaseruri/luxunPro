@@ -47,7 +47,7 @@ public class MainActivityPresenter {
 
                 @Override
                 public void onNext(MainJson mainJson) {
-                    mainActivity.onGetMainJsonSuccessNet();
+                    mainActivity.onGetMainJsonSuccessNet(mainJson);
                 }
 
                 @Override

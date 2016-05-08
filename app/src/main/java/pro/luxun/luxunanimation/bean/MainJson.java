@@ -1,11 +1,16 @@
 package pro.luxun.luxunanimation.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by wufeiyang on 16/5/7.
  */
-public class MainJson {
+public class MainJson implements Parcelable, Serializable{
 
     /**
      * original : 少年女僕 Shounen Maid
@@ -55,7 +60,7 @@ public class MainJson {
         this.quars = quars;
     }
 
-    public static class UpdatingEntity {
+    public static class UpdatingEntity implements Serializable {
         private String original;
         private String title;
         private String quarter;
@@ -179,7 +184,7 @@ public class MainJson {
             this.sets = sets;
         }
 
-        public static class SetsEntity {
+        public static class SetsEntity implements Serializable {
             private String url;
             private String set;
 
@@ -201,7 +206,7 @@ public class MainJson {
         }
     }
 
-    public static class QuarsEntity {
+    public static class QuarsEntity implements Serializable {
         private String quarter;
         private String url;
         /**
@@ -250,4 +255,38 @@ public class MainJson {
         }
 
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeList(this.updating);
+        dest.writeList(this.quars);
+    }
+
+    public MainJson() {
+    }
+
+    protected MainJson(Parcel in) {
+        this.updating = new ArrayList<UpdatingEntity>();
+        in.readList(this.updating, UpdatingEntity.class.getClassLoader());
+        this.quars = new ArrayList<QuarsEntity>();
+        in.readList(this.quars, QuarsEntity.class.getClassLoader());
+    }
+
+    public static final Creator<MainJson> CREATOR = new Creator<MainJson>() {
+        @Override
+        public MainJson createFromParcel(Parcel source) {
+            return new MainJson(source);
+        }
+
+        @Override
+        public MainJson[] newArray(int size) {
+            return new MainJson[size];
+        }
+    };
 }

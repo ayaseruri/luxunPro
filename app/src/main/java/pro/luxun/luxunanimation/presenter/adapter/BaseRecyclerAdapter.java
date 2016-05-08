@@ -11,12 +11,12 @@ import java.util.List;
 /**
  * Created by wufeiyang on 16/5/7.
  */
-public abstract class BaseRecyclerAdapter<T, V extends View> extends RecyclerView.Adapter {
+public abstract class BaseRecyclerAdapter<T, V extends View> extends RecyclerView.Adapter<BaseRecyclerAdapter.BaseViewHolder<V>> {
 
     protected List<T> items = new ArrayList<>();
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder<V> onCreateViewHolder(ViewGroup parent, int viewType) {
         return new BaseViewHolder<>(onCreateItemView(parent, viewType));
     }
 
@@ -38,4 +38,17 @@ public abstract class BaseRecyclerAdapter<T, V extends View> extends RecyclerVie
     }
 
     protected abstract V onCreateItemView(ViewGroup parent, int viewType);
+
+    public static class BaseViewHolder<V extends View> extends RecyclerView.ViewHolder{
+        private V mView;
+
+        public BaseViewHolder(View itemView) {
+            super(itemView);
+        }
+
+        public V getView() {
+            return mView;
+        }
+    }
+
 }

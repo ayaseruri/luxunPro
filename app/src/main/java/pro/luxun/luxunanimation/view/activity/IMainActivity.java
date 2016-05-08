@@ -7,7 +7,7 @@ import pro.luxun.luxunanimation.bean.MainJson;
  */
 public interface IMainActivity {
     void onStartGetMainJsonNet();
-    void onGetMainJsonSuccessNet();
+    void onGetMainJsonSuccessNet(MainJson mainJson);
     void onGetMainJsonErrorNet();
     void onGetMainJsonCacheSuccess(MainJson mainJson);
     void onGetMainJsonCacheFailed();

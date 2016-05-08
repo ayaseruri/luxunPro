@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/head_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="一六年 夏"
+        android:textColor="@color/text_color_black"
+        android:textSize="@dimen/text_size_big"/>
+
+</merge>

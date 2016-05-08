@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#F84790</color>
     <color name="colorAccent">#F6468F</color>
 
-    <color name="disable_mask">#4DFFFFFF</color>
+    <color name="text_color_black">#212121</color>
+    <color name="text_color_gray">#E0E0E0</color>
+    <color name="text_color_dark_gray">#616161</color>
+
+    <color name="disable_mask">#CDFFFFFF</color>
+    <color name="normal_mask">#CD000000</color>
     <color name="bg_animation_item_cur">#4D000000</color>
 </resources>

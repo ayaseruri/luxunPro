@@ -7,6 +7,11 @@
         android:layout_height="match_parent" />
 
     <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_animation_card_mask" />
+
+    <ImageView
         android:id="@+id/disable_mask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

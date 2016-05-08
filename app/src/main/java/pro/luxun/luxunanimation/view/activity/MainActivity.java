@@ -1,6 +1,7 @@
 package pro.luxun.luxunanimation.view.activity;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.design.widget.TabLayout;
@@ -22,6 +23,7 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
+import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.presenter.presenter.MainActivityPresenter;
 import pro.luxun.luxunanimation.view.fragment.MainFragment_;
 
@@ -63,13 +65,13 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
     }
 
     @Override
-    public void onGetMainJsonSuccessNet() {
+    public void onGetMainJsonSuccessNet(MainJson mainJson) {
         if(null != mAlertDialog && mAlertDialog.isShowing()){
             mAlertDialog.dismiss();
         }
 
         //初始化Fragments
-        initMain();
+        initMain(mainJson);
     }
 
     @Override
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
     public void onGetMainJsonCacheSuccess(MainJson mainJson) {
         if(null != mainJson){
             //初始化Fragments
-            initMain();
+            initMain(mainJson);
         }else {
             mMainActivityPresenter.getMainJsonNet();
         }
@@ -103,9 +105,9 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         mMainActivityPresenter.getMainJsonNet();
     }
 
-    private void initMain(){
+    private void initMain(MainJson mainJson){
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.add(new MainFragment_(), mMainTabTitles[0]);
+        viewPagerAdapter.add(MainFragment_.builder().arg(IntentConstant.INTENT_MAIN_JSON, (Parcelable) mainJson).build(), mMainTabTitles[0]);
         mViewPager.setAdapter(viewPagerAdapter);
 
         mTabLayout.setVisibility(View.VISIBLE);
