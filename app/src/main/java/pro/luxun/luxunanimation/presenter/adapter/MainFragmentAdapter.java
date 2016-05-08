@@ -31,8 +31,8 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
     private String mKeywords;
     private List<MainJson.UpdatingEntity> mUpdatingEntities;
 
-    public MainFragmentAdapter(MainJson mainJson) {
-        this.mUpdatingEntities = MainJsonUtils.formatMF(mainJson);
+    public MainFragmentAdapter(Context context, MainJson mainJson) {
+        this.mUpdatingEntities = MainJsonUtils.formatMF(context, mainJson);
     }
 
     @Override
@@ -41,10 +41,13 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
         switch (viewType){
             case TYPE_NORMAL:
                 itemView = MFAnimationItem_.build(parent.getContext());
+                break;
             case TYPE_HEAD:
                 itemView = MFHeadItem_.build(parent.getContext());
+                break;
             case TYPE_END:
                 itemView = MFBottomItem_.build(parent.getContext());
+                break;
             default:
                 itemView = MFAnimationItem_.build(parent.getContext());
                 break;
@@ -58,6 +61,11 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
             case TYPE_NORMAL:
                 ((MFAnimationItem_) holder.itemView).bind(mUpdatingEntities.get(position), mKeywords);
                 break;
+            case TYPE_HEAD:
+                ((MFHeadItem_) holder.itemView).bind(mUpdatingEntities.get(position).getTitle());
+                break;
+            case TYPE_END:
+                ((MFBottomItem_) holder.itemView).bind(mUpdatingEntities.get(position).getTitle());
             default:
                 break;
         }
@@ -70,13 +78,26 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
 
     @Override
     public int getItemViewType(int position) {
-        return TYPE_NORMAL;
+        MainJson.UpdatingEntity updatingEntity = mUpdatingEntities.get(position);
+        switch (updatingEntity.getType()){
+            case MainJsonUtils.TYPE_HEAD:
+                return TYPE_HEAD;
+            case MainJsonUtils.TYPE_BOTTOM:
+                return TYPE_END;
+            default:
+                return TYPE_NORMAL;
+        }
     }
 
     @UiThread
     public void addFilter(String keywors){
         this.mKeywords = keywors;
         notifyDataSetChanged();
+    }
+
+    public boolean isNormalItem(int postion){
+        MainJson.UpdatingEntity updatingEntity = mUpdatingEntities.get(postion);
+        return (updatingEntity.getType() != MainJsonUtils.TYPE_BOTTOM && updatingEntity.getType() != MainJsonUtils.TYPE_HEAD);
     }
 
     public static class MFViewHolder extends RecyclerView.ViewHolder{

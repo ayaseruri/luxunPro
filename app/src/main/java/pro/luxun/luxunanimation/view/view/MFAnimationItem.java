@@ -44,7 +44,8 @@ public class MFAnimationItem extends CardView{
 
     @AfterViews
     void init(){
-        setLayoutParams(new ViewGroup.LayoutParams(LocalDisplay.dp2px(116), LocalDisplay.dp2px(170)));
+        int width = (LocalDisplay.SCREEN_WIDTH_PIXELS - LocalDisplay.dp2px(4) * 4) / 3;
+        setLayoutParams(new ViewGroup.LayoutParams( width, (int) (width / 3 * 4.5)));
     }
 
     public void bind(MainJson.UpdatingEntity updatingEntity, String keywords){

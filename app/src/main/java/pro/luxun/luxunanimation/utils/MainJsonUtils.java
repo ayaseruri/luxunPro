@@ -19,15 +19,37 @@ public class MainJsonUtils {
     public static List<MainJson.UpdatingEntity> formatMF(Context context, MainJson mainJson){
         List<MainJson.UpdatingEntity> updatingEntities = new ArrayList<>();
         updatingEntities.addAll(mainJson.getUpdating());
+
         MainJson.UpdatingEntity updatingEntity = new MainJson.UpdatingEntity();
         updatingEntity.setType(TYPE_BOTTOM);
+
+        int setCount = 0;
+        for(MainJson.UpdatingEntity temp: mainJson.getUpdating()){
+            setCount = setCount + temp.getSets().size();
+        }
+
         updatingEntity.setTitle(String.format(context.getResources().getString(R.string.bottom_mf)
-                , mainJson.getUpdating().size()));
+                , mainJson.getUpdating().size(), setCount));
+        updatingEntities.add(updatingEntity);
+
         for (MainJson.QuarsEntity quarsEntity : mainJson.getQuars()){
+            updatingEntity = new MainJson.UpdatingEntity();
+            updatingEntity.setType(TYPE_HEAD);
+            updatingEntity.setTitle(MainJsonUtils.num2Season(quarsEntity.getQuarter()));
 
-
-
+            updatingEntities.add(updatingEntity);
             updatingEntities.addAll(quarsEntity.getBangumis());
+
+            updatingEntity = new MainJson.UpdatingEntity();
+            updatingEntity.setType(TYPE_BOTTOM);
+            setCount = 0;
+            for(MainJson.UpdatingEntity temp : quarsEntity.getBangumis()){
+                setCount = setCount + temp.getSets().size();
+            }
+
+            updatingEntity.setTitle(String.format(context.getResources().getString(R.string.bottom_mf)
+                    , quarsEntity.getBangumis().size(), setCount));
+            updatingEntities.add(updatingEntity);
         }
         return updatingEntities;
     }
@@ -60,6 +82,7 @@ public class MainJsonUtils {
             default:
                 break;
         }
+        return time.toString();
     }
 
     private static String num2Str(int num){
