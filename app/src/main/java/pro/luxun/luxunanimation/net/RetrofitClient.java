@@ -13,6 +13,8 @@ public class RetrofitClient {
 
     public static final String URL_BASE = "http://0.luxun.pro:163/";
     public static final String URL_MAIN_JSON = "http://0.luxun.pro:12580/luxun.json";
+    public static final String URL_SOURCE = "http://0.luxun.pro:12580/";
+    public static final String URL_REFERER = "http://luxun.pro/";
 
     private static ApiService sApiService;
 

@@ -60,7 +60,7 @@ public class MainJson implements Parcelable, Serializable{
         this.quars = quars;
     }
 
-    public static class UpdatingEntity implements Serializable {
+    public static class UpdatingEntity implements Serializable ,Parcelable{
         private String original;
         private String title;
         private String quarter;
@@ -204,6 +204,61 @@ public class MainJson implements Parcelable, Serializable{
                 this.set = set;
             }
         }
+
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.original);
+            dest.writeString(this.title);
+            dest.writeString(this.quarter);
+            dest.writeInt(this.week);
+            dest.writeString(this.cover);
+            dest.writeString(this.color);
+            dest.writeString(this.text);
+            dest.writeInt(this.type);
+            dest.writeInt(this.preview);
+            dest.writeInt(this.license);
+            dest.writeInt(this.modified);
+            dest.writeString(this.cur);
+            dest.writeList(this.sets);
+        }
+
+        public UpdatingEntity() {
+        }
+
+        protected UpdatingEntity(Parcel in) {
+            this.original = in.readString();
+            this.title = in.readString();
+            this.quarter = in.readString();
+            this.week = in.readInt();
+            this.cover = in.readString();
+            this.color = in.readString();
+            this.text = in.readString();
+            this.type = in.readInt();
+            this.preview = in.readInt();
+            this.license = in.readInt();
+            this.modified = in.readInt();
+            this.cur = in.readString();
+            this.sets = new ArrayList<SetsEntity>();
+            in.readList(this.sets, SetsEntity.class.getClassLoader());
+        }
+
+        public static final Creator<UpdatingEntity> CREATOR = new Creator<UpdatingEntity>() {
+            @Override
+            public UpdatingEntity createFromParcel(Parcel source) {
+                return new UpdatingEntity(source);
+            }
+
+            @Override
+            public UpdatingEntity[] newArray(int size) {
+                return new UpdatingEntity[size];
+            }
+        };
     }
 
     public static class QuarsEntity implements Serializable {

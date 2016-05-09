@@ -62,7 +62,8 @@ public class MainJsonUtils {
 
         int season = num % 100;
 
-        time.append(num2Str((num - num % 10) % 10));
+        num = (num - season) / 100;
+        time.append(num2Str((num - num % 10) / 10));
         time.append(num2Str(num % 10));
         time.append("年");
 

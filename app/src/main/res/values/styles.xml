@@ -10,6 +10,7 @@
 
     <style name="AppBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="contentInsetStart">0dp</item>
+        <item name="android:background">@color/colorPrimary</item>
         <item name="android:minHeight">?actionBarSize</item>
     </style>
 </resources>

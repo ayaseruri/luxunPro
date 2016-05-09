@@ -57,6 +57,29 @@ public class MainActivityPresenter {
             });
     }
 
+    public void getMainJsonNetSilent(){
+        mainActivityModel.getMainJsonNet()
+                .map(new Func1<MainJson, MainJson>() {
+                    @Override
+                    public MainJson call(MainJson mainJson) {
+                        SerializeUtils.serialization(SerializeUtils.TAG_MAIN_JSON, mainJson);
+                        return mainJson;
+                    }
+                })
+                .compose(RxUtils.<MainJson>applySchedulers())
+                .subscribe(new Action1<MainJson>() {
+                    @Override
+                    public void call(MainJson mainJson) {
+
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                    }
+                });
+    }
+
     public void getMainJsonCache(){
         mainActivityModel.getMainJsonCache().compose(RxUtils.<MainJson>applySchedulers())
                 .subscribe(new Action1<MainJson>() {

@@ -3,23 +3,12 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@android:color/white"
-    android:padding="@dimen/margin_narrow" >
-    
-    <EditText
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="@dimen/margin_narrow"
-        android:background="@drawable/main_search_et_bg"
-        android:gravity="center"
-        android:hint="筛选番剧"
-        android:textColorHint="@color/text_color_dark_gray"
-        android:textColor="@color/text_color_dark_gray"/>
+              android:background="@android:color/white">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/margin_narrow"/>
     
 </LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="@dimen/margin_narrow"
+        android:layout_marginTop="@dimen/margin_narrow"
+        android:layout_marginBottom="@dimen/margin_narrow"
+
+        android:background="@drawable/main_search_et_bg"
+        android:gravity="center"
+        android:hint="筛选番剧"
+        android:textColorHint="@color/text_color_dark_gray"
+        android:textColor="@color/text_color_dark_gray"/>
+</merge>

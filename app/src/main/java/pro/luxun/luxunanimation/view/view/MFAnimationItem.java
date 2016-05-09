@@ -1,10 +1,12 @@
 package pro.luxun.luxunanimation.view.view;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,13 +19,14 @@ import org.androidannotations.annotations.ViewById;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.utils.LocalDisplay;
+import pro.luxun.luxunanimation.utils.StartUtils;
 
 /**
  * Created by wufeiyang on 16/5/7.
  */
 
 @EViewGroup(R.layout.item_animation_mf)
-public class MFAnimationItem extends CardView{
+public class MFAnimationItem extends FrameLayout{
 
     @ViewById(R.id.disable_mask)
     ImageView mMask;
@@ -33,6 +36,8 @@ public class MFAnimationItem extends CardView{
     TextView mCur;
     @ViewById(R.id.title)
     TextView mTitle;
+    @ViewById(R.id.favrite)
+    CheckBox mFavrite;
 
     public MFAnimationItem(Context context) {
         super(context);
@@ -44,11 +49,11 @@ public class MFAnimationItem extends CardView{
 
     @AfterViews
     void init(){
-        int width = (LocalDisplay.SCREEN_WIDTH_PIXELS - LocalDisplay.dp2px(4) * 4) / 3;
+        int width = (LocalDisplay.SCREEN_WIDTH_PIXELS - LocalDisplay.dp2px(4)) / 3;
         setLayoutParams(new ViewGroup.LayoutParams( width, (int) (width / 3 * 4.5)));
     }
 
-    public void bind(MainJson.UpdatingEntity updatingEntity, String keywords){
+    public void bind(final MainJson.UpdatingEntity updatingEntity, String keywords){
         mCur.setText(updatingEntity.getCur());
         String title = updatingEntity.getTitle();
         mTitle.setText(title);
@@ -60,5 +65,12 @@ public class MFAnimationItem extends CardView{
         }
 
         Glide.with(getContext()).load(updatingEntity.getCover()).centerCrop().crossFade().into(mCover);
+
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartUtils.startAnimationDetailActivity(getContext(), updatingEntity);
+            }
+        });
     }
 }

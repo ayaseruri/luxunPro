@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":app" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="luxunPro" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":app" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="LuXunAnimation" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -96,8 +96,12 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.commit451/NativeStackBlur/1.0.2/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.google/ExoPlayer/r1.5.7/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.ksoichiro/android-observablescrollview/1.6.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.pnikosis/materialish-progress/1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/io.reactivex/rxandroid/1.1.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/jp.wasabeef/blurry/2.0.2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/nl.littlerobots.rxlint/rxlint/1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
@@ -107,7 +111,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/restart-dex" />
@@ -120,27 +123,32 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="design-23.3.0" level="project" />
     <orderEntry type="library" exported="" name="support-vector-drawable-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="fastjson-1.1.50.android" level="project" />
     <orderEntry type="library" exported="" name="library-1.3" level="project" />
-    <orderEntry type="library" exported="" name="androidannotations-api-4.0.0" level="project" />
     <orderEntry type="library" exported="" name="okhttp-3.2.0" level="project" />
     <orderEntry type="library" exported="" name="rxjava-1.1.3" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
     <orderEntry type="library" exported="" name="rxandroid-1.1.0" level="project" />
-    <orderEntry type="library" exported="" name="materialish-progress-1.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-23.3.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="adapter-rxjava-2.0.2" level="project" />
+    <orderEntry type="library" exported="" name="materialish-progress-1.0" level="project" />
+    <orderEntry type="library" exported="" name="ExoPlayer-r1.5.7" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="animated-vector-drawable-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="NativeStackBlur-1.0.2" level="project" />
     <orderEntry type="library" exported="" name="okio-1.6.0" level="project" />
-    <orderEntry type="library" exported="" name="rxlint-1.0" level="project" />
+    <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.3.0" level="project" />
-    <orderEntry type="library" exported="" name="retrofit-2.0.2" level="project" />
+    <orderEntry type="library" exported="" name="rxlint-1.0" level="project" />
     <orderEntry type="library" exported="" name="glide-3.7.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="design-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="blurry-2.0.2" level="project" />
+    <orderEntry type="library" exported="" name="fastjson-1.1.50.android" level="project" />
+    <orderEntry type="library" exported="" name="androidannotations-api-4.0.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-23.3.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
+    <orderEntry type="library" exported="" name="adapter-rxjava-2.0.2" level="project" />
+    <orderEntry type="library" exported="" name="animated-vector-drawable-23.3.0" level="project" />
+    <orderEntry type="library" exported="" name="retrofit-2.0.2" level="project" />
+    <orderEntry type="library" exported="" name="android-observablescrollview-1.6.0" level="project" />
   </component>
 </module>

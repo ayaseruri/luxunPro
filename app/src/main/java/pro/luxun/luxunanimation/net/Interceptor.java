@@ -13,7 +13,7 @@ public class Interceptor implements okhttp3.Interceptor {
     public Response intercept(Chain chain){
         Request request = chain.request();
         Request newRequest = request.newBuilder()
-                .addHeader("Referer", "http://luxun.pro/")
+                .addHeader("Referer", RetrofitClient.URL_REFERER)
                 .build();
 
         try {

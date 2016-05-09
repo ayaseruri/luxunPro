@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/AppBar"/>
+    android:theme="@style/AppBar"
+    app:layout_scrollFlags="scroll|enterAlways"/>

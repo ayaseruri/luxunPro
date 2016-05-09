@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         mAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         mAlertDialog.setTitleText(mLoadingStr);
 
+        mMainActivityPresenter.getMainJsonNetSilent();
         mMainActivityPresenter.getMainJsonCache();
     }
 
