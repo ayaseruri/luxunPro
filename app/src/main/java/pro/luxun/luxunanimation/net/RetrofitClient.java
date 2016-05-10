@@ -17,18 +17,26 @@ public class RetrofitClient {
     public static final String URL_REFERER = "http://luxun.pro/";
 
     private static ApiService sApiService;
+    private static OkHttpClient sOkHttpClient;
+
+    static {
+        sOkHttpClient = new OkHttpClient.Builder().addInterceptor(new Interceptor()).connectTimeout(30, TimeUnit.SECONDS).build();
+    }
 
     public static ApiService getApiService(){
         if(null == sApiService){
             synchronized (RetrofitClient.class){
                 if(null == sApiService){
                     sApiService = new Retrofit.Builder().baseUrl(URL_BASE).addConverterFactory(FastJsonConverterFactory.create())
-                            .client(new OkHttpClient.Builder().addInterceptor(new Interceptor()).connectTimeout(30, TimeUnit.SECONDS).build())
-                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                            .client(sOkHttpClient).addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .build().create(ApiService.class);
                 }
             }
         }
         return sApiService;
+    }
+
+    public static OkHttpClient getOkHttpClient() {
+        return sOkHttpClient;
     }
 }

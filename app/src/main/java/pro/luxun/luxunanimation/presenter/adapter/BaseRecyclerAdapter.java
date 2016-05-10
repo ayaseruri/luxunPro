@@ -13,7 +13,7 @@ import java.util.List;
  */
 public abstract class BaseRecyclerAdapter<T, V extends View> extends RecyclerView.Adapter<BaseRecyclerAdapter.BaseViewHolder<V>> {
 
-    protected List<T> items = new ArrayList<>();
+    protected List<T> mItems = new ArrayList<>();
 
     @Override
     public BaseViewHolder<V> onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -22,18 +22,18 @@ public abstract class BaseRecyclerAdapter<T, V extends View> extends RecyclerVie
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return mItems.size();
     }
 
     @UiThread
     public void refresh(List<T> datas){
-        items.clear();
+        mItems.clear();
         add(datas);
     }
 
     @UiThread
     public void add(List<T> datas){
-        items.addAll(datas);
+        mItems.addAll(datas);
         notifyDataSetChanged();
     }
 
@@ -42,8 +42,9 @@ public abstract class BaseRecyclerAdapter<T, V extends View> extends RecyclerVie
     public static class BaseViewHolder<V extends View> extends RecyclerView.ViewHolder{
         private V mView;
 
-        public BaseViewHolder(View itemView) {
+        public BaseViewHolder(V itemView) {
             super(itemView);
+            mView = itemView;
         }
 
         public V getView() {

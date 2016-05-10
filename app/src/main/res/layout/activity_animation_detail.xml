@@ -1,49 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="pro.luxun.luxunanimation.view.activity.AnimationDetailActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="pro.luxun.luxunanimation.view.activity.AnimationDetailActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+        android:id="@+id/observable_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/header_img"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/detail_head_height"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_below="@+id/header_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="72dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <pro.luxun.luxunanimation.view.view.AnimationSets_
+                    android:id="@+id/animation_sets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include layout="@layout/shadow"
+                         android:layout_width="match_parent"
+                         android:layout_height="1px"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_big"
+                    android:textColor="@color/text_color_dark_gray"
+                    android:layout_margin="@dimen/margin_double"
+                    android:text="简介"/>
+
+                <TextView
+                    android:id="@+id/introduce"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_szie_normal"
+                    android:textColor="@color/text_color_gray"
+                    android:lineSpacingMultiplier="1.2"
+                    android:layout_marginLeft="@dimen/margin_double"
+                    android:layout_marginRight="@dimen/margin_double"
+                    android:layout_marginBottom="@dimen/margin_double"/>
+
+                <include layout="@layout/shadow"
+                         android:layout_width="match_parent"
+                         android:layout_height="1px"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/detail_head_height"
+                android:layout_marginTop="72dp"
+                android:layout_marginLeft="@dimen/margin_triple"
+                android:layout_marginRight="@dimen/margin_triple">
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cover_root"
+                    android:layout_width="135dp"
+                    android:layout_height="match_parent"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true">
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:layout_margin="2dp"
+                        app:riv_corner_radius="2dp"/>
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_big"
+                    android:textColor="@android:color/white"
+                    android:layout_marginLeft="@dimen/margin_double"
+                    android:text="标题"
+                    android:singleLine="true"
+                    android:layout_toRightOf="@+id/cover_root"
+                    android:layout_marginTop="6dp"/>
+
+                <TextView
+                    android:id="@+id/info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_big"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="@dimen/margin_double"
+                    android:layout_marginLeft="@dimen/margin_double"
+                    android:text="播放信息"
+                    android:layout_below="@+id/title"
+                    android:layout_toRightOf="@+id/cover_root"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/favrite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_triple"
+        android:src="@drawable/ic_like_heart"
+        android:scaleType="center"
+        app:backgroundTint="@color/colorPrimary"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:layout_anchor="@id/header_img"
+        app:layout_anchorGravity="bottom|right"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="#a6a6a6"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <ImageView android:id="@+id/status_bar"
                    android:layout_width="match_parent"
                    android:layout_height="0dp"/>
 
         <include layout="@layout/toolbar"/>
     </LinearLayout>
-
-    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
-        android:id="@+id/observable_scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <FrameLayout
-                android:id="@+id/header_root"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/detail_head_height">
-                <ImageView
-                    android:id="@+id/header_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"/>
-            </FrameLayout>
-
-            <ScrollView
-                android:layout_below="@+id/header_root"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/white">
-
-            </ScrollView>
-        </RelativeLayout>
-    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
-
-
-</merge>
+</android.support.design.widget.CoordinatorLayout>

@@ -38,6 +38,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
     compile 'com.alibaba:fastjson:1.1.50.android'
 
     compile 'io.reactivex:rxjava:1.1.3'
@@ -51,4 +52,5 @@ dependencies {
 
     compile 'com.github.google:ExoPlayer:r1.5.7'
     compile 'com.commit451:NativeStackBlur:1.0.2'
+    compile 'com.makeramen:roundedimageview:2.2.1'
 }

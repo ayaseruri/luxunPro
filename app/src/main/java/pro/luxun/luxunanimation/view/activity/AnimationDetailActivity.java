@@ -4,9 +4,10 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.FrameLayout;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.commit451.nativestackblur.NativeStackBlur;
@@ -20,6 +21,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.res.DimensionRes;
+import org.androidannotations.annotations.res.StringRes;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -30,6 +32,8 @@ import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.TranslucentStatusHelper;
+import pro.luxun.luxunanimation.utils.Utils;
+import pro.luxun.luxunanimation.view.view.AnimationSets;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
@@ -40,34 +44,54 @@ public class AnimationDetailActivity extends AppCompatActivity {
 
     @ViewById(R.id.observable_scroll_view)
     ObservableScrollView mScrollView;
-    @ColorRes(R.color.colorPrimary)
-    int mColorPrimary;
     @ViewById(R.id.toolbar)
     Toolbar mToolbar;
     @ViewById(R.id.status_bar)
     ImageView mStatusbar;
-    @ViewById(R.id.header_root)
-    FrameLayout mHeaderRoot;
     @ViewById(R.id.header_img)
     ImageView mHeaderImg;
+    @ViewById(R.id.cover)
+    ImageView mCover;
+    @ViewById(R.id.title)
+    TextView mTitle;
+    @ViewById(R.id.info)
+    TextView mInfo;
+    @ViewById(R.id.animation_sets)
+    AnimationSets mAnimationSets;
+    @ViewById(R.id.introduce)
+    TextView mIntroduce;
 
+    @ColorRes(R.color.colorPrimary)
+    int mColorPrimary;
     @DimensionRes(R.dimen.detail_head_height)
     float mDetailHeadHeight;
+    @StringRes(R.string.detail_head_info)
+    String mDetailHeadInfo;
 
     @AfterViews
     void init(){
         MainJson.UpdatingEntity updatingEntity = getIntent().getParcelableExtra(IntentConstant.INTENT_UPDATING_ENTITY);
 
+        initToolbar();
         initTranslucentStatus();
         initHeaderBlur(updatingEntity.getCover());
 
+        Glide.with(this).load(updatingEntity.getCover()).centerCrop().into(mCover);
+
+        mTitle.setText(updatingEntity.getTitle());
+        mInfo.setText(String.format(mDetailHeadInfo, 0 == updatingEntity.getWeek() ? "日" : Utils.num2Str(updatingEntity.getWeek()), updatingEntity.getSets().size()));
+        mAnimationSets.init(updatingEntity.getSets());
+
+        mIntroduce.setText(updatingEntity.getText());
+
         mToolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, mColorPrimary));
+        mStatusbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, mColorPrimary));
 
         mScrollView.setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
             @Override
             public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-                mToolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(Math.max(1, scrollY / mDetailHeadHeight), mColorPrimary));
-                mStatusbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(Math.max(1, scrollY / mDetailHeadHeight), mColorPrimary));
+                mToolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(Math.min(1, scrollY / mDetailHeadHeight), mColorPrimary));
+                mStatusbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(Math.min(1, scrollY / mDetailHeadHeight), mColorPrimary));
             }
 
             @Override
@@ -88,7 +112,22 @@ public class AnimationDetailActivity extends AppCompatActivity {
             TranslucentStatusHelper.translucentStatus(this);
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mStatusbar.getLayoutParams();
             layoutParams.height = TranslucentStatusHelper.getStatusBarHeight(this);
-            mStatusbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, mColorPrimary));
+        }
+    }
+
+    private void initToolbar(){
+        setTitle("详情");
+        setSupportActionBar(mToolbar);
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        if(null != getSupportActionBar()){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
@@ -99,7 +138,7 @@ public class AnimationDetailActivity extends AppCompatActivity {
                 try {
                     Bitmap bitmap = Glide.with(AnimationDetailActivity.this)
                             .load(url).asBitmap().into(400, 400).get();
-                    bitmap = NativeStackBlur.process(bitmap, 40);
+                    bitmap = NativeStackBlur.process(bitmap, 30);
                     subscriber.onNext(bitmap);
                     subscriber.onCompleted();
                 } catch (InterruptedException e) {

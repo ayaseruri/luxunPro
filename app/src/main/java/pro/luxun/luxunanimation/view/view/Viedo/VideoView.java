@@ -1,10 +1,15 @@
 package pro.luxun.luxunanimation.view.view.Viedo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.MediaCodec;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.google.android.exoplayer.BuildConfig;
@@ -20,10 +25,12 @@ import com.google.android.exoplayer.upstream.DefaultHttpDataSource;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.Touch;
 import org.androidannotations.annotations.ViewById;
 
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.net.RetrofitClient;
+import pro.luxun.luxunanimation.utils.LocalDisplay;
 
 /**
  * Created by wufeiyang on 16/5/9.
@@ -35,11 +42,16 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     private static final int MB = 1024 * 1024;
     private MediaCodecVideoTrackRenderer mVideoRender;
     private MediaCodecAudioTrackRenderer mAudioRender;
-
     private ExoPlayer mPlayer = ExoPlayer.Factory.newInstance(2);
+
+    private GestureDetector mGestureDetector;
 
     @ViewById(R.id.surface_view)
     SurfaceView mSurfaceView;
+    @ViewById(R.id.light)
+    VideoSide mLightView;
+    @ViewById(R.id.sound)
+    VideoSide mSoundView;
 
     public VideoView(Context context) {
         super(context);
@@ -52,6 +64,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     @AfterViews
     void init(){
         setKeepScreenOn(true);
+        mGestureDetector = new GestureDetector(getContext(), new VideoGesture());
     }
 
     public void initPlayer(String url){
@@ -94,5 +107,57 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     @Override
     public void onPlayerError(ExoPlaybackException error) {
 
+    }
+
+    private void changeLight(float addPercent){
+        Window window = ((Activity) getContext()).getWindow();
+        WindowManager.LayoutParams lpa = window.getAttributes();
+
+        float brightness = lpa.screenBrightness;
+        if (brightness <= 0.00f)
+            brightness = 0.50f;
+        if (brightness < 0.01f)
+            brightness = 0.01f;
+
+        brightness = brightness + addPercent;
+        if(brightness < 0.01f){
+            brightness = 0.01f;
+        }else if(brightness > 1.0f){
+            brightness = 1.0f;
+        }
+        lpa.screenBrightness = brightness;
+        window.setAttributes(lpa);
+    }
+
+    private class VideoGesture extends GestureDetector.SimpleOnGestureListener{
+
+        private float mFirstDownY;
+        private float mTotalY;
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            mFirstDownY = e.getY();
+            return super.onDown(e);
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            if(e1.getX() > LocalDisplay.SCREEN_HEIGHT_PIXELS / 2){ //开始调节屏幕亮度
+
+                mTotalY = mTotalY + distanceY;
+                mLightView.setValue((int) Math.max(100, mTotalY / 4));
+                changeLight(mLightView.getPercent());
+            }else {//开始调节声音大小
+
+            }
+
+
+            return true;
+        }
+    }
+
+    @Touch(R.id.surface_view)
+    void onTouch(MotionEvent e){
+        mGestureDetector.onTouchEvent(e);
     }
 }
