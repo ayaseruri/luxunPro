@@ -45,6 +45,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     private ExoPlayer mPlayer = ExoPlayer.Factory.newInstance(2);
 
     private GestureDetector mGestureDetector;
+    private WindowManager.LayoutParams mWindowParams;
 
     @ViewById(R.id.surface_view)
     SurfaceView mSurfaceView;
@@ -64,6 +65,11 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     @AfterViews
     void init(){
         setKeepScreenOn(true);
+
+        Window window = ((Activity) getContext()).getWindow();
+        mWindowParams = window.getAttributes();
+
+
         mGestureDetector = new GestureDetector(getContext(), new VideoGesture());
     }
 
@@ -110,10 +116,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     }
 
     private void changeLight(float addPercent){
-        Window window = ((Activity) getContext()).getWindow();
-        WindowManager.LayoutParams lpa = window.getAttributes();
-
-        float brightness = lpa.screenBrightness;
+        float brightness = getScreenBrightness();
         if (brightness <= 0.00f)
             brightness = 0.50f;
         if (brightness < 0.01f)
@@ -125,14 +128,14 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         }else if(brightness > 1.0f){
             brightness = 1.0f;
         }
-        lpa.screenBrightness = brightness;
-        window.setAttributes(lpa);
+        setScreenBrightness(brightness);
+
+        mLightView.setValue(brightness * 100);
     }
 
     private class VideoGesture extends GestureDetector.SimpleOnGestureListener{
 
         private float mFirstDownY;
-        private float mTotalY;
 
         @Override
         public boolean onDown(MotionEvent e) {
@@ -143,10 +146,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             if(e1.getX() > LocalDisplay.SCREEN_HEIGHT_PIXELS / 2){ //开始调节屏幕亮度
-
-                mTotalY = mTotalY + distanceY;
-                mLightView.setValue((int) Math.max(100, mTotalY / 4));
-                changeLight(mLightView.getPercent());
+                changeLight((mFirstDownY - e2.getY()) * 1.0f / 16 / mLightView.getMax());
             }else {//开始调节声音大小
 
             }
@@ -159,5 +159,14 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     @Touch(R.id.surface_view)
     void onTouch(MotionEvent e){
         mGestureDetector.onTouchEvent(e);
+    }
+
+    private float getScreenBrightness(){
+        return mWindowParams.screenBrightness;
+    }
+
+    private void setScreenBrightness(float f){
+        mWindowParams.screenBrightness = f;
+        ((Activity) getContext()).getWindow().setAttributes(mWindowParams);
     }
 }

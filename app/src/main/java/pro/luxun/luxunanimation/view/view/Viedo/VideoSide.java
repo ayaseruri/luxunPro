@@ -47,8 +47,8 @@ public class VideoSide extends FrameLayout {
         mValueBarParams = (LayoutParams) mValueBar.getLayoutParams();
     }
 
-    public void setValue(int value){
-        mValueBarParams.height = Math.max(mDpHeight * value / mMax, mDpHeight - LocalDisplay.dp2px(4));
+    public void setValue(float value){
+        mValueBarParams.height = (int) Math.min(1.0f * mDpHeight * value, mDpHeight - LocalDisplay.dp2px(4));
         mValueBar.requestLayout();
     }
 
@@ -58,5 +58,9 @@ public class VideoSide extends FrameLayout {
 
     public void setMax(int max){
         mMax = max;
+    }
+
+    public int getMax() {
+        return mMax;
     }
 }
