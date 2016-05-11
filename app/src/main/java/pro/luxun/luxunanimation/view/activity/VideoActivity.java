@@ -1,6 +1,8 @@
 package pro.luxun.luxunanimation.view.activity;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -20,13 +22,15 @@ public class VideoActivity extends AppCompatActivity {
     @ViewById(R.id.video)
     VideoView mVideoView;
 
+
     @AfterViews
     void init(){
         String videoTitle = getIntent().getStringExtra(IntentConstant.INTENT_VIDEO_TITLE);
         String videoUrl = getIntent().getStringExtra(IntentConstant.INTENT_VIDEO_URL);
 
         videoUrl = RetrofitClient.URL_SOURCE + UrlEncode(videoTitle) + "/" + videoUrl;
-        mVideoView.initPlayer(videoUrl);
+
+        mVideoView.initPlayer(videoTitle, videoUrl);
         mVideoView.startPlayer();
     }
 

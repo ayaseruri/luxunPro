@@ -1,16 +1,19 @@
 package pro.luxun.luxunanimation.view.view.Viedo;
 
-import android.app.Activity;
 import android.content.Context;
 import android.media.MediaCodec;
 import android.media.session.PlaybackState;
 import android.net.Uri;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSeekBar;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
@@ -88,6 +91,8 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     AppCompatSeekBar mSeekBar;
     @ViewById(R.id.time)
     TextView mTime;
+    @ViewById(R.id.toolbar)
+    Toolbar mToolbar;
 
     @StringRes(R.string.video_time)
     String mVideoTime;
@@ -104,17 +109,16 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     void init(){
         setKeepScreenOn(true);
 
-        Window window = ((Activity) getContext()).getWindow();
+        Window window = ((AppCompatActivity) getContext()).getWindow();
         mWindowParams = window.getAttributes();
 
         mGestureDetector = new GestureDetector(getContext(), new VideoGesture());
-
-        startUitimer();
-
         userAgent = "android/" + BuildConfig.VERSION_NAME;
 
         mPlayer.addListener(this);
         mPlayerControl = new PlayerControl(mPlayer);
+
+        startUitimer();
     }
 
     @Override
@@ -126,8 +130,6 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
                 YoYo.with(Techniques.FadeOut).duration(TIME_ANIMATION).playOn(mHud);
                 break;
             case PlaybackState.STATE_BUFFERING:
-                mProgressWheel.setVisibility(VISIBLE);
-                YoYo.with(Techniques.FadeIn).duration(TIME_ANIMATION).playOn(mProgressWheel);
                 break;
             case PlaybackState.STATE_STOPPED:
                 break;
@@ -138,31 +140,12 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
 
     @Override
     public void onPlayWhenReadyCommitted() {
-        mProgressWheel.setVisibility(VISIBLE);
+
     }
 
     @Override
     public void onPlayerError(ExoPlaybackException error) {
 
-    }
-
-    //这里传入的是变化量的百分比，例如：0.2，0.4
-    private void changeLight(float addPercent){
-        float brightness = getScreenBrightness();
-        if (brightness <= 0.00f)
-            brightness = 0.50f;
-        if (brightness < 0.01f)
-            brightness = 0.01f;
-
-        brightness = brightness + addPercent;
-        if(brightness < 0.01f){
-            brightness = 0.01f;
-        }else if(brightness > 1.0f){
-            brightness = 1.0f;
-        }
-        setScreenBrightness(brightness);
-
-        mLightView.setValue(brightness * mLightView.getMax());
     }
 
     private class VideoGesture extends GestureDetector.SimpleOnGestureListener{
@@ -190,29 +173,43 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            if(e1.getX() > LocalDisplay.SCREEN_HEIGHT_PIXELS / 2){ //开始调节屏幕亮度
-                changeLight((mFirstDownY - e2.getY()) / 32.0f / mLightView.getMax());
-            }else {//开始调节声音大小
-
-            }
-
-
-            return true;
+//            if(e1.getX() > LocalDisplay.SCREEN_HEIGHT_PIXELS / 2){ //开始调节屏幕亮度
+//                changeLight((mFirstDownY - e2.getY()) / 32.0f / mLightView.getMax());
+//            }else {//开始调节声音大小
+//
+//            }
+            return super.onScroll(e1, e2, distanceX, distanceY);
         }
     }
 
-    public void initPlayer(String url){
+    public void initPlayer(String title, String url){
         Log.d("video_url", url);
+
+        Context context = getContext();
+        if(context instanceof AppCompatActivity){
+            final AppCompatActivity activity = (AppCompatActivity) context;
+            mToolbar.setTitle(title);
+            activity.setSupportActionBar(mToolbar);
+            mToolbar.setNavigationOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.finish();
+                }
+            });
+            ActionBar actionBar = activity.getSupportActionBar();
+            if(null != actionBar){
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
+        }
 
         Uri uri = Uri.parse(url);
 
         DefaultHttpDataSource httpDataSource = new DefaultHttpDataSource(userAgent, null);
         httpDataSource.setRequestProperty("Referer", RetrofitClient.URL_REFERER);
 
-        ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, httpDataSource
-                , new DefaultAllocator(2 * K), 250 * K, new Mp4Extractor());
+        ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, httpDataSource, new DefaultAllocator(5 * K), 5 * K * K, new Mp4Extractor());
 
-        mVideoRender = new MediaCodecVideoTrackRenderer(getContext(), sampleSource, MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT, K);
+        mVideoRender = new MediaCodecVideoTrackRenderer(sampleSource, MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT, 5 * K);
         mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource);
 
         mPlayer.prepare(mVideoRender, mAudioRender);
@@ -229,7 +226,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     }
 
     public void resumePlayer(){
-        startPlayer();
+        startUitimer();
     }
 
     public void releasePlayer() {
@@ -294,12 +291,31 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         }
     }
 
+    //这里传入的是变化量的百分比，例如：0.2，0.4
+    private void changeLight(float addPercent){
+        float brightness = getScreenBrightness();
+        if (brightness <= 0.00f)
+            brightness = 0.50f;
+        if (brightness < 0.01f)
+            brightness = 0.01f;
+
+        brightness = brightness + addPercent;
+        if(brightness < 0.01f){
+            brightness = 0.01f;
+        }else if(brightness > 1.0f){
+            brightness = 1.0f;
+        }
+        setScreenBrightness(brightness);
+
+        mLightView.setValue(brightness * mLightView.getMax());
+    }
+
     private float getScreenBrightness(){
         return mWindowParams.screenBrightness;
     }
 
     private void setScreenBrightness(float f){
         mWindowParams.screenBrightness = f;
-        ((Activity) getContext()).getWindow().setAttributes(mWindowParams);
+        ((AppCompatActivity) getContext()).getWindow().setAttributes(mWindowParams);
     }
 }
