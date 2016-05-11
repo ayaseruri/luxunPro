@@ -7,6 +7,7 @@ import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
@@ -23,7 +24,6 @@ import com.google.android.exoplayer.BuildConfig;
 import com.google.android.exoplayer.ExoPlaybackException;
 import com.google.android.exoplayer.ExoPlayer;
 import com.google.android.exoplayer.MediaCodecAudioTrackRenderer;
-import com.google.android.exoplayer.MediaCodecSelector;
 import com.google.android.exoplayer.MediaCodecVideoTrackRenderer;
 import com.google.android.exoplayer.extractor.ExtractorSampleSource;
 import com.google.android.exoplayer.extractor.mp4.Mp4Extractor;
@@ -72,6 +72,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     private PlayerControl mPlayerControl;
     private boolean isHudVisible = true;
     private Subscription mUiTimer;
+    private String userAgent;
 
     @ViewById(R.id.surface_view)
     SurfaceView mSurfaceView;
@@ -109,6 +110,8 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         mGestureDetector = new GestureDetector(getContext(), new VideoGesture());
 
         startUitimer();
+
+        userAgent = "android/" + BuildConfig.VERSION_NAME;
 
         mPlayer.addListener(this);
         mPlayerControl = new PlayerControl(mPlayer);
@@ -199,16 +202,18 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     }
 
     public void initPlayer(String url){
+        Log.d("video_url", url);
+
         Uri uri = Uri.parse(url);
 
-        DefaultHttpDataSource httpDataSource = new DefaultHttpDataSource("android/" + BuildConfig.VERSION_NAME, null);
+        DefaultHttpDataSource httpDataSource = new DefaultHttpDataSource(userAgent, null);
         httpDataSource.setRequestProperty("Referer", RetrofitClient.URL_REFERER);
 
         ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, httpDataSource
                 , new DefaultAllocator(2 * K), 250 * K, new Mp4Extractor());
 
-        mVideoRender = new MediaCodecVideoTrackRenderer(getContext(), sampleSource, MediaCodecSelector.DEFAULT, MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT);
-        mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource, MediaCodecSelector.DEFAULT);
+        mVideoRender = new MediaCodecVideoTrackRenderer(getContext(), sampleSource, MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT, K);
+        mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource);
 
         mPlayer.prepare(mVideoRender, mAudioRender);
     }

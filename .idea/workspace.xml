@@ -33,31 +33,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ff7863e-3a06-4506-8949-4808cce82f39" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/library_1_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/library_1_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/IVideoActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_pause.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_play.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/play_btn_selector.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/ExoPlayer_r1_5_7.xml" afterPath="$PROJECT_DIR$/.idea/libraries/ExoPlayer_r1_5_8.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/ExoPlayer_r1_5_8.xml" afterPath="$PROJECT_DIR$/.idea/libraries/ExoPlayer_r1_5_2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/MainJson.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/MainJson.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/global/IntentConstant.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/global/IntentConstant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/StartUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/StartUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/VideoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/VideoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/AnimationSets.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/AnimationSets.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/TranslucentStatusBarLinearLayout.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/TranslucentStatusBarLinearLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoSide.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoSide.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_video.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_video.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/video.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/video.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/attrs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <ignored path="luxunPro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -88,24 +69,45 @@
       <file leaf-file-name="VideoView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43700787">
-              <caret line="207" column="74" selection-start-line="207" selection-start-column="74" selection-end-line="207" selection-end-column="74" />
+            <state vertical-scroll-proportion="-0.8228347">
+              <caret line="215" column="68" selection-start-line="215" selection-start-column="68" selection-end-line="215" selection-end-column="68" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="docComment;class#VideoView#0" expanded="false" />
-                <element signature="e#3327#3346#1" expanded="true" />
-                <element signature="e#4699#4700#0" expanded="true" />
-                <element signature="e#4752#4753#0" expanded="true" />
+                <element signature="e#3326#3345#1" expanded="true" />
+                <element signature="e#4758#4759#0" expanded="true" />
+                <element signature="e#4811#4812#0" expanded="true" />
                 <element signature="method#changeLight#0;class#VideoView#0" expanded="false" />
-                <element signature="e#7575#7576#0" expanded="true" />
-                <element signature="e#7604#7605#0" expanded="true" />
-                <element signature="e#7833#7834#0" expanded="true" />
-                <element signature="e#7881#7882#0" expanded="true" />
-                <element signature="e#8432#8433#0" expanded="true" />
-                <element signature="e#8461#8462#0" expanded="true" />
-                <element signature="e#8766#9060#0" expanded="true" />
-                <element signature="e#9059#9060#0" expanded="true" />
+                <element signature="e#7587#7588#0" expanded="true" />
+                <element signature="e#7616#7617#0" expanded="true" />
+                <element signature="e#7845#7846#0" expanded="true" />
+                <element signature="e#7893#7894#0" expanded="true" />
+                <element signature="e#8444#8445#0" expanded="true" />
+                <element signature="e#8473#8474#0" expanded="true" />
+                <element signature="e#8778#9072#0" expanded="true" />
+                <element signature="e#9071#9072#0" expanded="true" />
                 <element signature="method#setScreenBrightness#0;class#VideoView#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RetrofitClient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/RetrofitClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="64" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MediaCodecVideoTrackRenderer.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.google/ExoPlayer/r1.5.8/95369deb4e58563c8f4072d5c9ce006284448f74/ExoPlayer-r1.5.8-sources.jar!/com/google/android/exoplayer/MediaCodecVideoTrackRenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.259259">
+              <caret line="135" column="37" selection-start-line="135" selection-start-column="9" selection-end-line="135" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -159,7 +161,7 @@
         <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="49" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -751,9 +753,9 @@
                 <option name="name" value="prepareComGithubBumptechGlideOkhttp3Integration140Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.github.google:ExoPlayer:r1.5.8" />
+                <option name="description" value="Prepare com.github.google:ExoPlayer:r1.5.2" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGithubGoogleExoPlayerR158Library" />
+                <option name="name" value="prepareComGithubGoogleExoPlayerR152Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.github.ksoichiro:android-observablescrollview:1.6.0" />
@@ -1449,9 +1451,9 @@
                 <option name="name" value="prepareComGithubBumptechGlideOkhttp3Integration140Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.github.google:ExoPlayer:r1.5.8" />
+                <option name="description" value="Prepare com.github.google:ExoPlayer:r1.5.2" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComGithubGoogleExoPlayerR158Library" />
+                <option name="name" value="prepareComGithubGoogleExoPlayerR152Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.github.ksoichiro:android-observablescrollview:1.6.0" />
@@ -1666,7 +1668,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4388333259000" />
+        <entry key="$PROJECT_DIR$" value="4388347701000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1870,7 +1872,7 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ksoichiro/android-observablescrollview/1.6.0/16fb3c2069fdca01631bd836e3c35c06b70f8809/android-observablescrollview-1.6.0.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/jp.wasabeef/blurry/2.0.2/932f9fb14f816cbab889958f0fc29fe1092aca36/blurry-2.0.2.aar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.google/ExoPlayer/r1.5.8/36a1361163ed725b23425424778c164482ea704d/ExoPlayer-r1.5.8.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.google/ExoPlayer/r1.5.2/1b52894c906e4b47f961d1d9649cd4282368348/ExoPlayer-r1.5.2.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.commit451/NativeStackBlur/1.0.2/a632a5ff4c315c697738f5d8960f51f8ecd4a065/NativeStackBlur-1.0.2.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.makeramen/roundedimageview/2.2.1/2488468737fbb6a4bb8adf763ae6cd9688a6c6d7/roundedimageview-2.2.1.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.daimajia.easing/library/1.0.1/8a138655d16289aeaebe6b451ebe1ef792df155c/library-1.0.1.aar" />
@@ -2011,11 +2013,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/MainJson.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/AnimationSets.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/video.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/VideoActivity.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java" />
       </list>
     </option>
@@ -2060,166 +2062,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Gradle Scripts" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunPro" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunPro" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunPro" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunPro" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunanimation" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunPro" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunanimation" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunPro" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunanimation" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunPro" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunanimation" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunPro" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="luxunanimation" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2687,25 +2529,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>137</line>
+          <line>140</line>
           <properties />
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>122</line>
+          <line>125</line>
           <properties />
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>126</line>
+          <line>129</line>
           <properties />
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>128</line>
+          <line>131</line>
           <properties />
           <option name="timeStamp" value="49" />
         </line-breakpoint>
@@ -2971,14 +2813,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/RetrofitClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/global/IntentConstant.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3046,14 +2880,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.904673">
           <caret line="79" column="9" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.google/ExoPlayer/r1.5.8/95369deb4e58563c8f4072d5c9ce006284448f74/ExoPlayer-r1.5.8-sources.jar!/com/google/android/exoplayer/MediaCodecVideoTrackRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="135" column="9" selection-start-line="135" selection-start-column="9" selection-end-line="135" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -3193,14 +3019,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="49" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.google/ExoPlayer/r1.5.8/95369deb4e58563c8f4072d5c9ce006284448f74/ExoPlayer-r1.5.8-sources.jar!/com/google/android/exoplayer/extractor/ts/AdtsExtractor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3212,24 +3030,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.google/ExoPlayer/r1.5.8/95369deb4e58563c8f4072d5c9ce006284448f74/ExoPlayer-r1.5.8-sources.jar!/com/google/android/exoplayer/MediaCodecVideoTrackRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.259259">
+          <caret line="135" column="37" selection-start-line="135" selection-start-column="9" selection-end-line="135" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/RetrofitClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="64" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43700787">
-          <caret line="207" column="74" selection-start-line="207" selection-start-column="74" selection-end-line="207" selection-end-column="74" />
+        <state vertical-scroll-proportion="-0.8228347">
+          <caret line="215" column="68" selection-start-line="215" selection-start-column="68" selection-end-line="215" selection-end-column="68" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="docComment;class#VideoView#0" expanded="false" />
-            <element signature="e#3327#3346#1" expanded="true" />
-            <element signature="e#4699#4700#0" expanded="true" />
-            <element signature="e#4752#4753#0" expanded="true" />
+            <element signature="e#3326#3345#1" expanded="true" />
+            <element signature="e#4758#4759#0" expanded="true" />
+            <element signature="e#4811#4812#0" expanded="true" />
             <element signature="method#changeLight#0;class#VideoView#0" expanded="false" />
-            <element signature="e#7575#7576#0" expanded="true" />
-            <element signature="e#7604#7605#0" expanded="true" />
-            <element signature="e#7833#7834#0" expanded="true" />
-            <element signature="e#7881#7882#0" expanded="true" />
-            <element signature="e#8432#8433#0" expanded="true" />
-            <element signature="e#8461#8462#0" expanded="true" />
-            <element signature="e#8766#9060#0" expanded="true" />
-            <element signature="e#9059#9060#0" expanded="true" />
+            <element signature="e#7587#7588#0" expanded="true" />
+            <element signature="e#7616#7617#0" expanded="true" />
+            <element signature="e#7845#7846#0" expanded="true" />
+            <element signature="e#7893#7894#0" expanded="true" />
+            <element signature="e#8444#8445#0" expanded="true" />
+            <element signature="e#8473#8474#0" expanded="true" />
+            <element signature="e#8778#9072#0" expanded="true" />
+            <element signature="e#9071#9072#0" expanded="true" />
             <element signature="method#setScreenBrightness#0;class#VideoView#0" expanded="false" />
           </folding>
         </state>
