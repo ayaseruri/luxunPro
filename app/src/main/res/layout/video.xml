@@ -46,37 +46,46 @@
             android:layout_marginRight="@dimen/margin_normal"
             app:height_dp="120dp"/>
 
+        <com.pnikosis.materialishprogress.ProgressWheel
+            android:id="@+id/progress"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            app:barColor="@color/colorPrimary"
+            app:progressIndeterminate="true"/>
+        
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/bg_animation_item_cur"
-            android:paddingLeft="@dimen/margin_normal"
-            android:paddingRight="@dimen/margin_normal">
-
-            <TextView
-                android:id="@+id/cur_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00:00"
-                android:textColor="@android:color/white"
-                android:layout_centerVertical="true"/>
+            android:paddingBottom="@dimen/margin_narrow">
 
             <android.support.v7.widget.AppCompatSeekBar
                 android:id="@+id/seek_bar"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_toLeftOf="@+id/total_time"
-                android:layout_toRightOf="@id/cur_time"/>
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/play_btn"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:button="@null"
+                android:background="@drawable/play_btn_selector"
+                android:layout_below="@id/seek_bar"
+                android:layout_marginLeft="@dimen/margin_narrow"/>
 
             <TextView
-                android:id="@+id/total_time"
+                android:id="@+id/time"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00:00"
-                android:textColor="@android:color/white"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
+                android:layout_height="36dp"
+                android:layout_toRightOf="@id/play_btn"
+                android:layout_below="@id/seek_bar"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:text="00:00/00:00"
+                android:textSize="@dimen/text_szie_normal"
+                android:textColor="@android:color/white"/>
         </RelativeLayout>
     </RelativeLayout>
 </merge>

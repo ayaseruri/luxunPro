@@ -56,7 +56,7 @@ public class AnimationSets extends LinearLayout {
                 holder.getView().setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        StartUtils.startVedioActivty(holder.getView().getContext(), setsEntity.getUrl());
+                        StartUtils.startVedioActivty(holder.getView().getContext(), setsEntity.getTitle(), setsEntity.getUrl());
                     }
                 });
             }

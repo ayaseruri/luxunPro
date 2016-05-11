@@ -20,8 +20,9 @@ public class StartUtils {
         context.startActivity(intent);
     }
 
-    public static void startVedioActivty(Context context, String url){
+    public static void startVedioActivty(Context context, String title, String url){
         Intent intent = new Intent(context, VideoActivity_.class);
+        intent.putExtra(IntentConstant.INTENT_VIDEO_TITLE, title);
         intent.putExtra(IntentConstant.INTENT_VIDEO_URL, url);
         context.startActivity(intent);
     }

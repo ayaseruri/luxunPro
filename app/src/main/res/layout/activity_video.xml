@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <pro.luxun.luxunanimation.view.view.TranslucentStatusBarLinearLayout_
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pro.luxun.luxunanimation.view.activity.VideoActivity">
+    tools:context="pro.luxun.luxunanimation.view.activity.VideoActivity"
+    app:status_bar_color="@color/bg_animation_item_cur">
 
     <pro.luxun.luxunanimation.view.view.Viedo.VideoView_
+        android:id="@+id/video"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

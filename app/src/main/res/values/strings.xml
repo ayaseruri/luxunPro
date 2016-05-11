@@ -6,6 +6,7 @@
 
     <string name="bottom_mf">%1$d部新番,共%2$d话</string>
     <string name="detail_head_info">周%1$s更新,已更新%2$s话</string>
+    <string name="video_time">%1$s/%2$s</string>
 
     <string-array name="main_tab_titles">
         <item>我</item>

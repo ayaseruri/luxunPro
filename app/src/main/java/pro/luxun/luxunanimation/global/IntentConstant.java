@@ -6,5 +6,7 @@ package pro.luxun.luxunanimation.global;
 public class IntentConstant {
     public static final String INTENT_MAIN_JSON = "main_json";
     public static final String INTENT_UPDATING_ENTITY = "updating_entity";
+
+    public static final String INTENT_VIDEO_TITLE = "video_title";
     public static final String INTENT_VIDEO_URL = "video_url";
 }

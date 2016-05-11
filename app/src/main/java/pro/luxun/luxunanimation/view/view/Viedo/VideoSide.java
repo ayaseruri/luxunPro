@@ -38,6 +38,7 @@ public class VideoSide extends FrameLayout {
         super(context, attrs);
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.VideoSide);
         mDpHeight = array.getDimensionPixelSize(R.styleable.VideoSide_height_dp, 100);
+        mDpHeight = mDpHeight - 2 * LocalDisplay.dp2px(4);
         array.recycle();
     }
 
@@ -47,8 +48,13 @@ public class VideoSide extends FrameLayout {
         mValueBarParams = (LayoutParams) mValueBar.getLayoutParams();
     }
 
+    //传入值相对于是max而言，例如：max ＝ 100，则传入30，40等小于100的整数
     public void setValue(float value){
-        mValueBarParams.height = (int) Math.min(1.0f * mDpHeight * value, mDpHeight - LocalDisplay.dp2px(4));
+        if(value < mMax){
+            mValueBarParams.height = (int) (mDpHeight * value / mMax);
+        }else {
+            mValueBarParams.height = LayoutParams.MATCH_PARENT;
+        }
         mValueBar.requestLayout();
     }
 

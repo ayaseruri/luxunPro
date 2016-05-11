@@ -1,5 +1,8 @@
 package pro.luxun.luxunanimation.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by wufeiyang on 16/5/10.
  */
@@ -30,5 +33,12 @@ public class Utils {
             default:
                 return "";
         }
+    }
+
+    public static String videoTimeFormat(long l){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+        Date date = new Date();
+        date.setTime(l);
+        return simpleDateFormat.format(date);
     }
 }

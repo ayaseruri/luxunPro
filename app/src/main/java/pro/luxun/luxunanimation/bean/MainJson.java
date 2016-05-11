@@ -187,6 +187,7 @@ public class MainJson implements Parcelable, Serializable{
         public static class SetsEntity implements Serializable {
             private String url;
             private String set;
+            private String title;
 
             public String getUrl() {
                 return url;
@@ -202,6 +203,14 @@ public class MainJson implements Parcelable, Serializable{
 
             public void setSet(String set) {
                 this.set = set;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
             }
         }
 

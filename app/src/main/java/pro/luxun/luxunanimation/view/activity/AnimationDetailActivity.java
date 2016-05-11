@@ -23,8 +23,6 @@ import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.res.DimensionRes;
 import org.androidannotations.annotations.res.StringRes;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.concurrent.ExecutionException;
 
 import pro.luxun.luxunanimation.R;
@@ -80,6 +78,10 @@ public class AnimationDetailActivity extends AppCompatActivity {
 
         mTitle.setText(updatingEntity.getTitle());
         mInfo.setText(String.format(mDetailHeadInfo, 0 == updatingEntity.getWeek() ? "日" : Utils.num2Str(updatingEntity.getWeek()), updatingEntity.getSets().size()));
+
+        for(MainJson.UpdatingEntity.SetsEntity setsEntity : updatingEntity.getSets()){
+            setsEntity.setTitle(updatingEntity.getOriginal());
+        }
         mAnimationSets.init(updatingEntity.getSets());
 
         mIntroduce.setText(updatingEntity.getText());
@@ -160,20 +162,5 @@ public class AnimationDetailActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private String UrlEncode(String s){
-        try {
-            return URLEncoder.encode(s, "UTF-8")
-                    .replaceAll("\\+", "%20")
-                    .replaceAll("\\%21", "!")
-                    .replaceAll("\\%27", "'")
-                    .replaceAll("\\%28", "(")
-                    .replaceAll("\\%29", ")")
-                    .replaceAll("\\%7E", "~");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 }

@@ -3,4 +3,8 @@
     <declare-styleable name="VideoSide">
         <attr name="height_dp" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="TranslucentStatusBarLinearLayout">
+        <attr name="status_bar_color" format="color"/>
+    </declare-styleable>
 </resources>
