@@ -17,26 +17,6 @@
             android:minHeight="?attr/actionBarSize"
             android:background="@color/bg_animation_item_cur" />
 
-        <pro.luxun.luxunanimation.view.view.Viedo.VideoSide_
-            android:id="@+id/light"
-            android:layout_width="15dp"
-            android:layout_height="120dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin_normal"
-            android:visibility="gone"
-            app:height_dp="120dp" />
-
-        <pro.luxun.luxunanimation.view.view.Viedo.VideoSide_
-            android:id="@+id/sound"
-            android:layout_width="15dp"
-            android:layout_height="120dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/margin_normal"
-            android:visibility="gone"
-            app:height_dp="120dp"/>
-
         <com.pnikosis.materialishprogress.ProgressWheel
             android:id="@+id/progress"
             android:layout_width="80dp"

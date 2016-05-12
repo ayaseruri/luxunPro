@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText
+        android:id="@+id/comment_et"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="评分不足矣吐槽?输入简评:"
+        android:textColorHint="@color/text_color_dark_gray"
+        android:textColor="@color/text_color_dark_gray"
+        android:background="@drawable/main_search_et_bg"
+        android:padding="@dimen/margin_normal"
+        android:gravity="start"
+        android:layout_above="@+id/bottom_bar"/>
+
+    <FrameLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="@dimen/margin_normal"
+        android:background="@drawable/main_search_et_bg"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="提交番评"
+            android:textSize="@dimen/text_size_big"
+            android:textColor="@color/blue"
+            android:background="@null"
+            android:layout_gravity="right" />
+
+        <RatingBar
+            android:id="@+id/rating_bar"
+            style="@style/RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:numStars="5"
+            android:rating="5" />
+    </FrameLayout>
+</merge>

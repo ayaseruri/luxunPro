@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 def AAVersion = '4.0.0'
-def AndroidVersion = '23.3.0'
+def AndroidVersion = '23.4.0'
 
 android {
     compileSdkVersion 23

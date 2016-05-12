@@ -10,12 +10,8 @@ import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
@@ -41,7 +37,6 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.SeekBarProgressChange;
 import org.androidannotations.annotations.SeekBarTouchStart;
 import org.androidannotations.annotations.SeekBarTouchStop;
-import org.androidannotations.annotations.Touch;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 
@@ -49,7 +44,6 @@ import java.util.concurrent.TimeUnit;
 
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.net.RetrofitClient;
-import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.Utils;
 import rx.Observable;
@@ -70,19 +64,12 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     private MediaCodecAudioTrackRenderer mAudioRender;
     private ExoPlayer mPlayer = ExoPlayer.Factory.newInstance(2);
 
-    private GestureDetector mGestureDetector;
-    private WindowManager.LayoutParams mWindowParams;
     private PlayerControl mPlayerControl;
-    private boolean isHudVisible = true;
     private Subscription mUiTimer;
     private String userAgent;
 
     @ViewById(R.id.surface_view)
     SurfaceView mSurfaceView;
-    @ViewById(R.id.light)
-    VideoSide mLightView;
-    @ViewById(R.id.sound)
-    VideoSide mSoundView;
     @ViewById(R.id.progress)
     ProgressWheel mProgressWheel;
     @ViewById(R.id.hud)
@@ -109,10 +96,6 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     void init(){
         setKeepScreenOn(true);
 
-        Window window = ((AppCompatActivity) getContext()).getWindow();
-        mWindowParams = window.getAttributes();
-
-        mGestureDetector = new GestureDetector(getContext(), new VideoGesture());
         userAgent = "android/" + BuildConfig.VERSION_NAME;
 
         mPlayer.addListener(this);
@@ -125,7 +108,6 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
         switch (playbackState){
             case PlaybackState.STATE_PLAYING:
-                isHudVisible = false;
                 mProgressWheel.setVisibility(GONE);
                 YoYo.with(Techniques.FadeOut).duration(TIME_ANIMATION).playOn(mHud);
                 break;
@@ -146,40 +128,6 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     @Override
     public void onPlayerError(ExoPlaybackException error) {
 
-    }
-
-    private class VideoGesture extends GestureDetector.SimpleOnGestureListener{
-
-        private float mFirstDownY;
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            isHudVisible = !isHudVisible;
-            Techniques techniques;
-            if(isHudVisible){
-                techniques = Techniques.FadeIn;
-            }else {
-                techniques = Techniques.FadeOut;
-            }
-            YoYo.with(techniques).duration(TIME_ANIMATION).playOn(mHud);
-            return super.onSingleTapConfirmed(e);
-        }
-
-        @Override
-        public boolean onDown(MotionEvent e) {
-            mFirstDownY = e.getY();
-            return super.onDown(e);
-        }
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-//            if(e1.getX() > LocalDisplay.SCREEN_HEIGHT_PIXELS / 2){ //开始调节屏幕亮度
-//                changeLight((mFirstDownY - e2.getY()) / 32.0f / mLightView.getMax());
-//            }else {//开始调节声音大小
-//
-//            }
-            return super.onScroll(e1, e2, distanceX, distanceY);
-        }
     }
 
     public void initPlayer(String title, String url){
@@ -238,9 +186,12 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         stopUiTimer();
     }
 
-    @Touch(R.id.surface_view)
-    void onTouch(MotionEvent e){
-        mGestureDetector.onTouchEvent(e);
+    public void hideHud(){
+        YoYo.with(Techniques.FadeOut).duration(TIME_ANIMATION).playOn(mHud);
+    }
+
+    public void showHud(){
+        YoYo.with(Techniques.FadeOut).duration(TIME_ANIMATION).playOn(mHud);
     }
 
     @CheckedChange(R.id.play_btn)
@@ -289,33 +240,5 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         if(null != mUiTimer && !mUiTimer.isUnsubscribed()){
             mUiTimer.unsubscribe();
         }
-    }
-
-    //这里传入的是变化量的百分比，例如：0.2，0.4
-    private void changeLight(float addPercent){
-        float brightness = getScreenBrightness();
-        if (brightness <= 0.00f)
-            brightness = 0.50f;
-        if (brightness < 0.01f)
-            brightness = 0.01f;
-
-        brightness = brightness + addPercent;
-        if(brightness < 0.01f){
-            brightness = 0.01f;
-        }else if(brightness > 1.0f){
-            brightness = 1.0f;
-        }
-        setScreenBrightness(brightness);
-
-        mLightView.setValue(brightness * mLightView.getMax());
-    }
-
-    private float getScreenBrightness(){
-        return mWindowParams.screenBrightness;
-    }
-
-    private void setScreenBrightness(float f){
-        mWindowParams.screenBrightness = f;
-        ((AppCompatActivity) getContext()).getWindow().setAttributes(mWindowParams);
     }
 }

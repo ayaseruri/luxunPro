@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.res.ColorRes;
 
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.utils.TranslucentStatusHelper;
@@ -21,9 +21,6 @@ import pro.luxun.luxunanimation.utils.TranslucentStatusHelper;
 @EViewGroup
 public class TranslucentStatusBarLinearLayout extends LinearLayout{
 
-    @ColorRes(R.color.colorPrimaryDark)
-    int mColorPrimaryDark;
-
     private int mStatusColor;
 
     public TranslucentStatusBarLinearLayout(Context context) {
@@ -33,7 +30,7 @@ public class TranslucentStatusBarLinearLayout extends LinearLayout{
     public TranslucentStatusBarLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TranslucentStatusBarLinearLayout);
-        mStatusColor = array.getColor(R.styleable.TranslucentStatusBarLinearLayout_status_bar_color, mColorPrimaryDark);
+        mStatusColor = array.getColor(R.styleable.TranslucentStatusBarLinearLayout_status_bar_color, ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
         array.recycle();
     }
 
@@ -42,10 +39,9 @@ public class TranslucentStatusBarLinearLayout extends LinearLayout{
         setOrientation(VERTICAL);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-            setFitsSystemWindows(false);
-
             Context context = getContext();
             if(context instanceof Activity){
+                setFitsSystemWindows(false);
                 TranslucentStatusHelper.translucentStatus((Activity) context);
                 ImageView statusBar = new ImageView(context);
                 statusBar.setBackgroundColor(mStatusColor);

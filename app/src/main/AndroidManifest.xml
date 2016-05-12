@@ -14,16 +14,21 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity android:name=".view.activity.MainActivity_">
+        </activity>
+        <activity android:name=".view.activity.AnimationDetailActivity_">
+        </activity>
+        <activity
+            android:name=".view.activity.VideoActivity_"
+            android:theme="@style/VideoTheme"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".view.activity.SplashActivity_"
+            android:theme="@style/AppTheme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <activity android:name=".view.activity.AnimationDetailActivity_">
-        </activity>
-        <activity android:name=".view.activity.VideoActivity_"
-            android:screenOrientation="landscape">
         </activity>
     </application>
 

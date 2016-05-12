@@ -11,4 +11,5 @@
     <color name="disable_mask">#CDFFFFFF</color>
     <color name="normal_mask">#CD000000</color>
     <color name="bg_animation_item_cur">#4D000000</color>
+    <color name="blue">#2963F6</color>
 </resources>

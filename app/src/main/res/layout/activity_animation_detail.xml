@@ -63,6 +63,10 @@
                 <include layout="@layout/shadow"
                          android:layout_width="match_parent"
                          android:layout_height="1px"/>
+
+                <pro.luxun.luxunanimation.view.view.VideoComment_
+                    android:layout_width="match_parent"
+                    android:layout_height="156dp" />
             </LinearLayout>
 
             <RelativeLayout
