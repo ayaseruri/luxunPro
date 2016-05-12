@@ -97,7 +97,11 @@
                     android:text="标题"
                     android:singleLine="true"
                     android:layout_toRightOf="@+id/cover_root"
-                    android:layout_marginTop="6dp"/>
+                    android:layout_marginTop="6dp"
+                    android:shadowColor="@color/text_color_dark_gray"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"/>
 
                 <TextView
                     android:id="@+id/info"
@@ -109,7 +113,11 @@
                     android:layout_marginLeft="@dimen/margin_double"
                     android:text="播放信息"
                     android:layout_below="@+id/title"
-                    android:layout_toRightOf="@+id/cover_root"/>
+                    android:layout_toRightOf="@+id/cover_root"
+                    android:shadowColor="@color/text_color_dark_gray"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"/>
             </RelativeLayout>
         </RelativeLayout>
     </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
