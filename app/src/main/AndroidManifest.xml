@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".view.activity.VideoActivity_"
-            android:theme="@style/VideoTheme"
+            android:theme="@style/AppTheme.VideoTheme"
             android:screenOrientation="landscape">
         </activity>
         <activity android:name=".view.activity.SplashActivity_"

@@ -1,6 +1,7 @@
 package pro.luxun.luxunanimation.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Visibility;
 import android.view.View;
 
 import org.androidannotations.annotations.AfterViews;
@@ -33,14 +34,11 @@ public class VideoActivity extends AppCompatActivity {
         mVideoView.startPlayer();
 
         hideSystemUI();
+
         mVideoView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
             @Override
             public void onSystemUiVisibilityChange(int visibility) {
-                if(visibility == View.VISIBLE){
-                    mVideoView.showHud();
-                }else {
-                    mVideoView.hideHud();
-                }
+                mVideoView.setHudVisibility(visibility & View.SYSTEM_UI_FLAG_FULLSCREEN);
             }
         });
     }
