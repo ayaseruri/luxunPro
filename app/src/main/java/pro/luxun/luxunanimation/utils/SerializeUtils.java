@@ -21,6 +21,7 @@ import rx.schedulers.Schedulers;
 public class SerializeUtils {
 
     public static final String TAG_MAIN_JSON = "main_json";
+    public static final String TAG_TOPIC_JSON = "topic_json";
 
 
     private static Context sContext;

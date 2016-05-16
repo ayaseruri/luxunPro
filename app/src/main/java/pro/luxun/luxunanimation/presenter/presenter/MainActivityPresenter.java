@@ -1,11 +1,12 @@
 package pro.luxun.luxunanimation.presenter.presenter;
 
 import pro.luxun.luxunanimation.bean.MainJson;
-import pro.luxun.luxunanimation.model.IMainActivityModel;
+import pro.luxun.luxunanimation.model.INetCacheModel;
 import pro.luxun.luxunanimation.model.MainActivityModel;
+import pro.luxun.luxunanimation.utils.MainJasonHelper;
 import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.SerializeUtils;
-import pro.luxun.luxunanimation.view.activity.IMainActivity;
+import pro.luxun.luxunanimation.view.activity.INetCacheData;
 import rx.Subscriber;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -16,16 +17,16 @@ import rx.schedulers.Schedulers;
  */
 public class MainActivityPresenter {
 
-    private IMainActivity mainActivity;
-    private IMainActivityModel mainActivityModel;
+    private INetCacheData mainActivity;
+    private INetCacheModel mainActivityModel;
 
-    public MainActivityPresenter(IMainActivity mainActivity) {
+    public MainActivityPresenter(INetCacheData mainActivity) {
         this.mainActivity = mainActivity;
         mainActivityModel = new MainActivityModel();
     }
 
     public void getMainJsonNet(){
-        mainActivityModel.getMainJsonNet().subscribeOn(Schedulers.io())
+        mainActivityModel.getJsonNet().subscribeOn(Schedulers.io())
                 .map(new Func1<MainJson, MainJson>() {
                     @Override
                     public MainJson call(MainJson mainJson) {
@@ -42,27 +43,27 @@ public class MainActivityPresenter {
 
                 @Override
                 public void onError(Throwable e) {
-                    mainActivity.onGetMainJsonErrorNet();
+                    mainActivity.onGetJsonErrorNet();
                 }
 
                 @Override
                 public void onNext(MainJson mainJson) {
-                    mainActivity.onGetMainJsonSuccessNet(mainJson);
+                    mainActivity.onGetJsonSuccessNet(mainJson);
                 }
 
                 @Override
                 public void onStart() {
-                    mainActivity.onStartGetMainJsonNet();
+                    mainActivity.onStartGetJsonNet();
                 }
             });
     }
 
     public void getMainJsonNetSilent(){
-        mainActivityModel.getMainJsonNet()
+        mainActivityModel.getJsonNet()
                 .map(new Func1<MainJson, MainJson>() {
                     @Override
                     public MainJson call(MainJson mainJson) {
-                        SerializeUtils.serialization(SerializeUtils.TAG_MAIN_JSON, mainJson);
+                        MainJasonHelper.saveMainJson(mainJson);
                         return mainJson;
                     }
                 })
@@ -81,17 +82,11 @@ public class MainActivityPresenter {
     }
 
     public void getMainJsonCache(){
-        mainActivityModel.getMainJsonCache().compose(RxUtils.<MainJson>applySchedulers())
-                .subscribe(new Action1<MainJson>() {
-                    @Override
-                    public void call(MainJson mainJson) {
-                        mainActivity.onGetMainJsonCacheSuccess(mainJson);
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        mainActivity.onGetMainJsonCacheFailed();
-                    }
-                });
+        MainJson mainJson = MainJasonHelper.getMainJsonCache();
+        if(null == mainJson){
+            mainActivity.onGetJsonCacheFailed();
+        }else {
+            mainActivity.onGetJsonCacheSuccess(mainJson);
+        }
     }
 }

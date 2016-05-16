@@ -1,6 +1,9 @@
 package pro.luxun.luxunanimation.net;
 
+import java.util.List;
+
 import pro.luxun.luxunanimation.bean.MainJson;
+import pro.luxun.luxunanimation.bean.TopicJson;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
 import rx.Observable;
@@ -11,4 +14,7 @@ import rx.Observable;
 public interface ApiService {
     @GET
     Observable<MainJson> getMainJson(@Url String url);
+
+    @GET
+    Observable<List<TopicJson>> getTopicJson(@Url String url);
 }

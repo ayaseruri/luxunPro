@@ -13,10 +13,10 @@ public class RetrofitClient {
 
     public static final String URL_BASE = "http://0.luxun.pro:163/";
     public static final String URL_MAIN_JSON = "http://0.luxun.pro:12580/luxun.json";
+    public static final String URL_TOPIC_JSON = "http://0.luxun.pro:163/?topics";
     public static final String URL_SOURCE = "http://0.luxun.pro:12580/";
     public static final String URL_REFERER = "http://luxun.pro/";
 
-    private static ApiService sApiService;
     private static OkHttpClient sOkHttpClient;
 
     static {
@@ -24,19 +24,16 @@ public class RetrofitClient {
     }
 
     public static ApiService getApiService(){
-        if(null == sApiService){
-            synchronized (RetrofitClient.class){
-                if(null == sApiService){
-                    sApiService = new Retrofit.Builder().baseUrl(URL_BASE).addConverterFactory(FastJsonConverterFactory.create())
-                            .client(sOkHttpClient).addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                            .build().create(ApiService.class);
-                }
-            }
-        }
-        return sApiService;
+        return SingleApiService.INSTANCE;
     }
 
     public static OkHttpClient getOkHttpClient() {
         return sOkHttpClient;
+    }
+
+    private static class SingleApiService{
+        private static final ApiService INSTANCE = new Retrofit.Builder().baseUrl(URL_BASE).addConverterFactory(FastJsonConverterFactory.create())
+                .client(sOkHttpClient).addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build().create(ApiService.class);
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="标题"
+            android:textColor="@color/text_color_dark_gray"
+            android:textSize="@dimen/text_size_big"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/margin_normal"/>
+        
+        <pro.luxun.luxunanimation.view.view.Gallery_
+            android:id="@+id/gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:view_pager_item_width="118dp"
+            app:view_pager_item_height="177dp"/>
+        
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/margin_normal"
+            android:textColor="@color/text_color"
+            android:lineSpacingMultiplier="1.2" />
+    </LinearLayout>
+
+</merge>

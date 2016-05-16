@@ -7,4 +7,9 @@
     <declare-styleable name="TranslucentStatusBarLinearLayout">
         <attr name="status_bar_color" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="Gallery">
+        <attr name="view_pager_item_height" format="dimension" />
+        <attr name="view_pager_item_width" format="dimension" />
+    </declare-styleable>
 </resources>

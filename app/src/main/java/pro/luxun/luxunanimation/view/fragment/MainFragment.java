@@ -9,8 +9,8 @@ import org.androidannotations.annotations.ViewById;
 
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
-import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.presenter.adapter.MainFragmentAdapter;
+import pro.luxun.luxunanimation.utils.MainJasonHelper;
 
 /**
  * Created by wufeiyang on 16/5/7.
@@ -28,7 +28,7 @@ public class MainFragment extends BaseFragment{
 
     @AfterViews
     void init(){
-        mMainJson = getArguments().getParcelable(IntentConstant.INTENT_MAIN_JSON);
+        mMainJson = MainJasonHelper.getMainJsonCache();
         mAdapter = new MainFragmentAdapter(mActivity, mMainJson);
         mLinearLayoutManager = new GridLayoutManager(mActivity, 3);
 

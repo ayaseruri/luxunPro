@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by wufeiyang on 16/5/7.
  */
-public class MainJson implements Parcelable, Serializable{
+public class MainJson implements Serializable{
 
     /**
      * original : 少年女僕 Shounen Maid
@@ -319,38 +319,4 @@ public class MainJson implements Parcelable, Serializable{
         }
 
     }
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeList(this.updating);
-        dest.writeList(this.quars);
-    }
-
-    public MainJson() {
-    }
-
-    protected MainJson(Parcel in) {
-        this.updating = new ArrayList<UpdatingEntity>();
-        in.readList(this.updating, UpdatingEntity.class.getClassLoader());
-        this.quars = new ArrayList<QuarsEntity>();
-        in.readList(this.quars, QuarsEntity.class.getClassLoader());
-    }
-
-    public static final Creator<MainJson> CREATOR = new Creator<MainJson>() {
-        @Override
-        public MainJson createFromParcel(Parcel source) {
-            return new MainJson(source);
-        }
-
-        @Override
-        public MainJson[] newArray(int size) {
-            return new MainJson[size];
-        }
-    };
 }

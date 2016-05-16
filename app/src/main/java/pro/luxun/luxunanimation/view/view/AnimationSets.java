@@ -50,13 +50,12 @@ public class AnimationSets extends LinearLayout {
         mAdapter = new BaseRecyclerAdapter<MainJson.UpdatingEntity.SetsEntity, AnimationSetItem>() {
 
             @Override
-            public void onBindViewHolder(final BaseViewHolder<AnimationSetItem> holder, int position) {
-                final MainJson.UpdatingEntity.SetsEntity setsEntity = mItems.get(position);
-                holder.getView().setNum(setsEntity.getSet());
-                holder.getView().setOnClickListener(new OnClickListener() {
+            protected void onBindView(final AnimationSetItem animationSetItem, final MainJson.UpdatingEntity.SetsEntity setsEntity) {
+                animationSetItem.setNum(setsEntity.getSet());
+                animationSetItem.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        StartUtils.startVedioActivty(holder.getView().getContext(), setsEntity.getTitle(), setsEntity.getUrl());
+                        StartUtils.startVedioActivty(animationSetItem.getContext(), setsEntity.getTitle(), setsEntity.getUrl());
                     }
                 });
             }

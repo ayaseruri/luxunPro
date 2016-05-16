@@ -37,18 +37,20 @@ public abstract class BaseRecyclerAdapter<T, V extends View> extends RecyclerVie
         notifyDataSetChanged();
     }
 
+
+    @Override
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
+        V v = (V) holder.itemView;
+        onBindView(v, mItems.get(position));
+    }
+
     protected abstract V onCreateItemView(ViewGroup parent, int viewType);
 
-    public static class BaseViewHolder<V extends View> extends RecyclerView.ViewHolder{
-        private V mView;
+    protected abstract void onBindView(V v, T t);
 
+    public static class BaseViewHolder<V extends View> extends RecyclerView.ViewHolder{
         public BaseViewHolder(V itemView) {
             super(itemView);
-            mView = itemView;
-        }
-
-        public V getView() {
-            return mView;
         }
     }
 

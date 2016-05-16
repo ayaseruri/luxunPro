@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import pro.luxun.luxunanimation.bean.MainJson;
-import pro.luxun.luxunanimation.utils.MainJsonUtils;
+import pro.luxun.luxunanimation.utils.JsonUtils;
 import pro.luxun.luxunanimation.utils.SimpleTextWatcher;
 import pro.luxun.luxunanimation.view.view.MFAnimationItem_;
 import pro.luxun.luxunanimation.view.view.MFBottomItem_;
@@ -31,7 +31,7 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
     private List<MainJson.UpdatingEntity> mUpdatingEntities;
 
     public MainFragmentAdapter(Context context, MainJson mainJson) {
-        this.mUpdatingEntities = MainJsonUtils.formatMF(context, mainJson);
+        this.mUpdatingEntities = JsonUtils.formatMF(context, mainJson);
     }
 
     @Override
@@ -95,9 +95,9 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
         }else {
             MainJson.UpdatingEntity updatingEntity = mUpdatingEntities.get(position - 1);
             switch (updatingEntity.getType()){
-                case MainJsonUtils.TYPE_HEAD:
+                case JsonUtils.TYPE_HEAD:
                     return TYPE_BLOCK_HEAD;
-                case MainJsonUtils.TYPE_BOTTOM:
+                case JsonUtils.TYPE_BOTTOM:
                     return TYPE_BLOCK_END;
                 default:
                     return TYPE_NORMAL;
@@ -113,7 +113,7 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
 
     public boolean isNormalItem(int postion){
         MainJson.UpdatingEntity updatingEntity = mUpdatingEntities.get(postion - 1);
-        return (updatingEntity.getType() != MainJsonUtils.TYPE_BOTTOM && updatingEntity.getType() != MainJsonUtils.TYPE_HEAD);
+        return (updatingEntity.getType() != JsonUtils.TYPE_BOTTOM && updatingEntity.getType() != JsonUtils.TYPE_HEAD);
     }
 
     public static class MFViewHolder extends RecyclerView.ViewHolder{

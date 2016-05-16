@@ -1,8 +1,5 @@
 package pro.luxun.luxunanimation.view.activity;
 
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
@@ -23,12 +21,12 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
-import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.presenter.presenter.MainActivityPresenter;
 import pro.luxun.luxunanimation.view.fragment.MainFragment_;
+import pro.luxun.luxunanimation.view.fragment.TopicFragment_;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity implements IMainActivity{
+public class MainActivity extends AppCompatActivity implements INetCacheData<MainJson> {
 
     @ViewById(R.id.main_tab)
     TabLayout mTabLayout;
@@ -46,9 +44,8 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
     private SweetAlertDialog mAlertDialog;
     private MainActivityPresenter mMainActivityPresenter;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @AfterViews
+    void init(){
         mMainActivityPresenter = new MainActivityPresenter(this);
 
         mAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
@@ -59,24 +56,24 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
     }
 
     @Override
-    public void onStartGetMainJsonNet() {
+    public void onStartGetJsonNet() {
         if(null != mAlertDialog){
             mAlertDialog.show();
         }
     }
 
     @Override
-    public void onGetMainJsonSuccessNet(MainJson mainJson) {
+    public void onGetJsonSuccessNet(MainJson mainJson) {
         if(null != mAlertDialog && mAlertDialog.isShowing()){
             mAlertDialog.dismiss();
         }
 
         //初始化Fragments
-        initMain(mainJson);
+        initMain();
     }
 
     @Override
-    public void onGetMainJsonErrorNet() {
+    public void onGetJsonErrorNet() {
         if(null != mAlertDialog){
             mAlertDialog.changeAlertType(SweetAlertDialog.ERROR_TYPE);
             mAlertDialog.setTitleText(mNetError);
@@ -92,23 +89,19 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
     }
 
     @Override
-    public void onGetMainJsonCacheSuccess(MainJson mainJson) {
-        if(null != mainJson){
-            //初始化Fragments
-            initMain(mainJson);
-        }else {
-            mMainActivityPresenter.getMainJsonNet();
-        }
+    public void onGetJsonCacheSuccess(MainJson mainJson) {
+        initMain();
     }
 
     @Override
-    public void onGetMainJsonCacheFailed() {
+    public void onGetJsonCacheFailed() {
         mMainActivityPresenter.getMainJsonNet();
     }
 
-    private void initMain(MainJson mainJson){
+    private void initMain(){
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.add(MainFragment_.builder().arg(IntentConstant.INTENT_MAIN_JSON, (Parcelable) mainJson).build(), mMainTabTitles[0]);
+        viewPagerAdapter.add(MainFragment_.builder().build(), mMainTabTitles[1]);
+        viewPagerAdapter.add(TopicFragment_.builder().build(), mMainTabTitles[3]);
         mViewPager.setAdapter(viewPagerAdapter);
 
         mTabLayout.setVisibility(View.VISIBLE);

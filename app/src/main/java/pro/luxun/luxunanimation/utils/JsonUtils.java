@@ -11,7 +11,7 @@ import pro.luxun.luxunanimation.bean.MainJson;
 /**
  * Created by wufeiyang on 16/5/8.
  */
-public class MainJsonUtils {
+public class JsonUtils {
 
     public static final int TYPE_BOTTOM = 10080;
     public static final int TYPE_HEAD = 10081;
@@ -35,7 +35,7 @@ public class MainJsonUtils {
         for (MainJson.QuarsEntity quarsEntity : mainJson.getQuars()){
             updatingEntity = new MainJson.UpdatingEntity();
             updatingEntity.setType(TYPE_HEAD);
-            updatingEntity.setTitle(MainJsonUtils.num2Season(quarsEntity.getQuarter()));
+            updatingEntity.setTitle(JsonUtils.num2Season(quarsEntity.getQuarter()));
 
             updatingEntities.add(updatingEntity);
             updatingEntities.addAll(quarsEntity.getBangumis());
@@ -54,7 +54,31 @@ public class MainJsonUtils {
         return updatingEntities;
     }
 
+    public static ArrayList<MainJson.UpdatingEntity> animationNames2Infos(String nameStr){
+        ArrayList<MainJson.UpdatingEntity> entities = new ArrayList<>();
+        MainJson mainJson = MainJasonHelper.getMainJsonCache();
 
+        String[] names = nameStr.split("\n");
+        for(String name : names){
+            for(MainJson.UpdatingEntity updatingEntity : mainJson.getUpdating()){
+                if(updatingEntity.getTitle().contains(name)){
+                    entities.add(updatingEntity);
+                    break;
+                }
+            }
+
+            for(MainJson.QuarsEntity quarsEntity : mainJson.getQuars()){
+                for(MainJson.UpdatingEntity updatingEntity : quarsEntity.getBangumis()){
+                    if(updatingEntity.getTitle().contains(name)){
+                        entities.add(updatingEntity);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return entities;
+    }
 
     private static String num2Season(String numStr){
         StringBuilder time = new StringBuilder();
