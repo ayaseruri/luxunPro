@@ -14,6 +14,8 @@ import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.TopicJson;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
 import pro.luxun.luxunanimation.presenter.presenter.TopicFragmentPresenter;
+import pro.luxun.luxunanimation.utils.GridSpacingItemDecoration;
+import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.view.activity.INetCacheData;
 import pro.luxun.luxunanimation.view.view.TopicItem;
 import pro.luxun.luxunanimation.view.view.TopicItem_;
@@ -46,6 +48,7 @@ public class TopicFragment extends BaseFragment implements INetCacheData<List<To
             }
         };
         mRecyclerView.setAdapter(mBaseRecyclerAdapter);
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(1, LocalDisplay.dp2px(6), true));
 
         mTopicFragmentPresenter = new TopicFragmentPresenter(this);
         mTopicFragmentPresenter.getTopicJsonNetSilent();
