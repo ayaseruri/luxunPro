@@ -19,15 +19,15 @@ APP 的设计初衷就是个人，极小规模同好以及技术交流使用，�
 
 # 截图
 
-![GitHub Logo](/images/logo.png)
+![screen1](https://raw.githubusercontent.com/ayaseruri/luxunPro/master/screen/1.png)
 
-![GitHub Logo](/images/logo.png)
+![screen2](https://raw.githubusercontent.com/ayaseruri/luxunPro/master/screen/2.png)
 
-![GitHub Logo](/images/logo.png)
+![screen3](https://raw.githubusercontent.com/ayaseruri/luxunPro/master/screen/3.png)
 
-![GitHub Logo](/images/logo.png)
+![screen4](https://raw.githubusercontent.com/ayaseruri/luxunPro/master/screen/4.png)
 
-![GitHub Logo](/images/logo.png)
+![screen5](https://raw.githubusercontent.com/ayaseruri/luxunPro/master/screen/5.png)
 
 # 同好
 
