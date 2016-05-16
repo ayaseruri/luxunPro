@@ -14,7 +14,7 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="VideoTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="AppTheme.VideoTheme" >
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/bg_animation_item_cur</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -25,9 +25,9 @@
         <item name="android:background">@mipmap/splash_bg</item>
     </style>
 
-    <style name="RatingBar" parent="Widget.AppCompat.RatingBar">
+    <style name="RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/rating_star</item>
-        <item name="android:minHeight">20dp</item>
-        <item name="android:maxHeight">20dp</item>
+        <item name="android:minHeight">18dp</item>
+        <item name="android:maxHeight">18dp</item>
     </style>
 </resources>

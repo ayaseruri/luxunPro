@@ -5,19 +5,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="评分不足矣吐槽?输入简评:"
-        android:textColorHint="@color/text_color_dark_gray"
-        android:textColor="@color/text_color_dark_gray"
-        android:background="@drawable/main_search_et_bg"
+        android:textColorHint="@color/text_color_gray"
+        android:textColor="@color/text_color_gray"
+        android:background="@null"
         android:padding="@dimen/margin_normal"
         android:gravity="start"
-        android:layout_above="@+id/bottom_bar"/>
+        android:layout_above="@+id/bottom_bar"
+        android:textSize="@dimen/text_size_big"/>
 
     <FrameLayout
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_margin="@dimen/margin_normal"
-        android:background="@drawable/main_search_et_bg"
         android:layout_alignParentBottom="true">
         <Button
             android:id="@+id/submit_btn"
@@ -31,10 +31,13 @@
 
         <RatingBar
             android:id="@+id/rating_bar"
-            style="@style/RatingBar"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/RatingBar"
+            android:layout_gravity="center_vertical"
             android:numStars="5"
-            android:rating="5" />
+            android:max="5"
+            android:rating="1"
+            android:stepSize="1"/>
     </FrameLayout>
 </merge>

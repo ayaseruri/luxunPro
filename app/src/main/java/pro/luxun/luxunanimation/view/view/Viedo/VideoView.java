@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.Toolbar;
+import android.transition.Visibility;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -186,12 +187,8 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         stopUiTimer();
     }
 
-    public void hideHud(){
-        YoYo.with(Techniques.FadeOut).duration(TIME_ANIMATION).playOn(mHud);
-    }
-
-    public void showHud(){
-        YoYo.with(Techniques.FadeOut).duration(TIME_ANIMATION).playOn(mHud);
+    public void setHudVisibility(int visibility){
+        mHud.setAlpha(visibility == VISIBLE ? 1.0f : 0.0f);
     }
 
     @CheckedChange(R.id.play_btn)
