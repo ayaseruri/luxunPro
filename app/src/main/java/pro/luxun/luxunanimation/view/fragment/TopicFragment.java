@@ -48,7 +48,7 @@ public class TopicFragment extends BaseFragment implements INetCacheData<List<To
             }
         };
         mRecyclerView.setAdapter(mBaseRecyclerAdapter);
-        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(1, LocalDisplay.dp2px(6), true));
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(1, LocalDisplay.dp2px(4), true));
 
         mTopicFragmentPresenter = new TopicFragmentPresenter(this);
         mTopicFragmentPresenter.getTopicJsonNetSilent();

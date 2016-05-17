@@ -2,20 +2,18 @@ package pro.luxun.luxunanimation.view.view;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.ColorRes;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,7 @@ import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.bean.TopicJson;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
 import pro.luxun.luxunanimation.utils.JsonUtils;
-import pro.luxun.luxunanimation.utils.LocalDisplay;
+import pro.luxun.luxunanimation.utils.Utils;
 
 /**
  * Created by wufeiyang on 16/5/16.
@@ -38,6 +36,12 @@ public class TopicItem extends LinearLayout{
     RecyclerView mGallery;
     @ViewById(R.id.details)
     TextView mDetails;
+    @ColorRes(R.color.text_color)
+    int mTextColorDark;
+    @ColorRes(R.color.text_color_gray)
+    int mTextColorGray;
+    @ColorRes(R.color.text_color_dark_gray)
+    int mTextColorDarkGray;
 
     private BaseRecyclerAdapter<MainJson.UpdatingEntity, MFAnimationItem> mGalleryAdapter;
 
@@ -79,7 +83,13 @@ public class TopicItem extends LinearLayout{
 
         ArrayList<MainJson.UpdatingEntity> infos = JsonUtils.animationNames2Infos(topicJson.getBangumis());
 
-        setBackgroundColor(Color.parseColor("#" + infos.get(0).getColor()));
+        int bgColor = Color.parseColor("#" + infos.get(0).getColor());
+        setBackgroundColor(bgColor);
+
+        boolean isColorDark = Utils.isColorDark(bgColor);
+        mDetails.setTextColor(isColorDark ? mTextColorGray : mTextColorDark);
+        mTitle.setTextColor(isColorDark ? mTextColorGray : mTextColorDarkGray);
+
         mGalleryAdapter.refresh(infos);
     }
 }

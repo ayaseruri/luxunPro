@@ -1,5 +1,6 @@
 package pro.luxun.luxunanimation.view.activity;
 
+import android.content.Intent;
 import android.support.annotation.UiThread;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
 import org.androidannotations.annotations.res.StringRes;
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.presenter.presenter.MainActivityPresenter;
+import pro.luxun.luxunanimation.utils.EventBusMsg;
 import pro.luxun.luxunanimation.view.fragment.MainFragment_;
+import pro.luxun.luxunanimation.view.fragment.MeFragment_;
 import pro.luxun.luxunanimation.view.fragment.TopicFragment_;
 
 @EActivity(R.layout.activity_main)
@@ -100,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements INetCacheData<Mai
 
     private void initMain(){
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.add(MeFragment_.builder().build(), mMainTabTitles[0]);
         viewPagerAdapter.add(MainFragment_.builder().build(), mMainTabTitles[1]);
         viewPagerAdapter.add(TopicFragment_.builder().build(), mMainTabTitles[3]);
         mViewPager.setAdapter(viewPagerAdapter);
@@ -108,6 +113,11 @@ public class MainActivity extends AppCompatActivity implements INetCacheData<Mai
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        EventBus.getDefault().post(new EventBusMsg.MsgAuthBack());
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter{
 
