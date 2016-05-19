@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.AnimationDetailActivity_">
+        <activity android:name=".view.activity.AnimationDetailActivity_"
+                  android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name=".view.activity.VideoActivity_"

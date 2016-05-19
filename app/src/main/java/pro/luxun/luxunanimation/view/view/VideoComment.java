@@ -2,11 +2,13 @@ package pro.luxun.luxunanimation.view.view;
 
 import android.content.Context;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 
 import com.pnikosis.materialishprogress.ProgressWheel;
 
@@ -15,9 +17,13 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.List;
+
 import pro.luxun.luxunanimation.R;
+import pro.luxun.luxunanimation.bean.Comment;
 import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
+import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
 import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.Utils;
 import rx.Subscriber;
@@ -26,7 +32,7 @@ import rx.Subscriber;
  * Created by wufeiyang on 16/5/12.
  */
 @EViewGroup(R.layout.view_video_comment)
-public class VideoComment extends LinearLayout{
+public class VideoComment extends RelativeLayout{
 
     @ViewById(R.id.rating_bar)
     RatingBar mStarBar;
@@ -34,12 +40,17 @@ public class VideoComment extends LinearLayout{
     EditText mCommentET;
     @ViewById(R.id.rating_bar)
     RatingBar mRatingBar;
-    @ViewById(R.id.progress)
-    ProgressWheel mProgressWheel;
+    @ViewById(R.id.progress_submit)
+    ProgressWheel mProgressSubmit;
+    @ViewById(R.id.progress_list)
+    ProgressWheel mProgressList;
+    @ViewById(R.id.recycler)
+    RecyclerView mRecyclerView;
 
     private ApiService mApiService;
     private String mCommentUrl;
     private int mCur = 0;
+    private BaseRecyclerAdapter mAdapter;
 
     public VideoComment(Context context) {
         super(context);
@@ -51,10 +62,22 @@ public class VideoComment extends LinearLayout{
 
     @AfterViews
     void init(){
-        setOrientation(VERTICAL);
-        mProgressWheel.setVisibility(GONE);
+        mProgressSubmit.setVisibility(GONE);
 
         mApiService = RetrofitClient.getApiService();
+
+        mAdapter = new BaseRecyclerAdapter<Comment, CommentItem>(){
+
+            @Override
+            protected CommentItem onCreateItemView(ViewGroup parent, int viewType) {
+                return null;
+            }
+
+            @Override
+            protected void onBindView(CommentItem commentItem, Comment comment) {
+
+            }
+        };
     }
 
     @Click(R.id.submit_btn)
@@ -70,17 +93,18 @@ public class VideoComment extends LinearLayout{
         }
 
         mApiService.submitComment(RetrofitClient.URL_COMMENT, (int) mRatingBar.getRating()
-                , mCur, 0.00, comment).compose(RxUtils.applySchedulers())
+                , mCur, "0:00", comment).compose(RxUtils.applySchedulers())
                 .subscribe(new Subscriber<Object>() {
                     @Override
                     public void onCompleted() {
-                        mProgressWheel.setVisibility(GONE);
+                        mCommentET.setText("");
+                        mProgressSubmit.setVisibility(GONE);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Snackbar.make(VideoComment.this, "评论出错", Snackbar.LENGTH_LONG).show();
-                        mProgressWheel.setVisibility(GONE);
+                        mProgressSubmit.setVisibility(GONE);
                     }
 
                     @Override
@@ -90,13 +114,34 @@ public class VideoComment extends LinearLayout{
 
                     @Override
                     public void onStart() {
-                        mProgressWheel.setVisibility(VISIBLE);
+                        mProgressSubmit.setVisibility(VISIBLE);
                     }
                 });
     }
 
 
     public void initComment(String name){
-        mCommentUrl = RetrofitClient.URL_COMMENT + Utils.encodeURIComponent("lx:" + name + mCur);
+        mCommentUrl = RetrofitClient.URL_COMMENT + Utils.encodeURIComponent(name);
+        initCommentList();
+    }
+
+    public void initCommentList(){
+        mApiService.getCommentList(mCommentUrl).compose(RxUtils.<List<Comment>>applySchedulers())
+                .subscribe(new Subscriber<List<Comment>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Comment> commentItems) {
+
+                    }
+                });
     }
 }

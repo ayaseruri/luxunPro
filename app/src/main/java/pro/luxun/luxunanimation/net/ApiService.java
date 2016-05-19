@@ -3,6 +3,7 @@ package pro.luxun.luxunanimation.net;
 import java.util.List;
 
 import pro.luxun.luxunanimation.bean.Auth;
+import pro.luxun.luxunanimation.bean.Comment;
 import pro.luxun.luxunanimation.bean.GetToken;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.bean.TopicJson;
@@ -30,10 +31,13 @@ public interface ApiService {
     @GET
     Observable<Auth> auth(@Url String url);
 
+    @GET
+    Observable<List<Comment>> getCommentList(@Url String url);
+
     @Multipart
     @POST
     Observable<Object> submitComment(@Url String url, @Part("rate") int rate
             , @Part("cur") int cur
-            , @Part("time") double time
+            , @Part("time") String time
             , @Part("text") String comment);
 }

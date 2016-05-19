@@ -18,7 +18,6 @@ public class RetrofitClient {
     public static final String URL_COMMENT = "http://0.luxun.pro:163/?review/";
     public static final String URL_WEB_AUTH = "http://luxun.pro/#/auth/";
 
-
     public static final String URL_SOURCE = "http://0.luxun.pro:12580/";
     public static final String URL_REFERER = "http://luxun.pro/";
 

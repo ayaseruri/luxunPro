@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/avatar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="@dimen/margin_normal"
+        app:riv_border_width="2dp"
+        app:riv_border_color="@android:color/white"
+        app:riv_oval="true"/>
+
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/avatar"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginBottom="@dimen/margin_normal"
+        style="@style/RatingBar"
+        android:numStars="5"
+        android:max="10"
+        android:rating="10"
+        android:stepSize="1" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/rating_bar"
+        android:textSize="@dimen/text_szie_normal"
+        android:textColor="@color/text_color_gray"/>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_szie_normal"
+        android:textColor="@color/text_color_dark_gray"
+        android:lineSpacingMultiplier="1.2"
+        android:layout_below="@id/rating_bar"
+        android:layout_toRightOf="@id/avatar"/>
+
+    <ImageView
+        android:id="@+id/heart"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/heart_btn_selector"
+        android:layout_below="@id/content"
+        android:layout_toRightOf="@id/avatar"/>
+
+    <TextView
+        android:id="@+id/like_count"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:textSize="@dimen/text_size_big"
+        android:gravity="center"
+        android:textColor="@color/text_color_gray"
+        android:layout_toRightOf="@+id/heart"/>
+</merge>

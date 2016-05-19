@@ -25,7 +25,7 @@
             android:layout_height="wrap_content">
 
             <com.pnikosis.materialishprogress.ProgressWheel
-                android:id="@+id/progress"
+                android:id="@+id/progress_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
@@ -52,15 +52,24 @@
                 style="@style/RatingBar"
                 android:numStars="5"
                 android:max="10"
-                android:rating="5"
+                android:rating="10"
                 android:stepSize="1" />
         </RelativeLayout>
     </LinearLayout>
+
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/progress_list"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/comment_part"
+        android:layout_centerHorizontal="true"
+        app:barColor="@color/colorPrimary"
+        app:barWidth="3dp"
+        app:progressIndeterminate="true"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/comment_part"
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 </merge>

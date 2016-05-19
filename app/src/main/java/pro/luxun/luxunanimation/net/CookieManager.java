@@ -1,6 +1,5 @@
 package pro.luxun.luxunanimation.net;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Cookie;
@@ -13,22 +12,13 @@ import pro.luxun.luxunanimation.utils.CookieHelper;
  */
 public class CookieManager implements CookieJar {
 
-    private static final String URL_BASE = "luxun.pro";
-
-    private ArrayList<Cookie> mEmptyCookies = new ArrayList<>();
-
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-        if(url.host().contains(URL_BASE)){
-            CookieHelper.save(cookies);
-        }
+        CookieHelper.save(url.host(), cookies);
     }
 
     @Override
     public List<Cookie> loadForRequest(HttpUrl url) {
-        if(url.host().contains(URL_BASE)){
-            return CookieHelper.get(url.host());
-        }
-        return mEmptyCookies;
+        return CookieHelper.get(url.host());
     }
 }
