@@ -1,43 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
-    <EditText
-        android:id="@+id/comment_et"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/comment_part"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="评分不足矣吐槽?输入简评:"
-        android:textColorHint="@color/text_color_gray"
-        android:textColor="@color/text_color_gray"
-        android:background="@null"
+        android:layout_height="156dp"
         android:padding="@dimen/margin_normal"
-        android:gravity="start"
-        android:layout_above="@+id/bottom_bar"
-        android:textSize="@dimen/text_size_big"/>
-
-    <FrameLayout
-        android:id="@+id/bottom_bar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_margin="@dimen/margin_normal"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:id="@+id/submit_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="提交番评"
-            android:textSize="@dimen/text_size_big"
-            android:textColor="@color/blue"
+        android:orientation="vertical"
+        android:background="@color/default_bg">
+        <EditText
+            android:id="@+id/comment_et"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="评分不足矣吐槽?输入简评:"
+            android:textColorHint="@color/text_color_gray"
+            android:textColor="@color/text_color_gray"
             android:background="@null"
-            android:layout_gravity="right" />
+            android:gravity="start"
+            android:textSize="@dimen/text_size_big"/>
 
-        <RatingBar
-            android:id="@+id/rating_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/RatingBar"
-            android:layout_gravity="center_vertical"
-            android:numStars="5"
-            android:max="5"
-            android:rating="1"
-            android:stepSize="1"/>
-    </FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.pnikosis.materialishprogress.ProgressWheel
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:barColor="@color/colorPrimary"
+                app:progressIndeterminate="true"
+                app:barWidth="3dp"
+                android:layout_toLeftOf="@+id/submit_btn"/>
+
+            <Button
+                android:id="@+id/submit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提交番评"
+                android:textSize="@dimen/text_size_big"
+                android:textColor="@color/blue"
+                android:background="@null"
+                android:layout_alignParentRight="true"/>
+
+            <RatingBar
+                android:id="@+id/rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                style="@style/RatingBar"
+                android:numStars="5"
+                android:max="10"
+                android:rating="5"
+                android:stepSize="1" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/comment_part"
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 </merge>

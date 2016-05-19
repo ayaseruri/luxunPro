@@ -14,6 +14,15 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity android:name=".view.activity.MainActivity_">
+            <intent-filter>
+                <data android:scheme="luxun" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
         </activity>
         <activity android:name=".view.activity.AnimationDetailActivity_">
         </activity>

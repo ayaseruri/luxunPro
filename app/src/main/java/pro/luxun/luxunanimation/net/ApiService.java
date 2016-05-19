@@ -29,4 +29,11 @@ public interface ApiService {
 
     @GET
     Observable<Auth> auth(@Url String url);
+
+    @Multipart
+    @POST
+    Observable<Object> submitComment(@Url String url, @Part("rate") int rate
+            , @Part("cur") int cur
+            , @Part("time") double time
+            , @Part("text") String comment);
 }

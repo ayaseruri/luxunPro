@@ -22,7 +22,7 @@ public class CookieHelper {
         mCookies = cookies;
         for (Cookie cookie : cookies){
             if(cookie.name().equals(PHPSESSID)){
-                mCookiePrefer.getPhpsessid().put(cookie.value());
+                mCookiePrefer.phpsessid().put(cookie.value());
                 break;
             }
         }
@@ -33,7 +33,7 @@ public class CookieHelper {
             ArrayList<Cookie> arrayList = new ArrayList<>();
             arrayList.add(new Cookie.Builder().domain(url)
                     .name(PHPSESSID)
-                    .value(mCookiePrefer.getPhpsessid().get()).build());
+                    .value(mCookiePrefer.phpsessid().get()).build());
             mCookies = arrayList;
         }
         return mCookies;

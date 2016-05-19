@@ -32,6 +32,7 @@ import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.TranslucentStatusHelper;
 import pro.luxun.luxunanimation.utils.Utils;
 import pro.luxun.luxunanimation.view.view.AnimationSets;
+import pro.luxun.luxunanimation.view.view.VideoComment;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
@@ -58,6 +59,8 @@ public class AnimationDetailActivity extends AppCompatActivity {
     AnimationSets mAnimationSets;
     @ViewById(R.id.introduce)
     TextView mIntroduce;
+    @ViewById(R.id.video_comment)
+    VideoComment mVideoComment;
 
     @ColorRes(R.color.colorPrimary)
     int mColorPrimary;
@@ -88,6 +91,8 @@ public class AnimationDetailActivity extends AppCompatActivity {
 
         mToolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, mColorPrimary));
         mStatusbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, mColorPrimary));
+
+        mVideoComment.initComment(updatingEntity.getTitle());
 
         mScrollView.setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
             @Override

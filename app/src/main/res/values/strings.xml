@@ -8,6 +8,10 @@
     <string name="detail_head_info">周%1$s更新,已更新%2$s话</string>
     <string name="video_time">%1$s/%2$s</string>
 
+    <string name="auth_hint">请点击右侧认证按钮完成认证</string>
+    <string name="auth_ing">正在认证</string>
+    <string name="auth_failed">认证出错了</string>
+
     <string-array name="main_tab_titles">
         <item>我</item>
         <item>追番</item>

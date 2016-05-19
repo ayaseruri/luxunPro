@@ -15,7 +15,7 @@ import rx.functions.Action1;
 
 @EActivity(R.layout.activity_splash)
 public class SplashActivity extends AppCompatActivity {
-    private static final int TIME_SPLASH = 1500;
+    private static final int TIME_SPLASH = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

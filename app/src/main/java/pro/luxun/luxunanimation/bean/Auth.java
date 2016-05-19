@@ -1,5 +1,7 @@
 package pro.luxun.luxunanimation.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by wufeiyang on 16/5/17.
  */
@@ -71,7 +73,7 @@ public class Auth {
         this.user = user;
     }
 
-    public static class UserEntity {
+    public static class UserEntity implements Serializable{
         private String uid;
         private String wbid;
         private String name;

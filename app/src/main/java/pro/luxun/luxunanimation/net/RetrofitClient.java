@@ -15,6 +15,7 @@ public class RetrofitClient {
     public static final String URL_MAIN_JSON = "http://0.luxun.pro:12580/luxun.json";
     public static final String URL_TOPIC_JSON = "http://0.luxun.pro:163/?topics";
     public static final String URL_AUTH_JSON = "http://0.luxun.pro:163/?auth/";
+    public static final String URL_COMMENT = "http://0.luxun.pro:163/?review/";
     public static final String URL_WEB_AUTH = "http://luxun.pro/#/auth/";
 
 

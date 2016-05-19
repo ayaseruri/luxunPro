@@ -65,8 +65,9 @@
                          android:layout_height="1px"/>
 
                 <pro.luxun.luxunanimation.view.view.VideoComment_
+                    android:id="@+id/video_comment"
                     android:layout_width="match_parent"
-                    android:layout_height="156dp" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <RelativeLayout
