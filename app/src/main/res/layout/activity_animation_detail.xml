@@ -11,12 +11,12 @@
     <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
         android:id="@+id/observable_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/header_img"
@@ -27,7 +27,7 @@
             <LinearLayout
                 android:layout_below="@+id/header_img"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingTop="72dp"
                 android:background="@android:color/white"
                 android:orientation="vertical">

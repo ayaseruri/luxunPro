@@ -70,14 +70,16 @@ public class VideoComment extends RelativeLayout{
 
             @Override
             protected CommentItem onCreateItemView(ViewGroup parent, int viewType) {
-                return null;
+                return CommentItem_.build(parent.getContext());
             }
 
             @Override
             protected void onBindView(CommentItem commentItem, Comment comment) {
-
+                commentItem.bind(comment);
             }
         };
+
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Click(R.id.submit_btn)
@@ -135,12 +137,19 @@ public class VideoComment extends RelativeLayout{
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Snackbar.make(VideoComment.this, "评论刷新失败", Snackbar.LENGTH_LONG).show();
+                        mProgressList.setVisibility(GONE);
                     }
 
                     @Override
                     public void onNext(List<Comment> commentItems) {
+                        mAdapter.refresh(commentItems);
+                        mRecyclerView.requestLayout();
+                    }
 
+                    @Override
+                    public void onStart() {
+                        mProgressList.setVisibility(VISIBLE);
                     }
                 });
     }

@@ -49,18 +49,15 @@ public class MainActivity extends AppCompatActivity implements INetCacheData<Mai
     void init(){
         mMainActivityPresenter = new MainActivityPresenter(this);
 
-        mAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        mAlertDialog.setTitleText(mLoadingStr);
-
         mMainActivityPresenter.getMainJsonNetSilent();
         mMainActivityPresenter.getMainJsonCache();
     }
 
     @Override
     public void onStartGetJsonNet() {
-        if(null != mAlertDialog){
-            mAlertDialog.show();
-        }
+        mAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        mAlertDialog.setTitleText(mLoadingStr);
+        mAlertDialog.show();
     }
 
     @Override
@@ -82,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements INetCacheData<Mai
             mAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                 @Override
                 public void onClick(SweetAlertDialog sweetAlertDialog) {
-                    mMainActivityPresenter.getMainJsonNet();
                     mAlertDialog.dismiss();
+                    mMainActivityPresenter.getMainJsonNet();
                 }
             });
         }

@@ -1,5 +1,7 @@
 package pro.luxun.luxunanimation.presenter.presenter;
 
+import android.util.Log;
+
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.model.INetCacheModel;
 import pro.luxun.luxunanimation.model.MainActivityModel;
@@ -43,6 +45,7 @@ public class MainActivityPresenter {
 
                 @Override
                 public void onError(Throwable e) {
+                    e.printStackTrace();
                     mainActivity.onGetJsonErrorNet();
                 }
 
