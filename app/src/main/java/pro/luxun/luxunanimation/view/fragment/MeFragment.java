@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.commit451.nativestackblur.NativeStackBlur;
 
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.res.StringRes;
 
 import java.util.concurrent.ExecutionException;
@@ -27,6 +30,7 @@ import pro.luxun.luxunanimation.bean.Auth;
 import pro.luxun.luxunanimation.bean.GetToken;
 import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
+import pro.luxun.luxunanimation.presenter.adapter.ViewPagerAdapter;
 import pro.luxun.luxunanimation.utils.AuthInfoHelper;
 import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.StartUtils;
@@ -43,24 +47,28 @@ public class MeFragment extends BaseFragment {
 
     private static final String AUTH_STR = "Hello,this is Android!";
 
-    RelativeLayout mRelativeLayout;
-    ImageView mAvatar;
-    ImageView mHeaderImg;
-    Button mLoginBtn;
-    TextView mUserName;
-    TextView mUserDes;
-    MaterialProgressBar mProgressBar;
-
     @StringRes(R.string.auth_hint)
     String mAuthHint;
     @StringRes(R.string.auth_ing)
     String mAuthIng;
     @StringRes(R.string.auth_failed)
     String mAuthFailed;
+    @ColorRes(R.color.colorPrimaryLight)
+    int mColorPrimaryLight;
 
     private ApiService mApiService;
     private String mTmpToken;
     private View mRootView;
+
+    private RelativeLayout mRelativeLayout;
+    private ImageView mAvatar;
+    private ImageView mHeaderImg;
+    private Button mLoginBtn;
+    private TextView mUserName;
+    private TextView mUserDes;
+    private MaterialProgressBar mProgressBar;
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
 
     @Nullable
     @Override
@@ -74,6 +82,8 @@ public class MeFragment extends BaseFragment {
             mUserName = ((TextView) mRootView.findViewById(R.id.user_name));
             mUserDes = ((TextView) mRootView.findViewById(R.id.user_des));
             mProgressBar = ((MaterialProgressBar) mRootView.findViewById(R.id.progress));
+            mViewPager = (ViewPager) mRootView.findViewById(R.id.view_pager);
+            mTabLayout = (TabLayout) mRootView.findViewById(R.id.tab);
         }
 
         if (this.mLoginBtn!= null) {
@@ -116,7 +126,15 @@ public class MeFragment extends BaseFragment {
             });
         }
 
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        pagerAdapter.add(BangumiFragment_.builder().build(), "我的追番");
+        pagerAdapter.add(LikeCommentFragment_.builder().build(), "喜欢番评");
+
+        mViewPager.setAdapter(pagerAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+
         mApiService = RetrofitClient.getApiService();
+
         return mRootView;
     }
 
@@ -161,6 +179,8 @@ public class MeFragment extends BaseFragment {
             });
         }else {
             mLoginBtn.setVisibility(View.VISIBLE);
+            mHeaderImg.setBackgroundColor(mColorPrimaryLight);
+            mAvatar.setImageResource(R.mipmap.ic_default_avatar);
         }
     }
 

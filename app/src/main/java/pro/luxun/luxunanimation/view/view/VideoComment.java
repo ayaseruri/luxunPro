@@ -2,6 +2,7 @@ package pro.luxun.luxunanimation.view.view;
 
 import android.content.Context;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -50,7 +51,7 @@ public class VideoComment extends RelativeLayout{
     private ApiService mApiService;
     private String mCommentUrl;
     private int mCur = 0;
-    private BaseRecyclerAdapter mAdapter;
+    private BaseRecyclerAdapter<Comment, CommentItem> mAdapter;
 
     public VideoComment(Context context) {
         super(context);
@@ -79,6 +80,7 @@ public class VideoComment extends RelativeLayout{
             }
         };
 
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -94,8 +96,8 @@ public class VideoComment extends RelativeLayout{
             return;
         }
 
-        mApiService.submitComment(RetrofitClient.URL_COMMENT, (int) mRatingBar.getRating()
-                , mCur, "0:00", comment).compose(RxUtils.applySchedulers())
+        mApiService.submitComment(mCommentUrl, (int) mRatingBar.getRating()
+                , mCur, "0.00", comment).compose(RxUtils.applySchedulers())
                 .subscribe(new Subscriber<Object>() {
                     @Override
                     public void onCompleted() {
@@ -132,19 +134,18 @@ public class VideoComment extends RelativeLayout{
                 .subscribe(new Subscriber<List<Comment>>() {
                     @Override
                     public void onCompleted() {
-
+                        mProgressList.setVisibility(INVISIBLE);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Snackbar.make(VideoComment.this, "评论刷新失败", Snackbar.LENGTH_LONG).show();
-                        mProgressList.setVisibility(GONE);
+                        mProgressList.setVisibility(INVISIBLE);
                     }
 
                     @Override
                     public void onNext(List<Comment> commentItems) {
                         mAdapter.refresh(commentItems);
-                        mRecyclerView.requestLayout();
                     }
 
                     @Override

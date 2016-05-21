@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/avatar"
         android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginBottom="@dimen/margin_normal"
         style="@style/RatingBar"
         android:numStars="5"
         android:max="10"
@@ -30,6 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/rating_bar"
         android:textSize="@dimen/text_szie_normal"
+        android:layout_marginLeft="@dimen/margin_narrow"
+        android:layout_alignBottom="@id/rating_bar"
         android:textColor="@color/text_color_gray"/>
 
     <TextView
@@ -40,7 +41,9 @@
         android:textColor="@color/text_color_dark_gray"
         android:lineSpacingMultiplier="1.2"
         android:layout_below="@id/rating_bar"
-        android:layout_toRightOf="@id/avatar"/>
+        android:layout_toRightOf="@id/avatar"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginBottom="@dimen/margin_normal"/>
 
     <ImageView
         android:id="@+id/heart"
@@ -57,5 +60,7 @@
         android:textSize="@dimen/text_size_big"
         android:gravity="center"
         android:textColor="@color/text_color_gray"
-        android:layout_toRightOf="@+id/heart"/>
+        android:layout_toRightOf="@+id/heart"
+        android:layout_below="@id/content"
+        android:layout_alignBaseline="@+id/heart"/>
 </merge>

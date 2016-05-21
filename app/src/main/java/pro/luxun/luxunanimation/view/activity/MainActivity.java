@@ -1,12 +1,9 @@
 package pro.luxun.luxunanimation.view.activity;
 
-import android.support.annotation.UiThread;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import org.androidannotations.annotations.AfterViews;
@@ -15,12 +12,10 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
 import org.androidannotations.annotations.res.StringRes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
+import pro.luxun.luxunanimation.presenter.adapter.ViewPagerAdapter;
 import pro.luxun.luxunanimation.presenter.presenter.MainActivityPresenter;
 import pro.luxun.luxunanimation.view.fragment.MainFragment_;
 import pro.luxun.luxunanimation.view.fragment.MeFragment_;
@@ -29,6 +24,8 @@ import pro.luxun.luxunanimation.view.fragment.TopicFragment_;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity implements INetCacheData<MainJson> {
 
+    @ViewById(R.id.toolbar)
+    Toolbar mToolbar;
     @ViewById(R.id.main_tab)
     TabLayout mTabLayout;
     @ViewById(R.id.main_view_pager)
@@ -47,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements INetCacheData<Mai
 
     @AfterViews
     void init(){
+        mToolbar.setTitle(R.string.app_name);
+        setSupportActionBar(mToolbar);
+
         mMainActivityPresenter = new MainActivityPresenter(this);
 
         mMainActivityPresenter.getMainJsonNetSilent();
@@ -102,42 +102,9 @@ public class MainActivity extends AppCompatActivity implements INetCacheData<Mai
         viewPagerAdapter.add(MainFragment_.builder().build(), mMainTabTitles[1]);
         viewPagerAdapter.add(TopicFragment_.builder().build(), mMainTabTitles[3]);
         mViewPager.setAdapter(viewPagerAdapter);
+        mViewPager.setCurrentItem(1);
 
         mTabLayout.setVisibility(View.VISIBLE);
         mTabLayout.setupWithViewPager(mViewPager);
-    }
-
-    static class ViewPagerAdapter extends FragmentPagerAdapter{
-
-        private List<Fragment> mFragments;
-        private List<String> mTitles;
-
-        public ViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-            mFragments = new ArrayList<>();
-            mTitles = new ArrayList<>();
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragments.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mTitles.get(position);
-        }
-
-        @UiThread
-        public void add(Fragment fragment, String title){
-            mFragments.add(fragment);
-            mTitles.add(title);
-            notifyDataSetChanged();
-        }
     }
 }

@@ -16,6 +16,7 @@ import org.androidannotations.annotations.ViewById;
 
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.Comment;
+import pro.luxun.luxunanimation.utils.Utils;
 
 /**
  * Created by wufeiyang on 16/5/19.
@@ -52,7 +53,7 @@ public class CommentItem extends RelativeLayout{
         Glide.with(getContext()).load(comment.getUser().getAvatar()).into(mAvatar);
         mRatingBar.setRating(Float.valueOf(comment.getRate()));
         mContent.setText(comment.getText());
-        mTime.setText("0");
+        mTime.setText(Utils.commentTimeFormat(Long.valueOf(comment.getCreated())));
         mLikeCount.setText(comment.getLiked());
     }
 }

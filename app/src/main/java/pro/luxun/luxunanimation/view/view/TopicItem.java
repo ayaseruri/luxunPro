@@ -2,12 +2,13 @@ package pro.luxun.luxunanimation.view.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -28,7 +29,7 @@ import pro.luxun.luxunanimation.utils.Utils;
  * Created by wufeiyang on 16/5/16.
  */
 @EViewGroup(R.layout.item_topic)
-public class TopicItem extends LinearLayout{
+public class TopicItem extends CardView{
 
     @ViewById(R.id.title)
     TextView mTitle;
@@ -57,7 +58,6 @@ public class TopicItem extends LinearLayout{
     void init(){
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setLayoutParams(layoutParams);
-        setOrientation(VERTICAL);
 
         mGallery.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mGalleryAdapter = new BaseRecyclerAdapter<MainJson.UpdatingEntity, MFAnimationItem>() {
@@ -74,7 +74,9 @@ public class TopicItem extends LinearLayout{
         };
 
         mGallery.setAdapter(mGalleryAdapter);
-
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH){
+            setElevation(0f);
+        }
     }
 
     public void bind(TopicJson topicJson){
@@ -84,7 +86,7 @@ public class TopicItem extends LinearLayout{
         ArrayList<MainJson.UpdatingEntity> infos = JsonUtils.animationNames2Infos(topicJson.getBangumis());
 
         int bgColor = Color.parseColor("#" + infos.get(0).getColor());
-        setBackgroundColor(bgColor);
+        setCardBackgroundColor(bgColor);
 
         boolean isColorDark = Utils.isColorDark(bgColor);
         mDetails.setTextColor(isColorDark ? mTextColorGray : mTextColorDark);

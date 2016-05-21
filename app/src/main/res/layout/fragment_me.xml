@@ -24,8 +24,9 @@
         <ImageView
             android:id="@+id/header_img"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"/>
+            android:layout_height="70dp"
+            android:scaleType="centerCrop"
+            android:background="@color/colorPrimaryLight"/>
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/avatar"
@@ -34,7 +35,8 @@
             android:layout_below="@+id/header_img"
             android:layout_marginTop="-35dp"
             android:layout_centerHorizontal="true"
-            app:riv_border_width="2dp"
+            android:src="@mipmap/ic_default_avatar"
+            app:riv_border_width="@dimen/margin_narrow"
             app:riv_border_color="@android:color/white"
             app:riv_oval="true"/>
 
@@ -85,10 +87,13 @@
             android:id="@+id/tab"
             android:layout_below="@id/shadow"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextColor="@color/text_color_gray"/>
 
         <android.support.v4.view.ViewPager
             android:layout_below="@+id/tab"
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </RelativeLayout>

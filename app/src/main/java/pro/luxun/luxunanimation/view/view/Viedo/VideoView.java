@@ -8,9 +8,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.Toolbar;
-import android.transition.Visibility;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -30,6 +30,7 @@ import com.google.android.exoplayer.extractor.mp4.Mp4Extractor;
 import com.google.android.exoplayer.upstream.DefaultAllocator;
 import com.google.android.exoplayer.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer.util.PlayerControl;
+import com.nineoldandroids.animation.Animator;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.androidannotations.annotations.AfterViews;
@@ -46,6 +47,7 @@ import java.util.concurrent.TimeUnit;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.RxUtils;
+import pro.luxun.luxunanimation.utils.SimpleAnimationListener;
 import pro.luxun.luxunanimation.utils.Utils;
 import rx.Observable;
 import rx.Subscription;
@@ -68,6 +70,10 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     private PlayerControl mPlayerControl;
     private Subscription mUiTimer;
     private String userAgent;
+
+    private boolean isHudConutDis = false;
+    private int mHudVisableTime = 10;
+    private AppCompatActivity mActivity;
 
     @ViewById(R.id.surface_view)
     SurfaceView mSurfaceView;
@@ -102,6 +108,8 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         mPlayer.addListener(this);
         mPlayerControl = new PlayerControl(mPlayer);
 
+        mActivity = (AppCompatActivity) getContext();
+
         startUitimer();
     }
 
@@ -110,7 +118,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         switch (playbackState){
             case PlaybackState.STATE_PLAYING:
                 mProgressWheel.setVisibility(GONE);
-                YoYo.with(Techniques.FadeOut).duration(TIME_ANIMATION).playOn(mHud);
+                hideSystemUI();
                 break;
             case PlaybackState.STATE_BUFFERING:
                 break;
@@ -131,25 +139,101 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
 
     }
 
+    @CheckedChange(R.id.play_btn)
+    void onPlayCheckedChange(CompoundButton playBtn, boolean isChecked){
+        if(isChecked){
+            mPlayerControl.pause();
+        }else {
+            mPlayerControl.start();
+        }
+    }
+
+    @SeekBarProgressChange(R.id.seek_bar)
+    void onSeekBarProgress(){
+        mTime.setText(String.format(mVideoTime, Utils.videoTimeFormat(mPlayer.getCurrentPosition())
+                , Utils.videoTimeFormat(mPlayer.getDuration())));
+    }
+
+    @SeekBarTouchStart(R.id.seek_bar)
+    void onSeekBarTouchStart(){
+        Log.d("touch", "seek_bar_touch_start");
+        stopUiTimer();
+    }
+
+    @SeekBarTouchStop(R.id.seek_bar)
+    void onSeekBarTouchStop(){
+        Log.d("touch", "seek_bar_touch_stop");
+        mPlayer.seekTo(mSeekBar.getProgress());
+        startUitimer();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                Log.d("touch", "dispatch_down");
+                isHudConutDis = false;
+                mHudVisableTime = 10;
+                showSystemUI();
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                Log.d("touch", "dispatch_cancel");
+                isHudConutDis = true;
+                break;
+            case MotionEvent.ACTION_UP:
+                Log.d("touch", "dispatch_up");
+                isHudConutDis = true;
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    private void startUitimer(){
+        mUiTimer = Observable.interval(1, TimeUnit.SECONDS).compose(RxUtils.applySchedulers())
+                .subscribe(new Action1<Object>() {
+                    @Override
+                    public void call(Object o) {
+                        mSeekBar.setMax((int) mPlayer.getDuration());
+                        mSeekBar.setProgress((int) mPlayer.getCurrentPosition());
+
+                        if(isHudConutDis && mHudVisableTime-- < 0){
+                            isHudConutDis = false;
+                            hideSystemUI();
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                    }
+                });
+    }
+
+    private void stopUiTimer(){
+        if(null != mUiTimer && !mUiTimer.isUnsubscribed()){
+            mUiTimer.unsubscribe();
+        }
+    }
+
     public void initPlayer(String title, String url){
         Log.d("video_url", url);
 
-        Context context = getContext();
-        if(context instanceof AppCompatActivity){
-            final AppCompatActivity activity = (AppCompatActivity) context;
-            mToolbar.setTitle(title);
-            activity.setSupportActionBar(mToolbar);
-            mToolbar.setNavigationOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    activity.finish();
-                }
-            });
-            ActionBar actionBar = activity.getSupportActionBar();
-            if(null != actionBar){
-                actionBar.setDisplayHomeAsUpEnabled(true);
+        mToolbar.setTitle(title);
+        mActivity.setSupportActionBar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.finish();
             }
+        });
+        ActionBar actionBar = mActivity.getSupportActionBar();
+        if(null != actionBar){
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        showSystemUI();
 
         Uri uri = Uri.parse(url);
 
@@ -162,6 +246,34 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource);
 
         mPlayer.prepare(mVideoRender, mAudioRender);
+    }
+
+    private void showSystemUI(){
+        if(INVISIBLE == mHud.getVisibility()){
+            mHud.setVisibility(VISIBLE);
+            YoYo.with(Techniques.FadeIn).duration(TIME_ANIMATION).playOn(mHud);
+            mActivity.getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+    }
+
+    private void hideSystemUI(){
+        if(VISIBLE == mHud.getVisibility()){
+            YoYo.with(Techniques.FadeOut).duration(TIME_ANIMATION).withListener(new SimpleAnimationListener(){
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mHud.setVisibility(INVISIBLE);
+                }
+            }).playOn(mHud);
+            mActivity.getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LOW_PROFILE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        }
     }
 
     public void startPlayer(){
@@ -185,57 +297,5 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         }
 
         stopUiTimer();
-    }
-
-    public void setHudVisibility(int visibility){
-        mHud.setAlpha(visibility == VISIBLE ? 1.0f : 0.0f);
-    }
-
-    @CheckedChange(R.id.play_btn)
-    void onPlayCheckedChange(CompoundButton playBtn, boolean isChecked){
-        if(isChecked){
-            mPlayerControl.pause();
-        }else {
-            mPlayerControl.start();
-        }
-    }
-
-    @SeekBarProgressChange(R.id.seek_bar)
-    void onSeekBarProgress(){
-        mTime.setText(String.format(mVideoTime, Utils.videoTimeFormat(mPlayer.getCurrentPosition())
-                , Utils.videoTimeFormat(mPlayer.getDuration())));
-    }
-
-    @SeekBarTouchStart(R.id.seek_bar)
-    void onSeekBarTouchStart(){
-        stopUiTimer();
-    }
-
-    @SeekBarTouchStop(R.id.seek_bar)
-    void onSeekBarTouchStop(){
-        mPlayer.seekTo(mSeekBar.getProgress());
-        startUitimer();
-    }
-
-    private void startUitimer(){
-        mUiTimer = Observable.interval(1, TimeUnit.SECONDS).compose(RxUtils.applySchedulers())
-                .subscribe(new Action1<Object>() {
-                    @Override
-                    public void call(Object o) {
-                        mSeekBar.setMax((int) mPlayer.getDuration());
-                        mSeekBar.setProgress((int) mPlayer.getCurrentPosition());
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-
-                    }
-                });
-    }
-
-    private void stopUiTimer(){
-        if(null != mUiTimer && !mUiTimer.isUnsubscribed()){
-            mUiTimer.unsubscribe();
-        }
     }
 }

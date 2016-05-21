@@ -40,4 +40,10 @@ public interface ApiService {
             , @Part("cur") int cur
             , @Part("time") String time
             , @Part("text") String comment);
+
+    @GET
+    Observable<Object> getBangumis(@Url String url);
+
+    @GET
+    Observable<Object> getlikes(@Url String url);
 }

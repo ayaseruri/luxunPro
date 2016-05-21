@@ -18,12 +18,11 @@ public class CookieHelper {
     private static final String PHPSESSID = "PHPSESSID";
     private static final String URL_BASE = "luxun.pro";
 
-    private static List<Cookie> mCookies;
+    private static List<Cookie> mEmptyCookies = new ArrayList<>();
     private static CookiePrefer_ mCookiePrefer = new CookiePrefer_(MApplication_.getInstance());
 
     public static void save(String url, List<Cookie> cookies){
         if(url.contains(URL_BASE)){
-            mCookies = cookies;
             for (Cookie cookie : cookies){
                 if(cookie.name().equals(PHPSESSID)){
                     mCookiePrefer.phpsessid().put(cookie.value());
@@ -34,13 +33,20 @@ public class CookieHelper {
     }
 
     public static List<Cookie> get(String url){
+        if(url.contains(URL_BASE)){
+            return iniCookieFormCache(url);
+        }
+        return mEmptyCookies;
+    }
+
+    private static List<Cookie> iniCookieFormCache(String url){
         String phpsessid = mCookiePrefer.phpsessid().get();
-        if(null == mCookies && !TextUtils.isEmpty(phpsessid)){
-            mCookies = new ArrayList<>();
-            mCookies.add(new Cookie.Builder().domain(url)
+        List<Cookie> cookies = new ArrayList<>();
+        if(!TextUtils.isEmpty(phpsessid)){
+            cookies.add(new Cookie.Builder().domain(url)
                     .name(PHPSESSID)
                     .value(mCookiePrefer.phpsessid().get()).build());
         }
-        return mCookies;
+        return cookies;
     }
 }
