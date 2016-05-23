@@ -42,14 +42,18 @@ import org.androidannotations.annotations.SeekBarTouchStop;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.net.RetrofitClient;
+import pro.luxun.luxunanimation.utils.JsonUtils;
 import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.SimpleAnimationListener;
 import pro.luxun.luxunanimation.utils.Utils;
+import pro.luxun.luxunanimation.view.view.Danmaku.DanmakuView;
 import rx.Observable;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Action1;
 
@@ -87,6 +91,8 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     TextView mTime;
     @ViewById(R.id.toolbar)
     Toolbar mToolbar;
+    @ViewById(R.id.danmaku)
+    DanmakuView mDanmakuView;
 
     @StringRes(R.string.video_time)
     String mVideoTime;
@@ -246,6 +252,29 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource);
 
         mPlayer.prepare(mVideoRender, mAudioRender);
+
+
+    }
+
+    public void initDanmaku(String title, String cur){
+        RetrofitClient.getApiService().getDm(RetrofitClient.URL_DM + Utils.encodeURIComponent("lx:" + title + cur))
+                .compose(RxUtils.<List<List>>applySchedulers())
+                .subscribe(new Subscriber<List<List>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<List> danmakulists) {
+                        mDanmakuView.initDanmaku(JsonUtils.parserDanmaku(danmakulists));
+                    }
+                });
     }
 
     private void showSystemUI(){

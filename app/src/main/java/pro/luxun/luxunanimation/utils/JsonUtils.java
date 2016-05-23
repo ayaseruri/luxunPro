@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pro.luxun.luxunanimation.R;
+import pro.luxun.luxunanimation.bean.Danmaku;
 import pro.luxun.luxunanimation.bean.MainJson;
 
 /**
@@ -54,14 +55,13 @@ public class JsonUtils {
         return updatingEntities;
     }
 
-    public static ArrayList<MainJson.UpdatingEntity> animationNames2Infos(String nameStr){
+    public static ArrayList<MainJson.UpdatingEntity> animationNames2Infos(List<String> names){
         ArrayList<MainJson.UpdatingEntity> entities = new ArrayList<>();
         MainJson mainJson = MainJasonHelper.getMainJsonCache();
 
-        String[] names = nameStr.split("\n");
         for(String name : names){
             for(MainJson.UpdatingEntity updatingEntity : mainJson.getUpdating()){
-                if(updatingEntity.getTitle().contains(name)){
+                if(updatingEntity.getTitle().equals(name)){
                     entities.add(updatingEntity);
                     break;
                 }
@@ -69,7 +69,7 @@ public class JsonUtils {
 
             for(MainJson.QuarsEntity quarsEntity : mainJson.getQuars()){
                 for(MainJson.UpdatingEntity updatingEntity : quarsEntity.getBangumis()){
-                    if(updatingEntity.getTitle().contains(name)){
+                    if(updatingEntity.getTitle().equals(name)){
                         entities.add(updatingEntity);
                         break;
                     }
@@ -78,6 +78,22 @@ public class JsonUtils {
         }
 
         return entities;
+    }
+
+    public static List<Danmaku> parserDanmaku(List<List> danmuList){
+
+        List<Danmaku> danmakus = new ArrayList<>();
+
+        for (List list : danmuList){
+            Danmaku danmaku = new Danmaku();
+            danmaku.setStart(Double.valueOf(list.get(0).toString()));
+            danmaku.setText(list.get(2).toString());
+            danmaku.setColor(list.get(3).toString());
+            danmaku.setType(list.get(5).toString());
+            danmaku.setY(Integer.valueOf(list.get(4).toString()));
+            danmakus.add(danmaku);
+        }
+        return danmakus;
     }
 
     private static String num2Season(String numStr){
@@ -109,4 +125,6 @@ public class JsonUtils {
         }
         return time.toString();
     }
+
+
 }

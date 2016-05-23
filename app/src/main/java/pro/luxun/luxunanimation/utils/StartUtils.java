@@ -24,10 +24,9 @@ public class StartUtils {
         context.startActivity(intent);
     }
 
-    public static void startVedioActivty(Context context, String title, String url){
+    public static void startVedioActivty(Context context, MainJson.UpdatingEntity.SetsEntity setsEntity){
         Intent intent = new Intent(context, VideoActivity_.class);
-        intent.putExtra(IntentConstant.INTENT_VIDEO_TITLE, title);
-        intent.putExtra(IntentConstant.INTENT_VIDEO_URL, url);
+        intent.putExtra(IntentConstant.INTENT_VIDEO_SET_ENTITY, (Parcelable) setsEntity);
         context.startActivity(intent);
     }
 

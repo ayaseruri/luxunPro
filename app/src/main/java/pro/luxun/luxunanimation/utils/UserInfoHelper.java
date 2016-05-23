@@ -17,7 +17,7 @@ public class UserInfoHelper {
 
     public static Auth.UserEntity getUserInfo(){
         if(null == mUserEntity){
-            mUserEntity = (Auth.UserEntity) SerializeUtils.deserialization(SerializeUtils.TAG_USER_INFO, true);
+            mUserEntity = (Auth.UserEntity) SerializeUtils.deserialization(SerializeUtils.TAG_USER_INFO, false);
             if(mUserEntity == null){
                 mUserEntity = new Auth.UserEntity();
             }

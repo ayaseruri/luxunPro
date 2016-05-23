@@ -50,7 +50,7 @@ public class CommentItem extends RelativeLayout{
     }
 
     public void bind(Comment comment){
-        Glide.with(getContext()).load(comment.getUser().getAvatar()).into(mAvatar);
+        Glide.with(getContext()).load(comment.getUser().getAvatar().replace("50","180")).into(mAvatar);
         mRatingBar.setRating(Float.valueOf(comment.getRate()));
         mContent.setText(comment.getText());
         mTime.setText(Utils.commentTimeFormat(Long.valueOf(comment.getCreated())));

@@ -7,6 +7,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 import pro.luxun.luxunanimation.R;
+import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.Utils;
@@ -20,12 +21,16 @@ public class VideoActivity extends AppCompatActivity {
 
     @AfterViews
     void init(){
-        String videoTitle = getIntent().getStringExtra(IntentConstant.INTENT_VIDEO_TITLE);
-        String videoUrl = getIntent().getStringExtra(IntentConstant.INTENT_VIDEO_URL);
+        MainJson.UpdatingEntity.SetsEntity setsEntity = getIntent().getParcelableExtra(IntentConstant.INTENT_VIDEO_SET_ENTITY);
+        String videoTitle = setsEntity.getTitle();
+        String orgTitle = setsEntity.getOrgTitle();
+        String videoUrl = setsEntity.getUrl();
+        String videCur = setsEntity.getSet();
 
-        videoUrl = RetrofitClient.URL_SOURCE + Utils.encodeURIComponent(videoTitle) + "/" + videoUrl;
+        videoUrl = RetrofitClient.URL_SOURCE + Utils.encodeURIComponent(orgTitle) + "/" + videoUrl;
 
-        mVideoView.initPlayer(videoTitle, videoUrl);
+        mVideoView.initPlayer(orgTitle, videoUrl);
+        mVideoView.initDanmaku(videoTitle, videCur);
         mVideoView.startPlayer();
     }
 

@@ -184,10 +184,19 @@ public class MainJson implements Serializable{
             this.sets = sets;
         }
 
-        public static class SetsEntity implements Serializable {
+        public static class SetsEntity implements Serializable, Parcelable {
             private String url;
             private String set;
             private String title;
+            private String orgTitle;
+
+            public String getOrgTitle() {
+                return orgTitle;
+            }
+
+            public void setOrgTitle(String orgTitle) {
+                this.orgTitle = orgTitle;
+            }
 
             public String getUrl() {
                 return url;
@@ -212,6 +221,42 @@ public class MainJson implements Serializable{
             public void setTitle(String title) {
                 this.title = title;
             }
+
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.url);
+                dest.writeString(this.set);
+                dest.writeString(this.title);
+                dest.writeString(this.orgTitle);
+            }
+
+            public SetsEntity() {
+            }
+
+            protected SetsEntity(Parcel in) {
+                this.url = in.readString();
+                this.set = in.readString();
+                this.title = in.readString();
+                this.orgTitle = in.readString();
+            }
+
+            public static final Creator<SetsEntity> CREATOR = new Creator<SetsEntity>() {
+                @Override
+                public SetsEntity createFromParcel(Parcel source) {
+                    return new SetsEntity(source);
+                }
+
+                @Override
+                public SetsEntity[] newArray(int size) {
+                    return new SetsEntity[size];
+                }
+            };
         }
 
 

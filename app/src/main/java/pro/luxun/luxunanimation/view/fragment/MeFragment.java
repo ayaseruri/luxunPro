@@ -141,7 +141,7 @@ public class MeFragment extends BaseFragment {
     private void initUserHeader(){
         if(UserInfoHelper.isLogin()){
             Auth.UserEntity userEntity = UserInfoHelper.getUserInfo();
-            final String avatarUrl = userEntity.getAvatar();
+            final String avatarUrl = userEntity.getAvatar().replace("50","180");
             Glide.with(mActivity).load(avatarUrl).centerCrop().crossFade().into(mAvatar);
 
             mLoginBtn.setVisibility(View.GONE);

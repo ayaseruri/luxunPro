@@ -2,17 +2,23 @@ package pro.luxun.luxunanimation.view.fragment;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.List;
+
 import pro.luxun.luxunanimation.R;
+import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
+import pro.luxun.luxunanimation.utils.GridSpacingItemDecoration;
+import pro.luxun.luxunanimation.utils.JsonUtils;
+import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.utils.RxUtils;
+import pro.luxun.luxunanimation.view.view.MFAnimationItem;
 import pro.luxun.luxunanimation.view.view.MFAnimationItem_;
 import rx.Subscriber;
 
@@ -25,35 +31,33 @@ public class BangumiFragment extends BaseFragment {
     @ViewById(R.id.recycler)
     RecyclerView mRecyclerView;
 
-    private BaseRecyclerAdapter mAdapter;
+    private BaseRecyclerAdapter<MainJson.UpdatingEntity, MFAnimationItem> mAdapter;
 
     @AfterViews
     void init(){
-        mAdapter = new BaseRecyclerAdapter() {
+        mAdapter = new BaseRecyclerAdapter<MainJson.UpdatingEntity, MFAnimationItem>() {
+
             @Override
-            protected View onCreateItemView(ViewGroup parent, int viewType) {
+            protected MFAnimationItem onCreateItemView(ViewGroup parent, int viewType) {
                 return MFAnimationItem_.build(parent.getContext());
             }
 
             @Override
-            protected void onBindView(View view, Object o) {
-
-            }
-
-            @Override
-            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+            protected void onBindView(MFAnimationItem mfAnimationItem, MainJson.UpdatingEntity s) {
+                mfAnimationItem.bind(s, "");
             }
         };
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(mActivity, 3));
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3, LocalDisplay.dp2px(4), true));
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        RetrofitClient.getApiService().getBangumis(RetrofitClient.URL_BANGUMI).compose(RxUtils.applySchedulers())
-                .subscribe(new Subscriber<Object>() {
+        RetrofitClient.getApiService().getBangumis(RetrofitClient.URL_BANGUMI).compose(RxUtils.<List<String>>applySchedulers())
+                .subscribe(new Subscriber<List<String>>() {
                     @Override
                     public void onCompleted() {
 
@@ -65,8 +69,10 @@ public class BangumiFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(Object o) {
-
+                    public void onNext(List<String> list) {
+                        List<MainJson.UpdatingEntity> updatingEntities =
+                                JsonUtils.animationNames2Infos(list);
+                        mAdapter.refresh(updatingEntities);
                     }
                 });
     }

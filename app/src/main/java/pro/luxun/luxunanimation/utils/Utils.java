@@ -7,6 +7,9 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+
 /**
  * Created by wufeiyang on 16/5/10.
  */
@@ -97,5 +100,9 @@ public class Utils {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static RequestBody str2RequestBody(String s){
+        return RequestBody.create(MediaType.parse("text/plain"), s);
     }
 }

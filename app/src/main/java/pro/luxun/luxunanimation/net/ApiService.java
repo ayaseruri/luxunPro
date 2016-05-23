@@ -2,10 +2,12 @@ package pro.luxun.luxunanimation.net;
 
 import java.util.List;
 
+import okhttp3.RequestBody;
 import pro.luxun.luxunanimation.bean.Auth;
 import pro.luxun.luxunanimation.bean.Comment;
 import pro.luxun.luxunanimation.bean.GetToken;
 import pro.luxun.luxunanimation.bean.MainJson;
+import pro.luxun.luxunanimation.bean.SubComment;
 import pro.luxun.luxunanimation.bean.TopicJson;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -36,14 +38,17 @@ public interface ApiService {
 
     @Multipart
     @POST
-    Observable<Object> submitComment(@Url String url, @Part("rate") int rate
+    Observable<SubComment> submitComment(@Url String url, @Part("rate") int rate
             , @Part("cur") int cur
-            , @Part("time") String time
-            , @Part("text") String comment);
+            , @Part("time") RequestBody time
+            , @Part("text") RequestBody comment);
 
     @GET
-    Observable<Object> getBangumis(@Url String url);
+    Observable<List<String>> getBangumis(@Url String url);
 
     @GET
     Observable<Object> getlikes(@Url String url);
+
+    @GET
+    Observable<List<List>> getDm(@Url String url);
 }

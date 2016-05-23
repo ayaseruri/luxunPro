@@ -17,6 +17,7 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.ColorRes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
@@ -83,7 +84,7 @@ public class TopicItem extends CardView{
         mTitle.setText(Html.fromHtml(topicJson.getTitle()));
         mDetails.setText(Html.fromHtml(topicJson.getText()));
 
-        ArrayList<MainJson.UpdatingEntity> infos = JsonUtils.animationNames2Infos(topicJson.getBangumis());
+        ArrayList<MainJson.UpdatingEntity> infos = JsonUtils.animationNames2Infos(Arrays.asList(topicJson.getBangumis().split("\n")));
 
         int bgColor = Color.parseColor("#" + infos.get(0).getColor());
         setCardBackgroundColor(bgColor);

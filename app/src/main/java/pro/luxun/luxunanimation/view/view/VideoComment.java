@@ -22,6 +22,7 @@ import java.util.List;
 
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.Comment;
+import pro.luxun.luxunanimation.bean.SubComment;
 import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
@@ -97,8 +98,9 @@ public class VideoComment extends RelativeLayout{
         }
 
         mApiService.submitComment(mCommentUrl, (int) mRatingBar.getRating()
-                , mCur, "0.00", comment).compose(RxUtils.applySchedulers())
-                .subscribe(new Subscriber<Object>() {
+                , mCur, Utils.str2RequestBody("0.00"), Utils.str2RequestBody(comment))
+                .compose(RxUtils.<SubComment>applySchedulers())
+                .subscribe(new Subscriber<SubComment>() {
                     @Override
                     public void onCompleted() {
                         mCommentET.setText("");
@@ -112,7 +114,7 @@ public class VideoComment extends RelativeLayout{
                     }
 
                     @Override
-                    public void onNext(Object o) {
+                    public void onNext(SubComment subComment) {
 
                     }
 

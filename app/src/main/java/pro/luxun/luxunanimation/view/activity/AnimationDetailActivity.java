@@ -83,7 +83,8 @@ public class AnimationDetailActivity extends AppCompatActivity {
         mInfo.setText(String.format(mDetailHeadInfo, 0 == updatingEntity.getWeek() ? "日" : Utils.num2Str(updatingEntity.getWeek()), updatingEntity.getSets().size()));
 
         for(MainJson.UpdatingEntity.SetsEntity setsEntity : updatingEntity.getSets()){
-            setsEntity.setTitle(updatingEntity.getOriginal());
+            setsEntity.setTitle(updatingEntity.getTitle());
+            setsEntity.setOrgTitle(updatingEntity.getOriginal());
         }
         mAnimationSets.init(updatingEntity.getSets());
 
