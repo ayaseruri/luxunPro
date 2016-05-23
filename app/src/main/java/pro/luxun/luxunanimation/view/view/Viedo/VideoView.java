@@ -182,6 +182,17 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
                 mHudVisableTime = 10;
                 showSystemUI();
                 break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                break;
             case MotionEvent.ACTION_CANCEL:
                 Log.d("touch", "dispatch_cancel");
                 isHudConutDis = true;
@@ -193,7 +204,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
             default:
                 break;
         }
-        return super.dispatchTouchEvent(ev);
+        return true;
     }
 
     private void startUitimer(){
