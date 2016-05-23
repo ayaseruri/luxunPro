@@ -31,6 +31,7 @@ public class VideoActivity extends AppCompatActivity {
 
         mVideoView.initPlayer(orgTitle, videoUrl);
         mVideoView.initDanmaku(videoTitle, videCur);
+
         mVideoView.startPlayer();
     }
 

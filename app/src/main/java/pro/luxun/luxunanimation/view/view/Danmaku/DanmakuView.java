@@ -16,6 +16,7 @@ import master.flame.danmaku.danmaku.model.android.DanmakuContext;
 import master.flame.danmaku.danmaku.model.android.Danmakus;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import pro.luxun.luxunanimation.bean.Danmaku;
+import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.utils.Utils;
 
 /**
@@ -73,54 +74,50 @@ public class DanmakuView extends master.flame.danmaku.ui.widget.DanmakuView{
 
             }
         });
-    }
 
-    public void initDanmaku(final List<Danmaku> danmakus){
-        prepare(new LuxunDanmuParser(mDanmakuContext, danmakus), mDanmakuContext);
+        prepare(new BaseDanmakuParser() {
+            @Override
+            protected IDanmakus parse() {
+                return new Danmakus();
+            }
+        }, mDanmakuContext);
         enableDanmakuDrawingCache(true);
     }
 
-    private static class LuxunDanmuParser extends BaseDanmakuParser{
+    public void refreshDanmaku(List<Danmaku> danmakus){
+        for (int i = 0; i < danmakus.size(); i++){
+            addDanmaku(danmakus.get(i), i);
+        }
+    }
 
-        private static final IDanmakus mIDanmakus = new Danmakus();
-
-        private static DanmakuContext mDanmakuContext;
-        private static List<Danmaku> mDanmakus;
-
-        public LuxunDanmuParser(DanmakuContext danmakuContext, List<Danmaku> danmakus) {
-            mDanmakuContext = danmakuContext;
-            mDanmakus = danmakus;
+    public void addDanmaku(Danmaku danmaku, int i){
+        int type;
+        switch (danmaku.getType()){
+            case "left":
+                type = BaseDanmaku.TYPE_SCROLL_LR;
+                break;
+            case "top":
+                type = BaseDanmaku.TYPE_FIX_TOP;
+                break;
+            case "bottom":
+                type = BaseDanmaku.TYPE_FIX_BOTTOM;
+                break;
+            default:
+                type = BaseDanmaku.TYPE_SCROLL_RL;
+                break;
         }
 
-        @Override
-        protected IDanmakus parse() {
-            for (int i = 0; i < mDanmakus.size(); i++){
-                Danmaku danmaku = mDanmakus.get(i);
-                int type;
-                switch (danmaku.getType()){
-                    case "left":
-                        type = BaseDanmaku.TYPE_SCROLL_LR;
-                        break;
-                    case "top":
-                        type = BaseDanmaku.TYPE_FIX_TOP;
-                        break;
-                    case "bottom":
-                        type = BaseDanmaku.TYPE_FIX_BOTTOM;
-                        break;
-                    default:
-                        type = BaseDanmaku.TYPE_SCROLL_RL;
-                        break;
-                }
-
-                BaseDanmaku baseDanmaku = mDanmakuContext.mDanmakuFactory.createDanmaku(type, mDanmakuContext);
-                baseDanmaku.text = danmaku.getText();
-                baseDanmaku.textColor = Color.parseColor(danmaku.getColor());
-                baseDanmaku.textShadowColor = Utils.isColorDark(baseDanmaku.textColor) ? Color.WHITE : Color.BLACK;
-                baseDanmaku.index = i;
-                baseDanmaku.time = (long) (danmaku.getStart() * 1000);
-                mIDanmakus.addItem(baseDanmaku);
-            }
-            return mIDanmakus;
-        }
+        BaseDanmaku baseDanmaku = mDanmakuContext.mDanmakuFactory.createDanmaku(type
+                , LocalDisplay.SCREEN_HEIGHT_PIXELS
+                , LocalDisplay.SCREEN_WIDTH_PIXELS, 1.0f, mDanmakuContext.scrollSpeedFactor);
+        baseDanmaku.text = danmaku.getText();
+        baseDanmaku.textColor = Color.parseColor(danmaku.getColor());
+        baseDanmaku.textShadowColor = Utils.isColorDark(baseDanmaku.textColor) ? Color.WHITE : Color.BLACK;
+        baseDanmaku.index = i;
+        baseDanmaku.priority = 0;
+        baseDanmaku.isLive = false;
+        baseDanmaku.time = (long) (danmaku.getStart() * 1000);
+        baseDanmaku.textSize = LocalDisplay.dp2px(16);
+        addDanmaku(baseDanmaku);
     }
 }

@@ -283,7 +283,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
 
                     @Override
                     public void onNext(List<List> danmakulists) {
-                        mDanmakuView.initDanmaku(JsonUtils.parserDanmaku(danmakulists));
+                        mDanmakuView.refreshDanmaku(JsonUtils.parserDanmaku(danmakulists));
                     }
                 });
     }

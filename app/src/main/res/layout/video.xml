@@ -6,6 +6,11 @@
        android:layout_height="match_parent"
        android:layout_gravity="center"/>
 
+    <pro.luxun.luxunanimation.view.view.Danmaku.DanmakuView
+        android:id="@+id/danmaku"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <RelativeLayout
         android:id="@+id/hud"
         android:fitsSystemWindows="true"
@@ -26,13 +31,6 @@
             app:barColor="@color/colorPrimary"
             app:barWidth="3dp"
             app:progressIndeterminate="true"/>
-
-        <pro.luxun.luxunanimation.view.view.Danmaku.DanmakuView
-            android:layout_below="@+id/toolbar"
-            android:layout_above="@+id/hud_bottom"
-            android:id="@+id/danmaku"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
         <RelativeLayout
             android:id="@+id/hud_bottom"
