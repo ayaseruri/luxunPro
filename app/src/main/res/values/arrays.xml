@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="danmaku_colors">
+        <item>@color/danmaku_gray</item>
+        <item>@color/danmaku_red</item>
+        <item>@color/danmaku_yellow</item>
+        <item>@color/danmaku_blue</item>
+        <item>@color/danmaku_drak</item>
+        <item>@color/danmaku_pink</item>
+        <item>@color/danmaku_org</item>
+        <item>@color/danmaku_green</item>
+    </integer-array>
+</resources>

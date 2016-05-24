@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+    android:background="@drawable/danmaku_setting_bg">
+
+    <LinearLayout
+        android:layout_width="152dp"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/margin_narrow">
+        <Button
+            android:id="@+id/RL_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="正向"
+            android:textColor="@color/danmaku_direction_text_color_selector"
+            android:background="@drawable/danmaku_direction_btn_bg_selector"
+            android:layout_marginRight="@dimen/margin_narrow"
+            style="?attr/buttonBarButtonStyle"/>
+
+        <Button
+            android:id="@+id/LR_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="反向"
+            android:textColor="@color/danmaku_direction_text_color_selector"
+            android:background="@drawable/danmaku_direction_btn_bg_selector"
+            android:layout_marginRight="@dimen/margin_narrow"
+            style="?attr/buttonBarButtonStyle"/>
+
+        <Button
+            android:id="@+id/top_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="顶部"
+            android:textColor="@color/danmaku_direction_text_color_selector"
+            android:background="@drawable/danmaku_direction_btn_bg_selector"
+            style="?attr/buttonBarButtonStyle"/>
+    </LinearLayout>
+
+    <pro.luxun.luxunanimation.view.view.ColorPalette_
+        android:id="@+id/color_palette"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

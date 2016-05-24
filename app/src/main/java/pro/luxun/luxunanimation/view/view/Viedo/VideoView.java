@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,6 +36,7 @@ import com.nineoldandroids.animation.Animator;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.SeekBarProgressChange;
@@ -52,6 +55,7 @@ import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.SimpleAnimationListener;
 import pro.luxun.luxunanimation.utils.Utils;
 import pro.luxun.luxunanimation.view.view.Danmaku.DanmakuView;
+import pro.luxun.luxunanimation.view.view.DanmakuSetting;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -93,9 +97,15 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     Toolbar mToolbar;
     @ViewById(R.id.danmaku)
     DanmakuView mDanmakuView;
+    @ViewById(R.id.danmaku_et)
+    EditText mDanmakuET;
+    @ViewById(R.id.danmaku_setting)
+    CheckBox mDanmakuSettingCB;
 
     @StringRes(R.string.video_time)
     String mVideoTime;
+    @Bean
+    DanmakuSetting mDanmakuSetting;
 
     public VideoView(Context context) {
         super(context);
@@ -171,6 +181,13 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         Log.d("touch", "seek_bar_touch_stop");
         mPlayer.seekTo(mSeekBar.getProgress());
         startUitimer();
+    }
+
+    @CheckedChange(R.id.danmaku_setting)
+    void onDanmakuSetting(CompoundButton danmakuSetting, boolean isChecked){
+        if(isChecked){
+            mDanmakuSetting.show(mDanmakuSettingCB);
+        }
     }
 
     @Override

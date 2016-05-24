@@ -65,6 +65,58 @@
                 android:text="00:00/00:00"
                 android:textSize="@dimen/text_szie_normal"
                 android:textColor="@android:color/white"/>
+
+            <ImageView
+                android:id="@+id/submit_btn"
+                android:layout_width="52dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_sub_danmaku"
+                android:scaleType="centerInside"
+                android:layout_alignParentRight="true"
+                android:layout_alignBottom="@+id/danmaku_root"
+                android:layout_below="@id/seek_bar" />
+
+            <RelativeLayout
+                android:id="@+id/danmaku_root"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/time"
+                android:layout_toLeftOf="@id/submit_btn"
+                android:layout_below="@+id/seek_bar"
+                android:layout_alignBottom="@+id/time"
+                android:background="@drawable/danmaku_et_bg"
+                android:paddingLeft="@dimen/margin_normal"
+                android:paddingRight="@dimen/margin_normal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_double"
+                android:layout_marginBottom="@dimen/margin_narrow">
+
+                <CheckBox
+                    android:id="@+id/danmaku_setting"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:button="@null"
+                    android:background="@drawable/danmaku_setting_selector"
+                    android:layout_centerVertical="true"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/danmaku_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"/>
+
+                <EditText
+                    android:id="@+id/danmaku_et"
+                    android:layout_toRightOf="@id/danmaku_setting"
+                    android:layout_toLeftOf="@id/danmaku_switch"
+                    android:paddingLeft="@dimen/margin_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="请在这里输入弹幕biu~"
+                    android:textColorHint="@color/text_color_dark_gray"
+                    android:textColor="@color/text_color_dark_gray"/>
+            </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
 </merge>

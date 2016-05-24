@@ -30,4 +30,16 @@
         <item name="android:minHeight">18dp</item>
         <item name="android:maxHeight">18dp</item>
     </style>
+
+    <style name="SwitchBtn" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/colorPrimary</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/text_color_dark_gray</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">@color/default_bg</item>
+
+    </style>
 </resources>

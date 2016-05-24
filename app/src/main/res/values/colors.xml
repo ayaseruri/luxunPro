@@ -15,4 +15,13 @@
 
     <color name="default_bg">#EBEBEB</color>
     <color name="blue">#2963F6</color>
+
+    <color name="danmaku_gray">#EFEFEF</color>
+    <color name="danmaku_red">#DD4354</color>
+    <color name="danmaku_yellow">#FBE100</color>
+    <color name="danmaku_blue">#57CCFF</color>
+    <color name="danmaku_drak">#666666</color>
+    <color name="danmaku_pink">#EC29FF</color>
+    <color name="danmaku_org">#F89D12</color>
+    <color name="danmaku_green">#C0E828</color>
 </resources>
