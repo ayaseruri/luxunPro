@@ -1,6 +1,7 @@
 package pro.luxun.luxunanimation.view.activity;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -27,7 +28,7 @@ public class VideoActivity extends AppCompatActivity {
         String videoUrl = setsEntity.getUrl();
         String videCur = setsEntity.getSet();
 
-        videoUrl = RetrofitClient.URL_SOURCE + Utils.encodeURIComponent(orgTitle) + "/" + videoUrl;
+        videoUrl = RetrofitClient.URL_SOURCE + Utils.encodeURIComponent(orgTitle + "/" + videoUrl);
 
         mVideoView.initPlayer(orgTitle, videoUrl);
         mVideoView.initDanmaku(videoTitle, videCur);
@@ -38,18 +39,21 @@ public class VideoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         mVideoView.resumePlayer();
+        Log.d("VideoActivity", "onResume");
         super.onResume();
     }
 
     @Override
     protected void onPause() {
         mVideoView.pausePlayer();
+        Log.d("VideoActivity", "onPause");
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
         mVideoView.releasePlayer();
+        Log.d("VideoActivity", "onDestroy");
         super.onDestroy();
     }
 }

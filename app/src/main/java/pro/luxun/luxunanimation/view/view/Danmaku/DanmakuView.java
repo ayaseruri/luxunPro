@@ -39,7 +39,7 @@ public class DanmakuView extends master.flame.danmaku.ui.widget.DanmakuView{
     private void initDanmuConfig() {
         // 设置最大显示行数
         HashMap<Integer, Integer> maxLinesPair = new HashMap<Integer, Integer>();
-        maxLinesPair.put(BaseDanmaku.TYPE_SCROLL_RL, 2); // 滚动弹幕最大显示2行
+        maxLinesPair.put(BaseDanmaku.TYPE_SCROLL_RL, 4); // 滚动弹幕最大显示4行
         // 设置是否禁止重叠
         HashMap<Integer, Boolean> overlappingEnablePair = new HashMap<Integer, Boolean>();
         overlappingEnablePair.put(BaseDanmaku.TYPE_SCROLL_RL, true);
@@ -86,24 +86,28 @@ public class DanmakuView extends master.flame.danmaku.ui.widget.DanmakuView{
 
     public void refreshDanmaku(List<Danmaku> danmakus){
         for (int i = 0; i < danmakus.size(); i++){
-            addDanmaku(danmakus.get(i), i);
+            addDanmaku(danmakus.get(i), i, false);
         }
     }
 
-    public void addDanmaku(Danmaku danmaku, int i){
+    public void addDanmaku(Danmaku danmaku){
+        addDanmaku(danmaku, 0, true);
+    }
+
+    public void addDanmaku(Danmaku danmaku, int i, boolean isLocal){
         int type;
         switch (danmaku.getType()){
-            case "left":
-                type = BaseDanmaku.TYPE_SCROLL_LR;
+            case DanmakuConstant.TYPE_RL:
+                type = BaseDanmaku.TYPE_SCROLL_RL;
                 break;
-            case "top":
+            case DanmakuConstant.TYPE_TOP:
                 type = BaseDanmaku.TYPE_FIX_TOP;
                 break;
-            case "bottom":
+            case DanmakuConstant.TYPE_BOTTOM:
                 type = BaseDanmaku.TYPE_FIX_BOTTOM;
                 break;
             default:
-                type = BaseDanmaku.TYPE_SCROLL_RL;
+                type = BaseDanmaku.TYPE_SCROLL_LR;
                 break;
         }
 
@@ -114,10 +118,13 @@ public class DanmakuView extends master.flame.danmaku.ui.widget.DanmakuView{
         baseDanmaku.textColor = Color.parseColor(danmaku.getColor());
         baseDanmaku.textShadowColor = Utils.isColorDark(baseDanmaku.textColor) ? Color.WHITE : Color.BLACK;
         baseDanmaku.index = i;
-        baseDanmaku.priority = 0;
+        baseDanmaku.priority = isLocal ? (byte) 1 : (byte) 0;
         baseDanmaku.isLive = false;
         baseDanmaku.time = (long) (danmaku.getStart() * 1000);
         baseDanmaku.textSize = LocalDisplay.dp2px(16);
+        if(isLocal){
+            baseDanmaku.borderColor = Color.WHITE;
+        }
         addDanmaku(baseDanmaku);
     }
 }

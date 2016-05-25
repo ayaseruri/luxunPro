@@ -5,6 +5,7 @@ import java.util.List;
 import okhttp3.RequestBody;
 import pro.luxun.luxunanimation.bean.Auth;
 import pro.luxun.luxunanimation.bean.Comment;
+import pro.luxun.luxunanimation.bean.Danmaku;
 import pro.luxun.luxunanimation.bean.GetToken;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.bean.SubComment;
@@ -51,4 +52,10 @@ public interface ApiService {
 
     @GET
     Observable<List<List>> getDm(@Url String url);
+
+    @Multipart
+    @POST
+    Observable<Danmaku> submitDm(@Url String url, @Part("start") RequestBody time
+            , @Part("text") RequestBody text, @Part("color") RequestBody color, @Part("y") int y
+            , @Part("type") RequestBody type);
 }

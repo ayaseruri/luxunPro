@@ -19,7 +19,7 @@
             android:textColor="@color/danmaku_direction_text_color_selector"
             android:background="@drawable/danmaku_direction_btn_bg_selector"
             android:layout_marginRight="@dimen/margin_narrow"
-            style="?attr/buttonBarButtonStyle"/>
+            style="?attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/LR_btn"

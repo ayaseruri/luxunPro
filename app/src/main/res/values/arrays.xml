@@ -10,4 +10,15 @@
         <item>@color/danmaku_org</item>
         <item>@color/danmaku_green</item>
     </integer-array>
+
+    <integer-array name="danmaku_colors_real">
+        <item>@color/danmaku_gray_real</item>
+        <item>@color/danmaku_red_real</item>
+        <item>@color/danmaku_yellow_real</item>
+        <item>@color/danmaku_blue_real</item>
+        <item>@color/danmaku_drak_real</item>
+        <item>@color/danmaku_pink_real</item>
+        <item>@color/danmaku_org_real</item>
+        <item>@color/danmaku_green_real</item>
+    </integer-array>
 </resources>

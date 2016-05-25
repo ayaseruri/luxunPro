@@ -30,7 +30,8 @@
         <activity
             android:name=".view.activity.VideoActivity_"
             android:theme="@style/AppTheme.VideoTheme"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".view.activity.SplashActivity_"
             android:theme="@style/AppTheme.SplashTheme">

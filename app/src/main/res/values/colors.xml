@@ -24,4 +24,13 @@
     <color name="danmaku_pink">#EC29FF</color>
     <color name="danmaku_org">#F89D12</color>
     <color name="danmaku_green">#C0E828</color>
+
+    <color name="danmaku_gray_real">#FFFFFF</color>
+    <color name="danmaku_red_real">#DD4354</color>
+    <color name="danmaku_yellow_real">#FBE100</color>
+    <color name="danmaku_blue_real">#57CCFF</color>
+    <color name="danmaku_drak_real">#444444</color>
+    <color name="danmaku_pink_real">#EC29FF</color>
+    <color name="danmaku_org_real">#F89D12</color>
+    <color name="danmaku_green_real">#C0E828</color>
 </resources>

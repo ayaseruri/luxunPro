@@ -11,6 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <com.pnikosis.materialishprogress.ProgressWheel
+        android:id="@+id/progress"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        app:barColor="@color/colorPrimary"
+        app:barWidth="3dp"
+        app:progressIndeterminate="true"/>
+
     <RelativeLayout
         android:id="@+id/hud"
         android:fitsSystemWindows="true"
@@ -22,15 +31,6 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             android:background="@color/bg_animation_item_cur" />
-
-        <com.pnikosis.materialishprogress.ProgressWheel
-            android:id="@+id/progress"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_centerInParent="true"
-            app:barColor="@color/colorPrimary"
-            app:barWidth="3dp"
-            app:progressIndeterminate="true"/>
 
         <RelativeLayout
             android:id="@+id/hud_bottom"
@@ -66,12 +66,12 @@
                 android:textSize="@dimen/text_szie_normal"
                 android:textColor="@android:color/white"/>
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/submit_btn"
                 android:layout_width="52dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_sub_danmaku"
-                android:scaleType="centerInside"
+                android:background="@null"
                 android:layout_alignParentRight="true"
                 android:layout_alignBottom="@+id/danmaku_root"
                 android:layout_below="@id/seek_bar" />
@@ -89,14 +89,15 @@
                 android:paddingRight="@dimen/margin_normal"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/margin_double"
-                android:layout_marginBottom="@dimen/margin_narrow">
+                android:layout_marginBottom="@dimen/margin_narrow"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
-                <CheckBox
+                <ImageView
                     android:id="@+id/danmaku_setting"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:button="@null"
-                    android:background="@drawable/danmaku_setting_selector"
+                    android:src="@drawable/danmaku_setting_btn_bg"
                     android:layout_centerVertical="true"/>
 
                 <android.support.v7.widget.SwitchCompat

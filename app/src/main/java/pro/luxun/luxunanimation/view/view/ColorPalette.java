@@ -3,6 +3,7 @@ package pro.luxun.luxunanimation.view.view;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -21,6 +22,11 @@ public class ColorPalette extends LinearLayout {
 
     @IntArrayRes(R.array.danmaku_colors)
     int[] mDanmakuColors;
+    @IntArrayRes(R.array.danmaku_colors_real)
+    int[] mDanmakuColorsReal;
+
+    private int mColor;
+    private IOnColorClick mIOnColorClick;
 
     public ColorPalette(Context context) {
         super(context);
@@ -33,6 +39,8 @@ public class ColorPalette extends LinearLayout {
     @AfterViews
     void init(){
         setOrientation(VERTICAL);
+
+        mColor = mDanmakuColorsReal[0];
 
         LinearLayout row0 = getLinearLayout();
         LinearLayout row1 = getLinearLayout();
@@ -51,7 +59,13 @@ public class ColorPalette extends LinearLayout {
         addView(row1);
     }
 
+    public int getColor() {
+        return mColor;
+    }
 
+    public void setIOnColorClick(IOnColorClick IOnColorClick) {
+        mIOnColorClick = IOnColorClick;
+    }
 
     private LinearLayout getLinearLayout(){
         LinearLayout linearLayout = new LinearLayout(getContext());
@@ -63,11 +77,24 @@ public class ColorPalette extends LinearLayout {
         return linearLayout;
     }
 
-    private ImageView getRoundImageView(int color){
+    private ImageView getRoundImageView(final int color){
         ImageView riv = new ImageView(getContext());
         riv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         riv.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.color_palette_oval));
         riv.setColorFilter(color);
+        riv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = color;
+                if(null != mIOnColorClick){
+                    mIOnColorClick.onColorClick(color);
+                }
+            }
+        });
         return riv;
+    }
+
+    public interface IOnColorClick{
+        void onColorClick(int color);
     }
 }

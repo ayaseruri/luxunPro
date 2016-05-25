@@ -103,6 +103,9 @@ public class Utils {
     }
 
     public static RequestBody str2RequestBody(String s){
+        if(null == s){
+            s = "";
+        }
         return RequestBody.create(MediaType.parse("text/plain"), s);
     }
 }
