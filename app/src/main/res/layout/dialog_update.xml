@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="240dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/update_dialog_bg">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发现更新"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="@dimen/margin_normal"
+        android:gravity="center_horizontal"
+        style="@style/TextAppearance.AppCompat.Title"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/update_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color_dark_gray"
+        android:textSize="@dimen/text_szie_normal"
+        android:text="更新日志"
+        android:layout_margin="@dimen/margin_normal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="取消"
+            android:textColor="@color/text_color_dark_gray"
+            style="@style/Base.Widget.AppCompat.ButtonBar"/>
+
+        <Button
+            android:id="@+id/ingnore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="跳过此版"
+            android:textColor="@color/text_color_dark_gray"
+            style="@style/Base.Widget.AppCompat.ButtonBar"/>
+
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="确定"
+            android:textColor="@color/text_color_dark_gray"
+            style="@style/Base.Widget.AppCompat.ButtonBar"/>
+    </LinearLayout>
+</LinearLayout>

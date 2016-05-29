@@ -3,6 +3,7 @@ package pro.luxun.luxunanimation.net;
 import java.util.List;
 
 import okhttp3.RequestBody;
+import okhttp3.Response;
 import pro.luxun.luxunanimation.bean.Auth;
 import pro.luxun.luxunanimation.bean.Comment;
 import pro.luxun.luxunanimation.bean.Danmaku;
@@ -58,4 +59,7 @@ public interface ApiService {
     Observable<Danmaku> submitDm(@Url String url, @Part("start") RequestBody time
             , @Part("text") RequestBody text, @Part("color") RequestBody color, @Part("y") int y
             , @Part("type") RequestBody type);
+
+    @GET
+    Observable<Response> checkUpdate(@Url String url);
 }

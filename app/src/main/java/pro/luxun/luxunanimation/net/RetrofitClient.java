@@ -20,6 +20,7 @@ public class RetrofitClient {
     public static final String URL_BANGUMI = "http://0.luxun.pro:163/?bangumi";
     public static final String URL_DM = "http://0.luxun.pro:163/?dm/";
     public static final String URL_LIKE = "http://0.luxun.pro:163/?like";
+    public static final String URL_UPDATE = "";
 
     public static final String URL_SOURCE = "http://0.luxun.pro:12580/";
     public static final String URL_REFERER = "http://luxun.pro/";
