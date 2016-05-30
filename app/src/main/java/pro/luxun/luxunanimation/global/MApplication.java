@@ -6,12 +6,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.github.johnpersano.supertoasts.SuperToast;
+import com.umeng.analytics.MobclickAgent;
 
 import org.androidannotations.annotations.EApplication;
 import org.androidannotations.annotations.UiThread;
 
 import java.io.InputStream;
 
+import pro.luxun.luxunanimation.BuildConfig;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.utils.SerializeUtils;
@@ -36,6 +38,9 @@ public class MApplication extends Application {
 
         SerializeUtils.init(this);
         LocalDisplay.init(this);
+
+        MobclickAgent.openActivityDurationTrack(false);
+        MobclickAgent.setCatchUncaughtExceptions(!BuildConfig.DEBUG);
     }
 
     @UiThread

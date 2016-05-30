@@ -14,7 +14,7 @@ import rx.Observable;
 import rx.functions.Action1;
 
 @EActivity(R.layout.activity_splash)
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
     private static final int TIME_SPLASH = 0;
 
     @Override

@@ -3,6 +3,8 @@ package pro.luxun.luxunanimation.view.view;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.view.Window;
@@ -23,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okio.BufferedSink;
 import okio.BufferedSource;
 import okio.Okio;
@@ -63,8 +66,8 @@ public class Update {
     }
 
     public void checkUpdate(final boolean isSilent){
-        RetrofitClient.getApiService().checkUpdate(RetrofitClient.URL_UPDATE).compose(RxUtils.<Response>applySchedulers())
-                .subscribe(new Subscriber<Response>() {
+        RetrofitClient.getApiService().checkUpdate(RetrofitClient.URL_UPDATE).compose(RxUtils.<ResponseBody>applySchedulers())
+                .subscribe(new Subscriber<ResponseBody>() {
                     @Override
                     public void onCompleted() {
 
@@ -78,9 +81,9 @@ public class Update {
                     }
 
                     @Override
-                    public void onNext(Response response) {
+                    public void onNext(ResponseBody response) {
                         try {
-                            String infoStr = response.body().string();
+                            String infoStr = response.string();
                             final pro.luxun.luxunanimation.bean.Update updateInfo = JSON.parseObject(infoStr, pro.luxun.luxunanimation.bean.Update.class, Feature.InitStringFieldAsEmpty);
 
                             if(BuildConfig.VERSION_CODE != updateInfo.getVer_code() && mComSettingPrefer.getIngnoreVer().get() != updateInfo.getVer_code()){
@@ -107,6 +110,7 @@ public class Update {
                                     @Override
                                     public void onClick(View v) {
                                         mComSettingPrefer.getIngnoreVer().put(updateInfo.getVer_code());
+                                        mDialog.dismiss();
                                     }
                                 });
 
@@ -114,8 +118,11 @@ public class Update {
                                     @Override
                                     public void onClick(View v) {
                                         downloadUpdate(updateInfo.getDownload_url(), "update", mContext.getCacheDir().getPath());
+                                        mDialog.dismiss();
                                     }
                                 });
+
+                                mDetailTV.setText(updateInfo.getDetail());
 
                                 mDialog.show();
                             }
@@ -168,6 +175,10 @@ public class Update {
                         output.flush();
                         output.close();
                         input.close();
+                        Uri uri = Uri.fromFile(file); //这里是APK路径
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                        mContext.startActivity(intent);
                         subscriber.onCompleted();
                     } else {
                         subscriber.onError(new Exception("更新出现问题"));

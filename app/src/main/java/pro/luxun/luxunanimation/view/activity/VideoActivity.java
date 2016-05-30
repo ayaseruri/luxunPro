@@ -15,29 +15,27 @@ import pro.luxun.luxunanimation.utils.Utils;
 import pro.luxun.luxunanimation.view.view.Viedo.VideoView;
 
 @EActivity(R.layout.activity_video)
-public class VideoActivity extends AppCompatActivity {
+public class VideoActivity extends BaseActivity {
 
     @ViewById(R.id.video)
     VideoView mVideoView;
 
-    @AfterViews
-    void init(){
+    @Override
+    protected void onResume() {
         MainJson.UpdatingEntity.SetsEntity setsEntity = getIntent().getParcelableExtra(IntentConstant.INTENT_VIDEO_SET_ENTITY);
         String videoTitle = setsEntity.getTitle();
         String orgTitle = setsEntity.getOrgTitle();
         String videoUrl = setsEntity.getUrl();
         String videCur = setsEntity.getSet();
 
-        videoUrl = RetrofitClient.URL_SOURCE + Utils.encodeURIComponent(orgTitle + "/" + videoUrl);
+        if(!videoUrl.startsWith("http://")){
+            videoUrl = RetrofitClient.URL_SOURCE + Utils.encodeURIComponent(orgTitle + "/" + videoUrl);
+        }
 
         mVideoView.initPlayer(orgTitle, videoUrl);
         mVideoView.initDanmaku(videoTitle, videCur);
 
         mVideoView.startPlayer();
-    }
-
-    @Override
-    protected void onResume() {
         mVideoView.resumePlayer();
         Log.d("VideoActivity", "onResume");
         super.onResume();

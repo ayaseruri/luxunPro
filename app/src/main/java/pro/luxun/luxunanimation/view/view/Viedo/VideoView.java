@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -31,7 +33,6 @@ import com.google.android.exoplayer.BuildConfig;
 import com.google.android.exoplayer.ExoPlaybackException;
 import com.google.android.exoplayer.ExoPlayer;
 import com.google.android.exoplayer.MediaCodecAudioTrackRenderer;
-import com.google.android.exoplayer.MediaCodecSelector;
 import com.google.android.exoplayer.MediaCodecVideoTrackRenderer;
 import com.google.android.exoplayer.extractor.ExtractorSampleSource;
 import com.google.android.exoplayer.extractor.mp4.Mp4Extractor;
@@ -94,6 +95,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     private boolean isHudConutDis = false;
     private int mHudVisableTime = 10, mDanmakuColor;
     private AppCompatActivity mActivity;
+    private TelephonyManager mTelephoneManager;
 
     @ViewById(R.id.surface_view)
     SurfaceView mSurfaceView;
@@ -138,6 +140,21 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     @AfterViews
     void init(){
         setKeepScreenOn(true);
+        mTelephoneManager = (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
+        mTelephoneManager.listen(new PhoneStateListener(){
+            @Override
+            public void onCallStateChanged(int state, String incomingNumber) {
+                switch (state){
+                    case TelephonyManager.CALL_STATE_RINGING:
+                        mPlayerControl.pause();
+                        mDanmakuView.pause();
+                        break;
+                    default:
+                        break;
+                }
+                super.onCallStateChanged(state, incomingNumber);
+            }
+        }, PhoneStateListener.LISTEN_CALL_STATE);
 
         userAgent = "android/okhttp" + BuildConfig.VERSION_NAME;
 
@@ -173,7 +190,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
                 hideSystemUI();
                 break;
             case PlaybackState.STATE_PAUSED:
-                mPlayBtn.setChecked(false);
+                mPlayBtn.setChecked(true);
                 break;
             case PlaybackState.STATE_BUFFERING:
                 mProgressWheel.setVisibility(VISIBLE);
@@ -366,7 +383,6 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         showSystemUI();
 
         initRender(url);
-        mPlayer.prepare(mVideoRender, mAudioRender);
     }
 
     public void initDanmaku(String title, String cur){
@@ -429,9 +445,8 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, okHttpDataSource, new DefaultAllocator(5 * K), 5 * K * K, new Mp4Extractor());
 
 
-        mVideoRender = new MediaCodecVideoTrackRenderer(getContext(), sampleSource, MediaCodecSelector.DEFAULT,
-                MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT, 5 * K);
-        mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource, MediaCodecSelector.DEFAULT);
+        mVideoRender = new MediaCodecVideoTrackRenderer(sampleSource, MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT, 5 * K);
+        mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource);
     }
 
     public void startPlayer(){

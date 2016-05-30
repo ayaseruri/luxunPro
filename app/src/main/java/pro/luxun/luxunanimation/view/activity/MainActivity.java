@@ -24,7 +24,7 @@ import pro.luxun.luxunanimation.view.fragment.TopicFragment_;
 import pro.luxun.luxunanimation.view.view.Update;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity implements INetCacheData<MainJson> {
+public class MainActivity extends BaseActivity implements INetCacheData<MainJson> {
 
     @ViewById(R.id.toolbar)
     Toolbar mToolbar;
