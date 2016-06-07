@@ -83,6 +83,10 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     private static final int K = 1024;
     private static final int TIME_ANIMATION = 250;
 
+    public static final int TYPE_VIDEO = 0;
+    public static final int TRACK_DISABLED = ExoPlayer.TRACK_DISABLED;
+
+
     private MediaCodecVideoTrackRenderer mVideoRender;
     private MediaCodecAudioTrackRenderer mAudioRender;
     private ExoPlayer mPlayer = ExoPlayer.Factory.newInstance(2);
@@ -93,6 +97,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
 
     private boolean isHudConutDis = false;
     private int mHudVisableTime = 10, mDanmakuColor;
+    private long mCurrentPostion;
     private AppCompatActivity mActivity;
 
     @ViewById(R.id.surface_view)
@@ -129,10 +134,12 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
 
     public VideoView(Context context) {
         super(context);
+        mCurrentPostion = 0;
     }
 
     public VideoView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mCurrentPostion = 0;
     }
 
     @AfterViews
@@ -241,6 +248,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     void onSeekBarTouchStop(){
         Log.d("touch", "seek_bar_touch_stop");
         mPlayer.seekTo(mSeekBar.getProgress());
+        mCurrentPostion = mSeekBar.getProgress();
         mDanmakuView.seekTo(Long.valueOf(mSeekBar.getProgress()));
         startUitimer();
     }
@@ -347,10 +355,10 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         }
     }
 
-    public void initPlayer(String title, String url){
+    public void initPlayer(String orgTitle, String title, String url, String cur){
         Log.d("video_url", url);
 
-        mToolbar.setTitle(title);
+        mToolbar.setTitle(orgTitle);
         mActivity.setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new OnClickListener() {
             @Override
@@ -366,10 +374,11 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         showSystemUI();
 
         initRender(url);
-        mPlayer.prepare(mVideoRender, mAudioRender);
-    }
 
-    public void initDanmaku(String title, String cur){
+        mPlayer.prepare(mVideoRender, mAudioRender);
+        mPlayer.sendMessage(mVideoRender, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, mSurfaceView.getHolder().getSurface());
+        mPlayer.setPlayWhenReady(true);
+
         mDanmakuUrl = RetrofitClient.URL_DM + Utils.encodeURIComponent("lx:" + title + cur);
         RetrofitClient.getApiService().getDm(mDanmakuUrl)
                 .compose(RxUtils.<List<List>>applySchedulers())
@@ -426,7 +435,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
                 ,userAgent , null);
         okHttpDataSource.setRequestProperty("Referer", RetrofitClient.URL_REFERER);
 
-        ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, okHttpDataSource, new DefaultAllocator(5 * K), 5 * K * K, new Mp4Extractor());
+        ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, okHttpDataSource, new DefaultAllocator(64 * K), 64 * K * 160, new Mp4Extractor());
 
 
         mVideoRender = new MediaCodecVideoTrackRenderer(getContext(), sampleSource, MediaCodecSelector.DEFAULT,
@@ -434,30 +443,27 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource, MediaCodecSelector.DEFAULT);
     }
 
-    public void startPlayer(){
-        mPlayer.sendMessage(mVideoRender, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, mSurfaceView.getHolder().getSurface());
-        mPlayer.setPlayWhenReady(true);
-    }
-
-    public void pausePlayer(){
-        mPlayer.stop();
-        mDanmakuView.stop();
-        stopUiTimer();
-    }
-
     public void resumePlayer(){
-        mPlayer.prepare(mVideoRender, mAudioRender);
-        mDanmakuView.start();
-        startUitimer();
+        if(null != mPlayer && null != mVideoRender && null != mAudioRender){
+            mPlayer.prepare(mVideoRender, mAudioRender);
+            mDanmakuView.start();
+            if(0 != mCurrentPostion){
+                mPlayerControl.seekTo((int)mCurrentPostion);
+                mDanmakuView.seekTo(mCurrentPostion);
+            }
+            startUitimer();
+        }
     }
 
     public void releasePlayer() {
         if (mPlayer != null) {
+            mPlayer.stop();
             mPlayer.release();
             mPlayer = null;
         }
 
         if(mDanmakuView != null){
+            mDanmakuView.stop();
             mDanmakuView.release();
             mDanmakuView = null;
         }

@@ -3,7 +3,6 @@ package pro.luxun.luxunanimation.view.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -20,8 +19,9 @@ public class VideoActivity extends AppCompatActivity {
     @ViewById(R.id.video)
     VideoView mVideoView;
 
-    @AfterViews
-    void init(){
+    @Override
+    protected void onResume() {
+        super.onResume();
         MainJson.UpdatingEntity.SetsEntity setsEntity = getIntent().getParcelableExtra(IntentConstant.INTENT_VIDEO_SET_ENTITY);
         String videoTitle = setsEntity.getTitle();
         String orgTitle = setsEntity.getOrgTitle();
@@ -30,30 +30,14 @@ public class VideoActivity extends AppCompatActivity {
 
         videoUrl = RetrofitClient.URL_SOURCE + Utils.encodeURIComponent(orgTitle + "/" + videoUrl);
 
-        mVideoView.initPlayer(orgTitle, videoUrl);
-        mVideoView.initDanmaku(videoTitle, videCur);
-
-        mVideoView.startPlayer();
-    }
-
-    @Override
-    protected void onResume() {
-        mVideoView.resumePlayer();
+        mVideoView.initPlayer(orgTitle, videoTitle, videoUrl, videCur);
         Log.d("VideoActivity", "onResume");
-        super.onResume();
     }
 
     @Override
     protected void onPause() {
-        mVideoView.pausePlayer();
-        Log.d("VideoActivity", "onPause");
         super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
         mVideoView.releasePlayer();
-        Log.d("VideoActivity", "onDestroy");
-        super.onDestroy();
+        Log.d("VideoActivity", "onPause");
     }
 }
