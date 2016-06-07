@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
@@ -20,9 +21,10 @@ import pro.luxun.luxunanimation.presenter.presenter.MainActivityPresenter;
 import pro.luxun.luxunanimation.view.fragment.MainFragment_;
 import pro.luxun.luxunanimation.view.fragment.MeFragment_;
 import pro.luxun.luxunanimation.view.fragment.TopicFragment_;
+import pro.luxun.luxunanimation.view.view.Update;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity implements INetCacheData<MainJson> {
+public class MainActivity extends BaseActivity implements INetCacheData<MainJson> {
 
     @ViewById(R.id.toolbar)
     Toolbar mToolbar;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements INetCacheData<Mai
     String mRetry;
     @StringArrayRes(R.array.main_tab_titles)
     String[] mMainTabTitles;
+    @Bean
+    Update mUpdate;
 
     private SweetAlertDialog mAlertDialog;
     private MainActivityPresenter mMainActivityPresenter;
@@ -51,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements INetCacheData<Mai
 
         mMainActivityPresenter.getMainJsonNetSilent();
         mMainActivityPresenter.getMainJsonCache();
+
+        mUpdate.checkUpdate(true);
     }
 
     @Override

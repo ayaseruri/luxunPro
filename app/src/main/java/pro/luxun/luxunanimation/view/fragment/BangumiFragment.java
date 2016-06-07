@@ -44,6 +44,7 @@ public class BangumiFragment extends BaseFragment {
 
             @Override
             protected void onBindView(MFAnimationItem mfAnimationItem, MainJson.UpdatingEntity s) {
+                s.setSub(true);
                 mfAnimationItem.bind(s, "");
             }
         };

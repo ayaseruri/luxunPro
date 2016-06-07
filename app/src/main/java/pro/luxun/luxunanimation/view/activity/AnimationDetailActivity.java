@@ -39,7 +39,7 @@ import rx.functions.Action1;
 
 
 @EActivity(R.layout.activity_animation_detail)
-public class AnimationDetailActivity extends AppCompatActivity {
+public class AnimationDetailActivity extends BaseActivity {
 
     @ViewById(R.id.observable_scroll_view)
     ObservableScrollView mScrollView;

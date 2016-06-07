@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,13 +14,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
+import okhttp3.RequestBody;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
+import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.LocalDisplay;
+import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.StartUtils;
+import pro.luxun.luxunanimation.utils.Utils;
+import rx.Subscriber;
 
 /**
  * Created by wufeiyang on 16/5/7.
@@ -55,7 +62,7 @@ public class MFAnimationItem extends FrameLayout{
 
     public void bind(final MainJson.UpdatingEntity updatingEntity, String keywords){
         mCur.setText(updatingEntity.getCur());
-        String title = updatingEntity.getTitle();
+        final String title = updatingEntity.getTitle();
         mTitle.setText(title);
 
         if(TextUtils.isEmpty(keywords)){
@@ -70,6 +77,38 @@ public class MFAnimationItem extends FrameLayout{
             @Override
             public void onClick(View v) {
                 StartUtils.startAnimationDetailActivity(getContext(), updatingEntity);
+            }
+        });
+
+        mFavrite.setChecked(updatingEntity.isSub());
+
+        mFavrite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                RequestBody requestBody;
+                if(isChecked){
+                    requestBody = Utils.str2RequestBody("1");
+                }else {
+                    requestBody = Utils.str2RequestBody("0");
+                }
+
+                RetrofitClient.getApiService().subscribe(RetrofitClient.URL_BANGUMI + Utils.encodeURIComponent(title), requestBody).compose(RxUtils.applySchedulers())
+                        .subscribe(new Subscriber<Object>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onNext(Object o) {
+
+                            }
+                        });
             }
         });
     }

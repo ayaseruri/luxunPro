@@ -73,10 +73,21 @@ public class MainJson implements Serializable{
         private int license;
         private int modified;
         private String cur;
+        private boolean isSub;
+
         /**
          * url : %E3%80%90%E5%B9%BB%E4%B9%8B%E5%AD%97%E5%B9%95%E7%BB%84%E3%80%91%5B%E5%B0%91%E5%B9%B4%E5%A5%B3%E5%83%95%20Shounen%20Maid%5D%5B01%5D%5B720P%5D%5BBIG5%5D.mp4
          * set : 01
          */
+
+        public boolean isSub() {
+            return isSub;
+        }
+
+        public void setSub(boolean sub) {
+            isSub = sub;
+        }
+
 
         private List<SetsEntity> sets;
 

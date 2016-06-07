@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -31,7 +33,6 @@ import com.google.android.exoplayer.BuildConfig;
 import com.google.android.exoplayer.ExoPlaybackException;
 import com.google.android.exoplayer.ExoPlayer;
 import com.google.android.exoplayer.MediaCodecAudioTrackRenderer;
-import com.google.android.exoplayer.MediaCodecSelector;
 import com.google.android.exoplayer.MediaCodecVideoTrackRenderer;
 import com.google.android.exoplayer.extractor.ExtractorSampleSource;
 import com.google.android.exoplayer.extractor.mp4.Mp4Extractor;
@@ -83,10 +84,6 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     private static final int K = 1024;
     private static final int TIME_ANIMATION = 250;
 
-    public static final int TYPE_VIDEO = 0;
-    public static final int TRACK_DISABLED = ExoPlayer.TRACK_DISABLED;
-
-
     private MediaCodecVideoTrackRenderer mVideoRender;
     private MediaCodecAudioTrackRenderer mAudioRender;
     private ExoPlayer mPlayer = ExoPlayer.Factory.newInstance(2);
@@ -97,8 +94,8 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
 
     private boolean isHudConutDis = false;
     private int mHudVisableTime = 10, mDanmakuColor;
-    private long mCurrentPostion;
     private AppCompatActivity mActivity;
+    private TelephonyManager mTelephoneManager;
 
     @ViewById(R.id.surface_view)
     SurfaceView mSurfaceView;
@@ -134,17 +131,30 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
 
     public VideoView(Context context) {
         super(context);
-        mCurrentPostion = 0;
     }
 
     public VideoView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mCurrentPostion = 0;
     }
 
     @AfterViews
     void init(){
         setKeepScreenOn(true);
+        mTelephoneManager = (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
+        mTelephoneManager.listen(new PhoneStateListener(){
+            @Override
+            public void onCallStateChanged(int state, String incomingNumber) {
+                switch (state){
+                    case TelephonyManager.CALL_STATE_RINGING:
+                        mPlayerControl.pause();
+                        mDanmakuView.pause();
+                        break;
+                    default:
+                        break;
+                }
+                super.onCallStateChanged(state, incomingNumber);
+            }
+        }, PhoneStateListener.LISTEN_CALL_STATE);
 
         userAgent = "android/okhttp" + BuildConfig.VERSION_NAME;
 
@@ -180,7 +190,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
                 hideSystemUI();
                 break;
             case PlaybackState.STATE_PAUSED:
-                mPlayBtn.setChecked(false);
+                mPlayBtn.setChecked(true);
                 break;
             case PlaybackState.STATE_BUFFERING:
                 mProgressWheel.setVisibility(VISIBLE);
@@ -248,7 +258,6 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     void onSeekBarTouchStop(){
         Log.d("touch", "seek_bar_touch_stop");
         mPlayer.seekTo(mSeekBar.getProgress());
-        mCurrentPostion = mSeekBar.getProgress();
         mDanmakuView.seekTo(Long.valueOf(mSeekBar.getProgress()));
         startUitimer();
     }
@@ -355,10 +364,10 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         }
     }
 
-    public void initPlayer(String orgTitle, String title, String url, String cur){
+    public void initPlayer(String title, String url){
         Log.d("video_url", url);
 
-        mToolbar.setTitle(orgTitle);
+        mToolbar.setTitle(title);
         mActivity.setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new OnClickListener() {
             @Override
@@ -374,11 +383,9 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         showSystemUI();
 
         initRender(url);
+    }
 
-        mPlayer.prepare(mVideoRender, mAudioRender);
-        mPlayer.sendMessage(mVideoRender, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, mSurfaceView.getHolder().getSurface());
-        mPlayer.setPlayWhenReady(true);
-
+    public void initDanmaku(String title, String cur){
         mDanmakuUrl = RetrofitClient.URL_DM + Utils.encodeURIComponent("lx:" + title + cur);
         RetrofitClient.getApiService().getDm(mDanmakuUrl)
                 .compose(RxUtils.<List<List>>applySchedulers())
@@ -435,35 +442,37 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
                 ,userAgent , null);
         okHttpDataSource.setRequestProperty("Referer", RetrofitClient.URL_REFERER);
 
-        ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, okHttpDataSource, new DefaultAllocator(64 * K), 64 * K * 160, new Mp4Extractor());
+        ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, okHttpDataSource, new DefaultAllocator(5 * K), 5 * K * K, new Mp4Extractor());
 
 
-        mVideoRender = new MediaCodecVideoTrackRenderer(getContext(), sampleSource, MediaCodecSelector.DEFAULT,
-                MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT, 5 * K);
-        mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource, MediaCodecSelector.DEFAULT);
+        mVideoRender = new MediaCodecVideoTrackRenderer(sampleSource, MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT, 5 * K);
+        mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource);
+    }
+
+    public void startPlayer(){
+        mPlayer.sendMessage(mVideoRender, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, mSurfaceView.getHolder().getSurface());
+        mPlayer.setPlayWhenReady(true);
+    }
+
+    public void pausePlayer(){
+        mPlayer.stop();
+        mDanmakuView.stop();
+        stopUiTimer();
     }
 
     public void resumePlayer(){
-        if(null != mPlayer && null != mVideoRender && null != mAudioRender){
-            mPlayer.prepare(mVideoRender, mAudioRender);
-            mDanmakuView.start();
-            if(0 != mCurrentPostion){
-                mPlayerControl.seekTo((int)mCurrentPostion);
-                mDanmakuView.seekTo(mCurrentPostion);
-            }
-            startUitimer();
-        }
+        mPlayer.prepare(mVideoRender, mAudioRender);
+        mDanmakuView.start();
+        startUitimer();
     }
 
     public void releasePlayer() {
         if (mPlayer != null) {
-            mPlayer.stop();
             mPlayer.release();
             mPlayer = null;
         }
 
         if(mDanmakuView != null){
-            mDanmakuView.stop();
             mDanmakuView.release();
             mDanmakuView = null;
         }
