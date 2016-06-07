@@ -51,26 +51,26 @@ public class Utils {
 
     public static String commentTimeFormat(long l){
         StringBuilder formatedTime = new StringBuilder();
-        int dif = (int) (System.currentTimeMillis() - l) / 1000;
+        long dif = (System.currentTimeMillis()/1000 - l);
         if(dif < 5){
             formatedTime.append("刚刚");
         }else if(dif < 60){
             formatedTime.append(dif).append("秒前");
         }else if(dif < (60 * 60)){
-            formatedTime.append(dif).append("分前");
+            formatedTime.append(dif/(60)).append("分前");
         }else if(dif < (60 * 60 * 24)){
-            formatedTime.append(dif).append("时前");
+            formatedTime.append(dif/(60 * 60)).append("时前");
         }else if(dif < (60 * 60 * 24 * 7)){
-            formatedTime.append(dif).append("天前");
+            formatedTime.append(dif/(60 * 60 * 24)).append("天前");
         }else if(dif < (60 * 60 * 24 * 7 * 2)){
-            formatedTime.append(dif).append("周前");
+            formatedTime.append(dif/(60 * 60 * 24 * 7)).append("周前");
         }else if(dif < (60 * 60 * 24 * 365)){
             SimpleDateFormat sf = new SimpleDateFormat("MM月dd日");
             Date date = new Date();
             date.setTime(l);
             formatedTime.append(sf.format(date));
         }else {
-            SimpleDateFormat sf = new SimpleDateFormat("YYYY年MM月dd日");
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy年MM月dd日");
             Date date = new Date();
             date.setTime(l);
             formatedTime.append(sf.format(date));

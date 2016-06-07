@@ -14,21 +14,25 @@ import android.widget.RelativeLayout;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.Comment;
 import pro.luxun.luxunanimation.bean.SubComment;
+import pro.luxun.luxunanimation.global.MApplication;
 import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
 import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.Utils;
 import rx.Subscriber;
+import rx.functions.Action1;
 
 /**
  * Created by wufeiyang on 16/5/12.
@@ -48,11 +52,14 @@ public class VideoComment extends RelativeLayout{
     ProgressWheel mProgressList;
     @ViewById(R.id.recycler)
     RecyclerView mRecyclerView;
+    @App
+    MApplication mMApplication;
 
     private ApiService mApiService;
     private String mCommentUrl;
     private int mCur = 0;
     private BaseRecyclerAdapter<Comment, CommentItem> mAdapter;
+    private ArrayList<Integer> mLikedCommentsId;
 
     public VideoComment(Context context) {
         super(context);
@@ -77,12 +84,14 @@ public class VideoComment extends RelativeLayout{
 
             @Override
             protected void onBindView(CommentItem commentItem, Comment comment) {
-                commentItem.bind(comment);
+                commentItem.bind(comment, mLikedCommentsId.contains(Integer.valueOf(comment.getCid())));
             }
         };
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
+
+        mLikedCommentsId = new ArrayList<>();
     }
 
     @Click(R.id.submit_btn)
@@ -105,6 +114,7 @@ public class VideoComment extends RelativeLayout{
                     public void onCompleted() {
                         mCommentET.setText("");
                         mProgressSubmit.setVisibility(GONE);
+                        initCommentList();
                     }
 
                     @Override
@@ -115,7 +125,7 @@ public class VideoComment extends RelativeLayout{
 
                     @Override
                     public void onNext(SubComment subComment) {
-
+                        mMApplication.showToast("评论成功", MApplication.TOAST_CONFIRM);
                     }
 
                     @Override
@@ -132,6 +142,20 @@ public class VideoComment extends RelativeLayout{
     }
 
     public void initCommentList(){
+        mApiService.getlikeCommentIds(RetrofitClient.URL_LIKE).compose(RxUtils.<List<Integer>>applySchedulers())
+                .subscribe(new Action1<List<Integer>>() {
+                    @Override
+                    public void call(List<Integer> integers) {
+                        mLikedCommentsId.clear();
+                        mLikedCommentsId.addAll(integers);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                    }
+                });
+
         mApiService.getCommentList(mCommentUrl).compose(RxUtils.<List<Comment>>applySchedulers())
                 .subscribe(new Subscriber<List<Comment>>() {
                     @Override

@@ -21,7 +21,7 @@
         android:numStars="5"
         android:max="10"
         android:rating="10"
-        android:stepSize="1" />
+        android:stepSize="2" />
 
     <TextView
         android:id="@+id/time"

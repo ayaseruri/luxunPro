@@ -8,6 +8,7 @@ import java.util.List;
 import okhttp3.Cookie;
 import pro.luxun.luxunanimation.db.CookiePrefer_;
 import pro.luxun.luxunanimation.global.MApplication_;
+import pro.luxun.luxunanimation.net.RetrofitClient;
 
 /**
  * Created by wufeiyang on 16/5/17.
@@ -33,6 +34,10 @@ public class CookieHelper {
     }
 
     public static List<Cookie> get(String url){
+        if(url.contains(RetrofitClient.URL_REFRESH_AUTH)){
+            return mEmptyCookies;
+        }
+
         if(url.contains(URL_BASE)){
             return iniCookieFormCache(url);
         }

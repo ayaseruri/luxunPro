@@ -14,13 +14,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.CheckedChange;
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 import okhttp3.RequestBody;
 import pro.luxun.luxunanimation.R;
+import pro.luxun.luxunanimation.bean.LikeBangumi;
 import pro.luxun.luxunanimation.bean.MainJson;
+import pro.luxun.luxunanimation.global.MApplication;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.utils.RxUtils;
@@ -45,6 +47,8 @@ public class MFAnimationItem extends FrameLayout{
     TextView mTitle;
     @ViewById(R.id.favrite)
     CheckBox mFavrite;
+    @App
+    MApplication mMApplication;
 
     public MFAnimationItem(Context context) {
         super(context);
@@ -76,6 +80,7 @@ public class MFAnimationItem extends FrameLayout{
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                updatingEntity.setSub(mFavrite.isChecked());
                 StartUtils.startAnimationDetailActivity(getContext(), updatingEntity);
             }
         });
@@ -84,7 +89,7 @@ public class MFAnimationItem extends FrameLayout{
 
         mFavrite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
                 RequestBody requestBody;
                 if(isChecked){
                     requestBody = Utils.str2RequestBody("1");
@@ -92,8 +97,11 @@ public class MFAnimationItem extends FrameLayout{
                     requestBody = Utils.str2RequestBody("0");
                 }
 
-                RetrofitClient.getApiService().subscribe(RetrofitClient.URL_BANGUMI + Utils.encodeURIComponent(title), requestBody).compose(RxUtils.applySchedulers())
-                        .subscribe(new Subscriber<Object>() {
+                updatingEntity.setSub(isChecked);
+
+                RetrofitClient.getApiService().subscribe(RetrofitClient.URL_BANGUMI + Utils.encodeURIComponent(title), requestBody)
+                        .compose(RxUtils.<LikeBangumi>applySchedulers())
+                        .subscribe(new Subscriber<LikeBangumi>() {
                             @Override
                             public void onCompleted() {
 
@@ -101,11 +109,13 @@ public class MFAnimationItem extends FrameLayout{
 
                             @Override
                             public void onError(Throwable e) {
-
+                                mMApplication.showToast(isChecked ?"订阅 " : "取消订阅 " + title + " 失败,请稍后重试", MApplication.TOAST_ALERT);
+                                mFavrite.setChecked(!isChecked);
+                                updatingEntity.setSub(mFavrite.isChecked());
                             }
 
                             @Override
-                            public void onNext(Object o) {
+                            public void onNext(LikeBangumi likeBangumi) {
 
                             }
                         });

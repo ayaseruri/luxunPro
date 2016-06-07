@@ -33,11 +33,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ff7863e-3a06-4506-8949-4808cce82f39" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/LikeBangumi.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/PostLikeComment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/VideoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/VideoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/MainJson.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/MainJson.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/ApiService.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/ApiService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/RetrofitClient.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/RetrofitClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/adapter/MainFragmentAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/adapter/MainFragmentAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/presenter/MainActivityPresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/presenter/MainActivityPresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/presenter/TopicFragmentPresenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/presenter/TopicFragmentPresenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/CookieHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/CookieHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/UserInfoHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/UserInfoHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/BangumiFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/BangumiFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/LikeCommentFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/LikeCommentFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/MainFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/MainFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/MeFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/MeFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/TopicFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/TopicFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/CommentItem.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/CommentItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/MFAnimationItem.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/MFAnimationItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/VideoComment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/VideoComment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/radio_btn_selector.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/radio_btn_selector.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_animation_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_animation_detail.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_me.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_me.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_topic.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_topic.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_animation_mf.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_animation_mf.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_comment_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_comment_list.xml" />
     </list>
     <ignored path="luxunPro.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,90 +105,100 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="VideoView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java">
+      <file leaf-file-name="LikeCommentFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/LikeCommentFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="376" column="0" selection-start-line="376" selection-start-column="0" selection-end-line="376" selection-end-column="0" />
+              <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
               <folding>
-                <element signature="docComment;class#VideoView#0" expanded="false" />
-                <element signature="method#VideoView#0;class#VideoView#0" expanded="false" />
-                <element signature="method#VideoView#1;class#VideoView#0" expanded="false" />
-                <element signature="method#onPlayWhenReadyCommitted#0;class#VideoView#0" expanded="false" />
-                <element signature="method#onPlayerError#0;class#VideoView#0" expanded="false" />
-                <element signature="method#onPlayCheckedChange#0;class#VideoView#0" expanded="false" />
-                <element signature="method#onDanmakuSwitch#0;class#VideoView#0" expanded="false" />
-                <element signature="method#onDanmakuETFocus#0;class#VideoView#0" expanded="false" />
-                <element signature="method#onSeekBarProgress#0;class#VideoView#0" expanded="false" />
-                <element signature="method#onSeekBarTouchStart#0;class#VideoView#0" expanded="false" />
-                <element signature="method#onSeekBarTouchStop#0;class#VideoView#0" expanded="false" />
-                <element signature="method#onSubmitDanmaku#0;class#VideoView#0" expanded="false" />
-                <element signature="class#9275:9760" expanded="false" />
-                <element signature="method#onCompleted#0;class#9275:9760" expanded="false" />
-                <element signature="method#onError#0;class#9275:9760" expanded="false" />
-                <element signature="method#onNext#0;class#9275:9760" expanded="false" />
-                <element signature="method#dispatchTouchEvent#0;class#VideoView#0" expanded="false" />
-                <element signature="method#onTouchEvent#0;class#VideoView#0" expanded="false" />
-                <element signature="method#startUitimer#0;class#VideoView#0" expanded="false" />
-                <element signature="class#11491:11644" expanded="false" />
-                <element signature="method#call#0;class#11491:11644" expanded="false" />
-                <element signature="method#stopUiTimer#0;class#VideoView#0" expanded="false" />
-                <element signature="class#12877:13342" expanded="false" />
-                <element signature="method#onCompleted#0;class#12877:13342" expanded="false" />
-                <element signature="method#onError#0;class#12877:13342" expanded="false" />
-                <element signature="method#onNext#0;class#12877:13342" expanded="false" />
-                <element signature="method#showSystemUI#0;class#VideoView#0" expanded="false" />
-                <element signature="method#hideSystemUI#0;class#VideoView#0" expanded="false" />
+                <element signature="e#1210#1228#1" expanded="true" />
+                <element signature="e#2234#2249#0" expanded="true" />
+                <element signature="e#2902#2903#0" expanded="true" />
+                <element signature="e#2976#2977#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/global/MApplication.java">
+      <file leaf-file-name="CommentItem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/CommentItem.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+              <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
+      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.13344887">
+              <caret line="53" column="56" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <file leaf-file-name="RetrofitClient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/RetrofitClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3841808">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="24" column="47" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StartUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/StartUtils.java">
+      <file leaf-file-name="BaseRecyclerAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/adapter/BaseRecyclerAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="66" selection-start-line="27" selection-start-column="66" selection-end-line="27" selection-end-column="66" />
+              <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VideoActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/VideoActivity.java">
+      <file leaf-file-name="AnimationDetailActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <caret line="109" column="30" selection-start-line="109" selection-start-column="30" selection-end-line="109" selection-end-column="30" />
+              <folding>
+                <element signature="e#5392#5405#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoComment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/VideoComment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="86" column="104" selection-start-line="86" selection-start-column="16" selection-end-line="86" selection-end-column="104" />
+              <folding>
+                <element signature="e#4878#4893#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApiService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/ApiService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="69" column="14" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -738,9 +775,9 @@
                 <option name="name" value="prepareComGithubCtiaoDanmakuFlameMaster046Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.github.google:ExoPlayer:r1.5.8" />
+                <option name="description" value="Prepare com.github.google:ExoPlayer:r1.4.2" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGithubGoogleExoPlayerR158Library" />
+                <option name="name" value="prepareComGithubGoogleExoPlayerR142Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.github.johnpersano:supertoasts:1.3.4" />
@@ -775,9 +812,9 @@
                 <option name="name" value="prepareDebugUnitTestDependencies" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare io.reactivex:rxandroid:1.1.0" />
+                <option name="description" value="Prepare io.reactivex:rxandroid:1.2.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareIoReactivexRxandroid110Library" />
+                <option name="name" value="prepareIoReactivexRxandroid120Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare me.zhanghai.android.materialprogressbar:library:1.1.6" />
@@ -1446,9 +1483,9 @@
                 <option name="name" value="prepareComGithubCtiaoDanmakuFlameMaster046Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.github.google:ExoPlayer:r1.5.8" />
+                <option name="description" value="Prepare com.github.google:ExoPlayer:r1.4.2" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComGithubGoogleExoPlayerR158Library" />
+                <option name="name" value="prepareComGithubGoogleExoPlayerR142Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.github.johnpersano:supertoasts:1.3.4" />
@@ -1483,9 +1520,9 @@
                 <option name="name" value="prepareDebugUnitTestDependencies" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare io.reactivex:rxandroid:1.1.0" />
+                <option name="description" value="Prepare io.reactivex:rxandroid:1.2.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareIoReactivexRxandroid110Library" />
+                <option name="name" value="prepareIoReactivexRxandroid120Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare me.zhanghai.android.materialprogressbar:library:1.1.6" />
@@ -1668,7 +1705,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4392055665000" />
+        <entry key="$PROJECT_DIR$" value="4393160613000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1864,14 +1901,14 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava/2.0.2/a60c039ba54c73d1133b72178e1b04133c73d13d/adapter-rxjava-2.0.2.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/okhttp3-integration/1.4.0/bd540d703a141a3d8246aac5bf3c36f43e23edcd/okhttp3-integration-1.4.0.aar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.alibaba/fastjson/1.1.50.android/4f76b23b6b566cd94913c818d1f849cca5d08481/fastjson-1.1.50.android.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.3/5a1aef6a9d56efb473b8be6b66689077e7317c45/rxjava-1.1.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex/rxandroid/1.1.0/70751512690d3c21f2a03717f9e831fc09f60117/rxandroid-1.1.0.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.alibaba/fastjson/1.1.52.android/6fcd2df42d3576368514855c72baabe3b6e318e0/fastjson-1.1.52.android.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.5/ece7b5d0870e66d8226dab6dcf47a2b12afff061/rxjava-1.1.5.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex/rxandroid/1.2.0/fb0f288a7f103debac82ed878c24eb961a74ea38/rxandroid-1.2.0.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/nl.littlerobots.rxlint/rxlint/1.0/f598e6ac36fcac18c112f939469a7031b83fa441/rxlint-1.0.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.pedant.sweetalert/library/1.3/4d87f52c453faf689c87371ffa33316b8c0748f2/library-1.3.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ksoichiro/android-observablescrollview/1.6.0/16fb3c2069fdca01631bd836e3c35c06b70f8809/android-observablescrollview-1.6.0.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.google/ExoPlayer/r1.5.8/36a1361163ed725b23425424778c164482ea704d/ExoPlayer-r1.5.8.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.google/ExoPlayer/r1.4.2/bf7c5879817bd38f9b0cfcd2ef49d8d785bc61c1/ExoPlayer-r1.4.2.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.commit451/NativeStackBlur/1.0.2/a632a5ff4c315c697738f5d8960f51f8ecd4a065/NativeStackBlur-1.0.2.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.makeramen/roundedimageview/2.2.1/2488468737fbb6a4bb8adf763ae6cd9688a6c6d7/roundedimageview-2.2.1.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.daimajia.easing/library/1.0.1/8a138655d16289aeaebe6b451ebe1ef792df155c/library-1.0.1.aar" />
@@ -1879,6 +1916,7 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.johnpersano/supertoasts/1.3.4/1b64ace927956257c2291409942cb82286ecbbfa/supertoasts-1.3.4.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.zhanghai.android.materialprogressbar/library/1.1.6/cf962161c5ca0fb2176476d3d24140a2ad9278d1/library-1.1.6.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.4.6/94bbe5137ac43897741a54dbdb0b4d5ea48d4986/DanmakuFlameMaster-0.4.6.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.umeng.analytics/analytics/6.0.1/aab9085bca0c26dcb9cb11837a5f5e22cc102a5e/analytics-6.0.1.jar" />
                             <option value="$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/animated-vector-drawable/23.4.0/animated-vector-drawable-23.4.0.aar" />
                             <option value="$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/support-vector-drawable/23.4.0/support-vector-drawable-23.4.0.aar" />
                             <option value="$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar" />
@@ -1970,34 +2008,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_topic.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/SimpleAnimationListener.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/UserInfoHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/Bangumis.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/MFAnimationItem.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/TopicItem.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/AutoHeightViewPager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_me.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/BangumiFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/MeFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/CommentItem.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/SubComment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/VideoComment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/Danmaku.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/JsonUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/RetrofitClient.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/MainJson.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/global/IntentConstant.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/StartUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/AnimationSets.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/danmaku_et_bg.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/danmaku_setting_selector.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/color_palette_view.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/danmaku_direction_text_color_selector.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/color/danmaku_direction_text_color_selector.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/color/danmaku_direction_btn_bg_selector.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/color_palette_oval.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/danmaku_setting_bg.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/danmaku_direction_btn_bg_selector.xml" />
@@ -2008,19 +2018,47 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/danmaku_setting_btn_bg.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/danmaku_setting.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Danmaku/DanmakuSetting.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/ColorPalette.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/ApiService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Danmaku/DanmakuView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/db/DanmakuSettingPrefer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/DanmakuSettingHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/video.xml" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/OkHttpDataSource.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/VideoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/global/MApplication.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/adapter/MainFragmentAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/MainFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_topic.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/presenter/TopicFragmentPresenter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/TopicFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_me.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/BangumiFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/PostLikeComment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/CommentItem.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_comment_list.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/UserInfoHelper.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/MeFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/LikeBangumi.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_animation_detail.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/MFAnimationItem.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/MainJson.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_animation_mf.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/radio_btn_selector.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/model/MainActivityModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/presenter/MainActivityPresenter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/CookieManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/CookieHelper.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/RetrofitClient.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/VideoComment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/LikeCommentFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/ApiService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java" />
       </list>
     </option>
   </component>
@@ -2066,9 +2104,19 @@
               <option name="myItemId" value="luxunPro" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
+              <option name="myItemId" value="luxunPro" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2076,13 +2124,93 @@
               <option name="myItemId" value="luxunPro" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="luxunPro" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="luxunanimation" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="luxunPro" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="luxunanimation" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="presenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="luxunPro" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="luxunanimation" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="luxunPro" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="device.picker.selection" value="57664950" />
@@ -2411,10 +2539,12 @@
       <window_info id="Android WiFi ADB" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28541002" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3704955" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2972973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3186937" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35472974" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -2427,14 +2557,12 @@
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20730738" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1517572" sideWeight="0.49358973" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15601704" sideWeight="0.49358973" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28541002" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2972973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2486,90 +2614,114 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/MainActivity.java</url>
-          <line>71</line>
+          <line>103</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/MainActivity.java</url>
-          <line>73</line>
+          <line>105</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/presenter/MainActivityPresenter.java</url>
-          <line>52</line>
+          <line>41</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>397</line>
+          <line>404</line>
           <properties />
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>400</line>
+          <line>407</line>
           <properties />
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>154</line>
+          <line>164</line>
           <properties />
           <option name="timeStamp" value="157" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>156</line>
+          <line>166</line>
           <properties />
           <option name="timeStamp" value="158" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>157</line>
+          <line>167</line>
           <properties />
           <option name="timeStamp" value="159" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>177</line>
+          <line>187</line>
           <properties />
           <option name="timeStamp" value="160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>211</line>
+          <line>221</line>
           <properties />
           <option name="timeStamp" value="161" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>214</line>
+          <line>224</line>
           <properties />
           <option name="timeStamp" value="162" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>220</line>
+          <line>230</line>
           <properties />
           <option name="timeStamp" value="163" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>251</line>
+          <line>260</line>
           <properties />
           <option name="timeStamp" value="164" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java</url>
-          <line>287</line>
+          <line>296</line>
           <properties />
           <option name="timeStamp" value="165" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java</url>
+          <line>129</line>
+          <properties />
+          <option name="timeStamp" value="170" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/MFAnimationItem.java</url>
+          <line>99</line>
+          <properties />
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java</url>
+          <line>53</line>
+          <properties />
+          <option name="timeStamp" value="176" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java</url>
+          <line>54</line>
+          <properties />
+          <option name="timeStamp" value="177" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="170" />
+      <option name="time" value="178" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="app">
@@ -2579,289 +2731,13 @@
         <watch expression="sLastDisp.getWidth()" />
         <watch expression="LastDisp.getHeight()" />
         <watch expression="sLastDisp.getHeight()" />
+        <watch expression="mUpdatingEntity.isSub()" />
+        <watch expression="System.currentTimeMillis() - l" />
+        <watch expression="System.currentTimeMillis()" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/global/IntentConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="54" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/AnimationSets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="94" selection-start-line="57" selection-start-column="94" selection-end-line="57" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/JsonUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="82" column="32" selection-start-line="82" selection-start-column="32" selection-end-line="82" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48699272">
-          <caret line="57" column="34" selection-start-line="57" selection-start-column="34" selection-end-line="57" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/cn.pedant.sweetalert/library/1.3/res/values/values.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3216495">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.581818">
-          <caret line="35" column="62" selection-start-line="35" selection-start-column="62" selection-end-line="35" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/attrs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/danmaku_et_bg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8571428">
-          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.4.6/47262d207ab0e2f62054c5dcd60408b4bfcc7d6c/DanmakuFlameMaster-0.4.6-sources.jar!/master/flame/danmaku/danmaku/model/android/DanmakuFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1015299">
-          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/color/danmaku_direction_text_color_selector.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8571428">
-          <caret line="2" column="73" selection-start-line="2" selection-start-column="73" selection-end-line="2" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/color_palette_oval.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.7857144">
-          <caret line="3" column="54" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/danmaku_direction_btn_bg_selector.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.857142">
-          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/danmaku_setting_bg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.7857144">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/adapter/MainFragmentAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57322836">
-          <caret line="14" column="41" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-23/android/widget/PopupWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4503937">
-          <caret line="1091" column="16" selection-start-line="1091" selection-start-column="16" selection-end-line="1091" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.413509">
-          <caret line="33" column="51" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.3/2e57a219582a72557a8353443edf4fce79a55c4/rxjava-1.1.3-sources.jar!/rx/Subscription.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6314961">
-          <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.107143">
-          <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/arrays.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.964285">
-          <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Danmaku/DanmakuConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36850393">
-          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/danmaku_setting.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14661655">
-          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/danmaku_setting_btn_bg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09269162">
-          <caret line="2" column="48" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-23/android/widget/ImageView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17357911">
-          <caret line="1325" column="43" selection-start-line="1325" selection-start-column="43" selection-end-line="1325" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/RetrofitClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.039938558">
-          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/ColorPalette.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/ApiService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.663837">
-          <caret line="57" column="22" selection-start-line="57" selection-start-column="22" selection-end-line="57" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/Danmaku.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30899832">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/VideoComment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48556876">
-          <caret line="99" column="25" selection-start-line="99" selection-start-column="25" selection-end-line="99" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.4.6/47262d207ab0e2f62054c5dcd60408b4bfcc7d6c/DanmakuFlameMaster-0.4.6-sources.jar!/master/flame/danmaku/danmaku/model/BaseDanmaku.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="16" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Danmaku/DanmakuView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72590363">
-          <caret line="125" column="50" selection-start-line="125" selection-start-column="50" selection-end-line="125" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/db/CookiePrefer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31325302">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/db/DanmakuSettingPrefer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4307229">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/DanmakuSettingHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7439759">
-          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Danmaku/DanmakuSetting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31325302">
-          <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-23/android/media/session/PlaybackState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.228164">
-          <caret line="192" column="39" selection-start-line="192" selection-start-column="28" selection-end-line="192" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/video.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74206346">
-          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21212122">
-          <caret line="89" column="43" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.google/ExoPlayer/r1.5.8/95369deb4e58563c8f4072d5c9ce006284448f74/ExoPlayer-r1.5.8-sources.jar!/com/google/android/exoplayer/MediaCodecVideoTrackRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33511585">
-          <caret line="135" column="9" selection-start-line="135" selection-start-column="9" selection-end-line="135" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/OkHttpDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.5543072">
-          <caret line="90" column="27" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/Auth.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2873,13 +2749,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/UserInfoHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="48" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -2904,18 +2773,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/StartUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="66" selection-start-line="27" selection-start-column="66" selection-end-line="27" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/VideoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.7627119">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2923,44 +2784,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/Viedo/VideoView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="376" column="0" selection-start-line="376" selection-start-column="0" selection-end-line="376" selection-end-column="0" />
-          <folding>
-            <element signature="docComment;class#VideoView#0" expanded="false" />
-            <element signature="method#VideoView#0;class#VideoView#0" expanded="false" />
-            <element signature="method#VideoView#1;class#VideoView#0" expanded="false" />
-            <element signature="method#onPlayWhenReadyCommitted#0;class#VideoView#0" expanded="false" />
-            <element signature="method#onPlayerError#0;class#VideoView#0" expanded="false" />
-            <element signature="method#onPlayCheckedChange#0;class#VideoView#0" expanded="false" />
-            <element signature="method#onDanmakuSwitch#0;class#VideoView#0" expanded="false" />
-            <element signature="method#onDanmakuETFocus#0;class#VideoView#0" expanded="false" />
-            <element signature="method#onSeekBarProgress#0;class#VideoView#0" expanded="false" />
-            <element signature="method#onSeekBarTouchStart#0;class#VideoView#0" expanded="false" />
-            <element signature="method#onSeekBarTouchStop#0;class#VideoView#0" expanded="false" />
-            <element signature="method#onSubmitDanmaku#0;class#VideoView#0" expanded="false" />
-            <element signature="class#9275:9760" expanded="false" />
-            <element signature="method#onCompleted#0;class#9275:9760" expanded="false" />
-            <element signature="method#onError#0;class#9275:9760" expanded="false" />
-            <element signature="method#onNext#0;class#9275:9760" expanded="false" />
-            <element signature="method#dispatchTouchEvent#0;class#VideoView#0" expanded="false" />
-            <element signature="method#onTouchEvent#0;class#VideoView#0" expanded="false" />
-            <element signature="method#startUitimer#0;class#VideoView#0" expanded="false" />
-            <element signature="class#11491:11644" expanded="false" />
-            <element signature="method#call#0;class#11491:11644" expanded="false" />
-            <element signature="method#stopUiTimer#0;class#VideoView#0" expanded="false" />
-            <element signature="class#12877:13342" expanded="false" />
-            <element signature="method#onCompleted#0;class#12877:13342" expanded="false" />
-            <element signature="method#onError#0;class#12877:13342" expanded="false" />
-            <element signature="method#onNext#0;class#12877:13342" expanded="false" />
-            <element signature="method#showSystemUI#0;class#VideoView#0" expanded="false" />
-            <element signature="method#hideSystemUI#0;class#VideoView#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/global/MApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+          <caret line="383" column="0" selection-start-line="383" selection-start-column="0" selection-end-line="383" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2975,8 +2799,434 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3841808">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+        <state vertical-scroll-proportion="2.3730159">
+          <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32911393">
+          <caret line="6" column="49" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="49" />
+          <folding>
+            <element signature="e#673#695#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/BaseFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.20527308">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/adapter/MainFragmentAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.45009416">
+          <caret line="34" column="95" selection-start-line="34" selection-start-column="95" selection-end-line="34" selection-end-column="95" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/model/TopicFragmentModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6817326">
+          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/MainJasonHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="49" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_topic.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38396624">
+          <caret line="7" column="38" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/presenter/TopicFragmentPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1751412">
+          <caret line="71" column="30" selection-start-line="71" selection-start-column="30" selection-end-line="71" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/global/MApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16386555">
+          <caret line="3" column="27" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/TopicFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.0357816">
+          <caret line="85" column="67" selection-start-line="85" selection-start-column="67" selection-end-line="85" selection-end-column="67" />
+          <folding>
+            <element signature="e#1541#1559#1" expanded="false" />
+            <element signature="e#3404#3405#0" expanded="false" />
+            <element signature="e#3461#3462#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_me.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.1929824">
+          <caret line="7" column="47" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
+          <folding>
+            <element signature="e#555#4809#0" expanded="false" />
+            <element signature="e#1912#1934#0" expanded="true" />
+            <element signature="e#2599#2621#0" expanded="true" />
+            <element signature="e#2667#2689#0" expanded="true" />
+            <element signature="e#3054#3079#0" expanded="true" />
+            <element signature="e#3212#3234#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_comment_list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7805907">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/PostLikeComment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24482109">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="28" />
+          <folding>
+            <element signature="e#399#400#0" expanded="false" />
+            <element signature="e#426#427#0" expanded="false" />
+            <element signature="e#466#467#0" expanded="false" />
+            <element signature="e#498#499#0" expanded="false" />
+            <element signature="e#530#531#0" expanded="false" />
+            <element signature="e#558#559#0" expanded="false" />
+            <element signature="e#600#601#0" expanded="false" />
+            <element signature="e#634#635#0" expanded="false" />
+            <element signature="e#664#665#0" expanded="false" />
+            <element signature="e#690#691#0" expanded="false" />
+            <element signature="e#728#729#0" expanded="false" />
+            <element signature="e#758#759#0" expanded="false" />
+            <element signature="e#789#790#0" expanded="false" />
+            <element signature="e#819#820#0" expanded="false" />
+            <element signature="e#862#863#0" expanded="false" />
+            <element signature="e#900#901#0" expanded="false" />
+            <element signature="e#932#933#0" expanded="false" />
+            <element signature="e#963#964#0" expanded="false" />
+            <element signature="e#1008#1009#0" expanded="false" />
+            <element signature="e#1048#1049#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/UserInfoHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="14" column="41" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/LikeBangumi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="24" />
+          <folding>
+            <element signature="e#285#286#0" expanded="true" />
+            <element signature="e#313#314#0" expanded="true" />
+            <element signature="e#355#356#0" expanded="true" />
+            <element signature="e#389#390#0" expanded="true" />
+            <element signature="e#420#421#0" expanded="true" />
+            <element signature="e#447#448#0" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
+            <element signature="e#519#520#0" expanded="true" />
+            <element signature="e#549#550#0" expanded="true" />
+            <element signature="e#575#576#0" expanded="true" />
+            <element signature="e#613#614#0" expanded="true" />
+            <element signature="e#643#644#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/RxUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/SubComment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="23" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_animation_detail.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.7368422">
+          <caret line="134" column="49" selection-start-line="134" selection-start-column="49" selection-end-line="134" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/StartUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/bean/MainJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="106.44444">
+          <caret line="294" column="37" selection-start-line="294" selection-start-column="32" selection-end-line="294" selection-end-column="37" />
+          <folding>
+            <element signature="e#21954#21955#0" expanded="true" />
+            <element signature="e#21989#21990#0" expanded="true" />
+            <element signature="e#26299#26300#0" expanded="true" />
+            <element signature="e#26331#26332#0" expanded="true" />
+            <element signature="e#28019#28020#0" expanded="true" />
+            <element signature="e#28082#28083#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/MFAnimationItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.703704">
+          <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
+          <folding>
+            <element signature="e#3428#3441#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/radio_btn_selector.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67196816">
+          <caret line="20" column="139" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="139" />
+          <folding>
+            <element signature="e#1170#1900#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_animation_mf.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.907173">
+          <caret line="53" column="54" selection-start-line="53" selection-start-column="54" selection-end-line="53" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/JsonUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="61" selection-start-line="69" selection-start-column="61" selection-end-line="69" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/MainFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69448376">
+          <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/BangumiFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0363952">
+          <caret line="83" column="19" selection-start-line="63" selection-start-column="8" selection-end-line="83" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/model/MainActivityModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31542462">
+          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/model/INetCacheModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40554592">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/presenter/MainActivityPresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.86481804">
+          <caret line="83" column="5" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/Interceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/CookieHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5875217">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/CookieManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7209705">
+          <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+          <folding>
+            <element signature="e#489#490#0" expanded="true" />
+            <element signature="e#540#541#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/MeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.045060657">
+          <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/AnimationDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="109" column="30" selection-start-line="109" selection-start-column="30" selection-end-line="109" selection-end-column="30" />
+          <folding>
+            <element signature="e#5392#5405#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/VideoComment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="86" column="104" selection-start-line="86" selection-start-column="16" selection-end-line="86" selection-end-column="104" />
+          <folding>
+            <element signature="e#4878#4893#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/presenter/adapter/BaseRecyclerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/fragment/LikeCommentFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+          <folding>
+            <element signature="e#1210#1228#1" expanded="true" />
+            <element signature="e#2234#2249#0" expanded="true" />
+            <element signature="e#2902#2903#0" expanded="true" />
+            <element signature="e#2976#2977#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/view/CommentItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="42" selection-start-line="73" selection-start-column="42" selection-end-line="73" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/RetrofitClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="47" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/net/ApiService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="14" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/view/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pro/luxun/luxunanimation/utils/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13344887">
+          <caret line="53" column="56" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="56" />
           <folding />
         </state>
       </provider>

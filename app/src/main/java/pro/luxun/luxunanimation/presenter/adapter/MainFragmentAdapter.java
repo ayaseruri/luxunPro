@@ -11,6 +11,7 @@ import java.util.List;
 
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.utils.JsonUtils;
+import pro.luxun.luxunanimation.utils.MainJasonHelper;
 import pro.luxun.luxunanimation.utils.SimpleTextWatcher;
 import pro.luxun.luxunanimation.view.view.MFAnimationItem_;
 import pro.luxun.luxunanimation.view.view.MFBottomItem_;
@@ -30,8 +31,8 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
     private String mKeywords;
     private List<MainJson.UpdatingEntity> mUpdatingEntities;
 
-    public MainFragmentAdapter(Context context, MainJson mainJson) {
-        this.mUpdatingEntities = JsonUtils.formatMF(context, mainJson);
+    public MainFragmentAdapter(Context context) {
+        this.mUpdatingEntities = JsonUtils.formatMF(context, MainJasonHelper.getMainJsonCache());
     }
 
     @Override

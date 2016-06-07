@@ -2,7 +2,7 @@ package pro.luxun.luxunanimation.view.activity;
 
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +17,8 @@ import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.ColorRes;
@@ -25,9 +27,13 @@ import org.androidannotations.annotations.res.StringRes;
 
 import java.util.concurrent.ExecutionException;
 
+import okhttp3.RequestBody;
 import pro.luxun.luxunanimation.R;
+import pro.luxun.luxunanimation.bean.LikeBangumi;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.global.IntentConstant;
+import pro.luxun.luxunanimation.global.MApplication;
+import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.TranslucentStatusHelper;
 import pro.luxun.luxunanimation.utils.Utils;
@@ -61,6 +67,10 @@ public class AnimationDetailActivity extends BaseActivity {
     TextView mIntroduce;
     @ViewById(R.id.video_comment)
     VideoComment mVideoComment;
+    @ViewById(R.id.favrite)
+    FloatingActionButton mActionButton;
+    @App
+    MApplication mMApplication;
 
     @ColorRes(R.color.colorPrimary)
     int mColorPrimary;
@@ -69,31 +79,35 @@ public class AnimationDetailActivity extends BaseActivity {
     @StringRes(R.string.detail_head_info)
     String mDetailHeadInfo;
 
+    private MainJson.UpdatingEntity mUpdatingEntity;
+
     @AfterViews
     void init(){
-        MainJson.UpdatingEntity updatingEntity = getIntent().getParcelableExtra(IntentConstant.INTENT_UPDATING_ENTITY);
+        mUpdatingEntity = getIntent().getParcelableExtra(IntentConstant.INTENT_UPDATING_ENTITY);
 
         initToolbar();
         initTranslucentStatus();
-        initHeaderBlur(updatingEntity.getCover());
+        initHeaderBlur(mUpdatingEntity.getCover());
 
-        Glide.with(this).load(updatingEntity.getCover()).centerCrop().into(mCover);
+        Glide.with(this).load(mUpdatingEntity.getCover()).centerCrop().into(mCover);
 
-        mTitle.setText(updatingEntity.getTitle());
-        mInfo.setText(String.format(mDetailHeadInfo, 0 == updatingEntity.getWeek() ? "日" : Utils.num2Str(updatingEntity.getWeek()), updatingEntity.getSets().size()));
+        mTitle.setText(mUpdatingEntity.getTitle());
+        mInfo.setText(String.format(mDetailHeadInfo
+                , 0 == mUpdatingEntity.getWeek() ? "日" : Utils.num2Str(mUpdatingEntity.getWeek())
+                , mUpdatingEntity.getSets().size()));
 
-        for(MainJson.UpdatingEntity.SetsEntity setsEntity : updatingEntity.getSets()){
-            setsEntity.setTitle(updatingEntity.getTitle());
-            setsEntity.setOrgTitle(updatingEntity.getOriginal());
+        for(MainJson.UpdatingEntity.SetsEntity setsEntity : mUpdatingEntity.getSets()){
+            setsEntity.setTitle(mUpdatingEntity.getTitle());
+            setsEntity.setOrgTitle(mUpdatingEntity.getOriginal());
         }
-        mAnimationSets.init(updatingEntity.getSets());
+        mAnimationSets.init(mUpdatingEntity.getSets());
 
-        mIntroduce.setText(updatingEntity.getText());
+        mIntroduce.setText(mUpdatingEntity.getText());
 
         mToolbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, mColorPrimary));
         mStatusbar.setBackgroundColor(ScrollUtils.getColorWithAlpha(0, mColorPrimary));
 
-        mVideoComment.initComment(updatingEntity.getTitle());
+        mVideoComment.initComment(mUpdatingEntity.getTitle());
 
         mScrollView.setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
             @Override
@@ -112,8 +126,43 @@ public class AnimationDetailActivity extends BaseActivity {
 
             }
         });
+
+        mActionButton.setSelected(mUpdatingEntity.isSub());
     }
 
+    @Click(R.id.favrite)
+    void onActionBtn(){
+        RequestBody requestBody;
+        if(!mUpdatingEntity.isSub()){
+            requestBody = Utils.str2RequestBody("1");
+        }else {
+            requestBody = Utils.str2RequestBody("0");
+        }
+
+        mUpdatingEntity.setSub(!mUpdatingEntity.isSub());
+        mActionButton.setSelected(mUpdatingEntity.isSub());
+
+        RetrofitClient.getApiService().subscribe(RetrofitClient.URL_BANGUMI + Utils.encodeURIComponent(mUpdatingEntity.getTitle()), requestBody)
+                .compose(RxUtils.<LikeBangumi>applySchedulers())
+                .subscribe(new Subscriber<LikeBangumi>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mMApplication.showToast(mUpdatingEntity.isSub() ? "订阅 " : "取消订阅 " + mUpdatingEntity.getTitle() + " 失败,请稍后重试", MApplication.TOAST_ALERT);
+                        mUpdatingEntity.setSub(!mUpdatingEntity.isSub());
+                        mActionButton.setSelected(mUpdatingEntity.isSub());
+                    }
+
+                    @Override
+                    public void onNext(LikeBangumi likeBangumi) {
+
+                    }
+                });
+    }
 
     private void initTranslucentStatus(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){

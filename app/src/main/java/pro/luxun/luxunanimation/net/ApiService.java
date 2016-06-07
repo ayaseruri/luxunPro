@@ -3,13 +3,14 @@ package pro.luxun.luxunanimation.net;
 import java.util.List;
 
 import okhttp3.RequestBody;
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import pro.luxun.luxunanimation.bean.Auth;
 import pro.luxun.luxunanimation.bean.Comment;
 import pro.luxun.luxunanimation.bean.Danmaku;
 import pro.luxun.luxunanimation.bean.GetToken;
+import pro.luxun.luxunanimation.bean.LikeBangumi;
 import pro.luxun.luxunanimation.bean.MainJson;
+import pro.luxun.luxunanimation.bean.PostLikeComment;
 import pro.luxun.luxunanimation.bean.SubComment;
 import pro.luxun.luxunanimation.bean.TopicJson;
 import retrofit2.http.GET;
@@ -51,10 +52,17 @@ public interface ApiService {
 
     @Multipart
     @POST
-    Observable<Object> subscribe(@Url String url, @Part("type") RequestBody type);
+    Observable<LikeBangumi> subscribe(@Url String url, @Part("type") RequestBody type);
 
     @GET
-    Observable<Object> getlikes(@Url String url);
+    Observable<List<Integer>> getlikeCommentIds(@Url String url);
+
+    @GET
+    Observable<List<Comment>> getlikeComment(@Url String url);
+
+    @Multipart
+    @POST
+    Observable<PostLikeComment> likeComment(@Url String url, @Part("type") RequestBody cid, @Part("theid") RequestBody theid);
 
     @GET
     Observable<List<List>> getDm(@Url String url);
@@ -67,4 +75,8 @@ public interface ApiService {
 
     @GET
     Observable<ResponseBody> checkUpdate(@Url String url);
+
+    @Multipart
+    @POST
+    Observable<Object> refreshAuth(@Url String url, @Part("sss") RequestBody sss);
 }

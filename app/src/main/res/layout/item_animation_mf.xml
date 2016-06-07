@@ -47,8 +47,8 @@
 
         <CheckBox
             android:id="@+id/favrite"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentRight="true"
             android:button="@null"
             android:background="@drawable/radio_btn_selector"/>

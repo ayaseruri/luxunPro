@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,9 +45,11 @@ import rx.functions.Action1;
  * Created by wufeiyang on 16/5/17.
  */
 @EFragment
-public class MeFragment extends BaseFragment {
+public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private static final String AUTH_STR = "Hello,this is Android!";
+    private static final String AUTH_STR = "你为什么这么熟练啊?";
+    private static final int POSTION_BANGUMI = 0;
+    private static final int POSTION_LIKE_COMMENT = 1;
 
     @StringRes(R.string.auth_hint)
     String mAuthHint;
@@ -60,6 +64,7 @@ public class MeFragment extends BaseFragment {
     private String mTmpToken;
     private View mRootView;
 
+    private SwipeRefreshLayout mRefreshLayout;
     private RelativeLayout mRelativeLayout;
     private ImageView mAvatar;
     private ImageView mHeaderImg;
@@ -69,6 +74,8 @@ public class MeFragment extends BaseFragment {
     private MaterialProgressBar mProgressBar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    private BangumiFragment mBangumiFragment;
+    private LikeCommentFragment mLikeCommentFragment;
 
     @Nullable
     @Override
@@ -84,65 +91,70 @@ public class MeFragment extends BaseFragment {
             mProgressBar = ((MaterialProgressBar) mRootView.findViewById(R.id.progress));
             mViewPager = (ViewPager) mRootView.findViewById(R.id.view_pager);
             mTabLayout = (TabLayout) mRootView.findViewById(R.id.tab);
+            mRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh);
         }
 
-        if (this.mLoginBtn!= null) {
-            this.mLoginBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mApiService.getToken(RetrofitClient.URL_AUTH_JSON, AUTH_STR).compose(RxUtils.<GetToken>applySchedulers())
-                            .subscribe(new Subscriber<GetToken>() {
-                                @Override
-                                public void onCompleted() {
-                                    mProgressBar.setVisibility(View.GONE);
-                                }
+        mLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            mApiService.getToken(RetrofitClient.URL_AUTH_JSON, AUTH_STR).compose(RxUtils.<GetToken>applySchedulers())
+                    .subscribe(new Subscriber<GetToken>() {
+                        @Override
+                        public void onCompleted() {
+                            mProgressBar.setVisibility(View.GONE);
+                        }
 
-                                @Override
-                                public void onError(Throwable e) {
-                                    Snackbar.make(mRelativeLayout, mAuthFailed, Snackbar.LENGTH_LONG).show();
-                                    mProgressBar.setVisibility(View.GONE);
-                                }
+                        @Override
+                        public void onError(Throwable e) {
+                            Snackbar.make(mRelativeLayout, mAuthFailed, Snackbar.LENGTH_LONG).show();
+                            mProgressBar.setVisibility(View.GONE);
+                        }
 
-                                @Override
-                                public void onNext(GetToken getToken) {
-                                    mTmpToken = getToken.getToken();
-                                    Snackbar.make(mRelativeLayout, mAuthHint, Snackbar.LENGTH_LONG)
-                                            .setAction("认证", new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    AuthInfoHelper.setRequestAuth(true);
-                                                    AuthInfoHelper.saveAuthToken(mTmpToken);
-                                                    StartUtils.startLocalBorwser(mActivity, RetrofitClient.URL_WEB_AUTH + mTmpToken);
-                                                }
-                                            }).show();
-                                }
+                        @Override
+                        public void onNext(GetToken getToken) {
+                            mTmpToken = getToken.getToken();
+                            Snackbar.make(mRelativeLayout, mAuthHint, Snackbar.LENGTH_LONG)
+                                    .setAction("认证", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            AuthInfoHelper.setRequestAuth(true);
+                                            AuthInfoHelper.saveAuthToken(mTmpToken);
+                                            StartUtils.startLocalBorwser(mActivity, RetrofitClient.URL_WEB_AUTH + mTmpToken);
+                                        }
+                                    }).show();
+                        }
 
-                                @Override
-                                public void onStart() {
-                                    mProgressBar.setVisibility(View.VISIBLE);
-                                }
-                            });
-                }
-            });
-        }
+                        @Override
+                        public void onStart() {
+                            mProgressBar.setVisibility(View.VISIBLE);
+                        }
+                    });
+            }
+        });
 
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
-        pagerAdapter.add(BangumiFragment_.builder().build(), "我的追番");
-        pagerAdapter.add(LikeCommentFragment_.builder().build(), "喜欢番评");
+
+        mBangumiFragment = BangumiFragment_.builder().build();
+        mLikeCommentFragment = LikeCommentFragment_.builder().build();
+
+        pagerAdapter.add(mBangumiFragment, "我的追番");
+        pagerAdapter.add(mLikeCommentFragment, "喜欢番评");
 
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
         mApiService = RetrofitClient.getApiService();
 
+        mRefreshLayout.setColorSchemeColors(ContextCompat.getColor(mActivity, R.color.colorPrimary));
+        mRefreshLayout.setOnRefreshListener(this);
+
         return mRootView;
     }
 
     private void initUserHeader(){
         if(UserInfoHelper.isLogin()){
-            Auth.UserEntity userEntity = UserInfoHelper.getUserInfo();
-            final String avatarUrl = userEntity.getAvatar().replace("50","180");
-            Glide.with(mActivity).load(avatarUrl).centerCrop().crossFade().into(mAvatar);
+            final Auth.UserEntity userEntity = UserInfoHelper.getUserInfo();
+            Glide.with(mActivity).load(userEntity.getAvatar()).centerCrop().crossFade().into(mAvatar);
 
             mLoginBtn.setVisibility(View.GONE);
 
@@ -155,7 +167,7 @@ public class MeFragment extends BaseFragment {
                 @Override
                 public void call(Subscriber<? super Bitmap> subscriber) {
                     try {
-                        Bitmap bitmap = Glide.with(mActivity).load(avatarUrl).asBitmap().into(400, 400).get();
+                        Bitmap bitmap = Glide.with(mActivity).load(userEntity.getAvatar()).asBitmap().into(400, 400).get();
                         subscriber.onNext(NativeStackBlur.process(bitmap, 30));
                         subscriber.onCompleted();
                     } catch (InterruptedException e) {
@@ -224,5 +236,31 @@ public class MeFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mRootView = null;
+    }
+
+    @Override
+    public void onRefresh() {
+        initUserHeader();
+        int tabSelected = mTabLayout.getSelectedTabPosition();
+        switch (tabSelected){
+            case POSTION_BANGUMI:
+                mBangumiFragment.refresh(new BangumiFragment.IOnRefreshComplete() {
+                    @Override
+                    public void onComplete() {
+                        mRefreshLayout.setRefreshing(false);
+                    }
+                });
+                break;
+            case POSTION_LIKE_COMMENT:
+                mLikeCommentFragment.refresh(new LikeCommentFragment.IOnRefreshComplete() {
+                    @Override
+                    public void onComplete() {
+                        mRefreshLayout.setRefreshing(false);
+                    }
+                });
+                break;
+            default:
+                break;
+        }
     }
 }

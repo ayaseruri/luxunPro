@@ -57,11 +57,17 @@ public class BangumiFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        refresh(null);
+    }
+
+    public void refresh(final IOnRefreshComplete refreshComplete){
         RetrofitClient.getApiService().getBangumis(RetrofitClient.URL_BANGUMI).compose(RxUtils.<List<String>>applySchedulers())
                 .subscribe(new Subscriber<List<String>>() {
                     @Override
                     public void onCompleted() {
-
+                        if(null != refreshComplete){
+                            refreshComplete.onComplete();
+                        }
                     }
 
                     @Override
@@ -76,5 +82,9 @@ public class BangumiFragment extends BaseFragment {
                         mAdapter.refresh(updatingEntities);
                     }
                 });
+    }
+
+    public interface IOnRefreshComplete{
+        void onComplete();
     }
 }

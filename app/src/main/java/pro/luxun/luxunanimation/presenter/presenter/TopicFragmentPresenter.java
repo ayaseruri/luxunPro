@@ -69,7 +69,7 @@ public class TopicFragmentPresenter {
     public void getTopicJsonCache(){
         ArrayList<TopicJson> topicJson = (ArrayList<TopicJson>) SerializeUtils.deserialization(SerializeUtils.TAG_TOPIC_JSON, true);
         if(null == topicJson){
-            mTopicModel.getJsonNet();
+            getTopicJsonNet();
         }else {
             mTopicFragment.onGetJsonCacheSuccess(topicJson);
         }

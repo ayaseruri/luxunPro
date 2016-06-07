@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -271,6 +270,9 @@ public class MainJson implements Serializable{
         }
 
 
+        public UpdatingEntity() {
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -290,10 +292,8 @@ public class MainJson implements Serializable{
             dest.writeInt(this.license);
             dest.writeInt(this.modified);
             dest.writeString(this.cur);
-            dest.writeList(this.sets);
-        }
-
-        public UpdatingEntity() {
+            dest.writeByte(this.isSub ? (byte) 1 : (byte) 0);
+            dest.writeTypedList(this.sets);
         }
 
         protected UpdatingEntity(Parcel in) {
@@ -309,8 +309,8 @@ public class MainJson implements Serializable{
             this.license = in.readInt();
             this.modified = in.readInt();
             this.cur = in.readString();
-            this.sets = new ArrayList<SetsEntity>();
-            in.readList(this.sets, SetsEntity.class.getClassLoader());
+            this.isSub = in.readByte() != 0;
+            this.sets = in.createTypedArrayList(SetsEntity.CREATOR);
         }
 
         public static final Creator<UpdatingEntity> CREATOR = new Creator<UpdatingEntity>() {

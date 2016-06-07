@@ -12,6 +12,7 @@ public class UserInfoHelper {
 
     public static void save(Auth.UserEntity userEntity){
         mUserEntity = userEntity;
+        mUserEntity.setAvatar(mUserEntity.getAvatar().replace("50","180"));
         SerializeUtils.serialization(SerializeUtils.TAG_USER_INFO, mUserEntity);
     }
 

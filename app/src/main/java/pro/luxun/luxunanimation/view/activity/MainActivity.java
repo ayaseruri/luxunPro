@@ -2,7 +2,6 @@ package pro.luxun.luxunanimation.view.activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -16,12 +15,17 @@ import org.androidannotations.annotations.res.StringRes;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
+import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.ViewPagerAdapter;
 import pro.luxun.luxunanimation.presenter.presenter.MainActivityPresenter;
+import pro.luxun.luxunanimation.utils.RxUtils;
+import pro.luxun.luxunanimation.utils.UserInfoHelper;
+import pro.luxun.luxunanimation.utils.Utils;
 import pro.luxun.luxunanimation.view.fragment.MainFragment_;
 import pro.luxun.luxunanimation.view.fragment.MeFragment_;
 import pro.luxun.luxunanimation.view.fragment.TopicFragment_;
 import pro.luxun.luxunanimation.view.view.Update;
+import rx.functions.Action1;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements INetCacheData<MainJson> {
@@ -57,6 +61,28 @@ public class MainActivity extends BaseActivity implements INetCacheData<MainJson
         mMainActivityPresenter.getMainJsonCache();
 
         mUpdate.checkUpdate(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(UserInfoHelper.isLogin()){
+            RetrofitClient.getApiService().refreshAuth(RetrofitClient.URL_REFRESH_AUTH
+                    , Utils.str2RequestBody(UserInfoHelper.getUserInfo().getSss()))
+                    .compose(RxUtils.applySchedulers())
+                    .subscribe(new Action1<Object>() {
+                        @Override
+                        public void call(Object o) {
+
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+
+                        }
+                    });
+
+        }
     }
 
     @Override
@@ -112,5 +138,9 @@ public class MainActivity extends BaseActivity implements INetCacheData<MainJson
 
         mTabLayout.setVisibility(View.VISIBLE);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    public MainActivityPresenter getMainActivityPresenter() {
+        return mMainActivityPresenter;
     }
 }

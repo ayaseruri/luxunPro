@@ -21,6 +21,8 @@ public class RetrofitClient {
     public static final String URL_DM = "http://0.luxun.pro:163/?dm/";
     public static final String URL_LIKE = "http://0.luxun.pro:163/?like";
     public static final String URL_UPDATE = "http://luxun.pro/clients/android/update.json";
+    public static final String URL_REFRESH_AUTH = "http://0.luxun.pro:163/?u";
+    public static final String URL_LIKE_COMMENT = "http://0.luxun.pro:163/?me.review";
 
     public static final String URL_SOURCE = "http://0.luxun.pro:12580/";
     public static final String URL_REFERER = "http://luxun.pro/";

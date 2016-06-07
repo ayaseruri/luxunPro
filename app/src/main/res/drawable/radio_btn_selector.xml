@@ -9,7 +9,7 @@
                 </shape>
             </item>
 
-            <item android:gravity="right">
+            <item android:width="16dp" android:height="16dp" android:gravity="right">
                 <shape android:shape="ring"
                        android:innerRadius="6dp"
                        android:useLevel="false"
@@ -18,7 +18,7 @@
                 </shape>
             </item>
 
-            <item android:top="3dp" android:bottom="3dp" android:left="3dp" android:right="3dp" android:gravity="right">
+            <item  android:width="10dp" android:height="10dp" android:top="3dp" android:bottom="3dp" android:left="3dp" android:right="3dp" android:gravity="right">
                 <shape android:shape="oval">
                     <solid android:color="@android:color/white"/>
                 </shape>
@@ -34,7 +34,7 @@
                 </shape>
             </item>
 
-            <item android:gravity="right">
+            <item android:width="16dp" android:height="16dp" android:gravity="right">
                 <shape android:shape="ring"
                        android:innerRadius="6dp"
                        android:useLevel="false"
