@@ -1,5 +1,6 @@
 package pro.luxun.luxunanimation.view.view.Viedo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.media.MediaCodec;
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -79,7 +81,7 @@ import rx.functions.Action1;
  */
 
 @EViewGroup(R.layout.video)
-public class VideoView extends FrameLayout implements ExoPlayer.Listener {
+public class VideoView extends FrameLayout implements ExoPlayer.Listener, CompoundButton.OnCheckedChangeListener {
 
     private static final int K = 1024;
     private static final int TIME_ANIMATION = 250;
@@ -162,7 +164,6 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         mPlayerControl = new PlayerControl(mPlayer);
 
         mActivity = (AppCompatActivity) getContext();
-        mDanmakuView.stop();
 
         mDanmakuColor = mDanmakuSetting.getDefaultColor();
         mDanmakuType = mDanmakuSetting.getDefaultType();
@@ -178,6 +179,8 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         mDanmakuSwitch.setChecked(DanmakuSettingHelper.getSwitchStatus());
 
         mSubmitBtn.setEnabled(false);
+
+        mPlayBtn.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -188,9 +191,14 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
                 mDanmakuView.start();
                 startUitimer();
                 hideSystemUI();
+                mPlayBtn.setOnCheckedChangeListener(null);
+                mPlayBtn.setChecked(false);
+                mPlayBtn.setOnCheckedChangeListener(this);
                 break;
             case PlaybackState.STATE_PAUSED:
+                mPlayBtn.setOnCheckedChangeListener(null);
                 mPlayBtn.setChecked(true);
+                mPlayBtn.setOnCheckedChangeListener(this);
                 break;
             case PlaybackState.STATE_BUFFERING:
                 mProgressWheel.setVisibility(VISIBLE);
@@ -215,17 +223,6 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
 
     }
 
-    @CheckedChange(R.id.play_btn)
-    void onPlayCheckedChange(CompoundButton playBtn, boolean isChecked){
-        if(isChecked){
-            mPlayerControl.pause();
-            mDanmakuView.pause();
-        }else {
-            mPlayerControl.start();
-            mDanmakuView.start();
-        }
-    }
-
     @CheckedChange(R.id.danmaku_switch)
     void onDanmakuSwitch(CompoundButton switchBtn, boolean isChecked){
         mDanmakuView.setVisibility(isChecked ? VISIBLE : GONE);
@@ -235,9 +232,15 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
     void onDanmakuETFocus(View danmakuET, boolean hasFocus){
         if(hasFocus){
             mPlayerControl.pause();
+            mPlayBtn.setOnCheckedChangeListener(null);
+            mPlayBtn.setChecked(true);
+            mPlayBtn.setOnCheckedChangeListener(this);
             stopUiTimer();
         }else {
             mPlayerControl.start();
+            mPlayBtn.setOnCheckedChangeListener(null);
+            mPlayBtn.setChecked(false);
+            mPlayBtn.setOnCheckedChangeListener(this);
             startUitimer();
         }
     }
@@ -305,9 +308,11 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
         switch (ev.getAction()){
             case MotionEvent.ACTION_DOWN:
                 Log.d("touch", "dispatch_down");
-                isHudConutDis = false;
-                mHudVisableTime = 10;
-                showSystemUI();
+                if(mHud.getVisibility() == INVISIBLE){
+                    isHudConutDis = false;
+                    mHudVisableTime = 10;
+                    showSystemUI();
+                }
                 break;
             default:
                 break;
@@ -447,9 +452,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
 
         mVideoRender = new MediaCodecVideoTrackRenderer(sampleSource, MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT, 5 * K);
         mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource);
-    }
 
-    public void startPlayer(){
         mPlayer.sendMessage(mVideoRender, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, mSurfaceView.getHolder().getSurface());
         mPlayer.setPlayWhenReady(true);
     }
@@ -477,5 +480,23 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener {
             mDanmakuView = null;
         }
         stopUiTimer();
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        Activity activity = (Activity) getContext();
+        View view = activity.getCurrentFocus();
+        if (null != view) {
+            ((InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            mDanmakuET.clearFocus();
+        }
+        if(isChecked){
+            mPlayerControl.pause();
+            mDanmakuView.pause();
+        }else {
+            mPlayerControl.start();
+            mDanmakuView.start();
+        }
     }
 }

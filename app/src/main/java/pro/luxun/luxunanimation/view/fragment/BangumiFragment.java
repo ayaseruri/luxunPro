@@ -18,6 +18,7 @@ import pro.luxun.luxunanimation.utils.GridSpacingItemDecoration;
 import pro.luxun.luxunanimation.utils.JsonUtils;
 import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.utils.RxUtils;
+import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.view.view.MFAnimationItem;
 import pro.luxun.luxunanimation.view.view.MFAnimationItem_;
 import rx.Subscriber;
@@ -61,27 +62,29 @@ public class BangumiFragment extends BaseFragment {
     }
 
     public void refresh(final IOnRefreshComplete refreshComplete){
-        RetrofitClient.getApiService().getBangumis(RetrofitClient.URL_BANGUMI).compose(RxUtils.<List<String>>applySchedulers())
-                .subscribe(new Subscriber<List<String>>() {
-                    @Override
-                    public void onCompleted() {
-                        if(null != refreshComplete){
-                            refreshComplete.onComplete();
+        if(UserInfoHelper.isLogin()){
+            RetrofitClient.getApiService().getBangumis(RetrofitClient.URL_BANGUMI).compose(RxUtils.<List<String>>applySchedulers())
+                    .subscribe(new Subscriber<List<String>>() {
+                        @Override
+                        public void onCompleted() {
+                            if(null != refreshComplete){
+                                refreshComplete.onComplete();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
+                        @Override
+                        public void onError(Throwable e) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onNext(List<String> list) {
-                        List<MainJson.UpdatingEntity> updatingEntities =
-                                JsonUtils.animationNames2Infos(list);
-                        mAdapter.refresh(updatingEntities);
-                    }
-                });
+                        @Override
+                        public void onNext(List<String> list) {
+                            List<MainJson.UpdatingEntity> updatingEntities =
+                                    JsonUtils.animationNames2Infos(list);
+                            mAdapter.refresh(updatingEntities);
+                        }
+                    });
+        }
     }
 
     public interface IOnRefreshComplete{

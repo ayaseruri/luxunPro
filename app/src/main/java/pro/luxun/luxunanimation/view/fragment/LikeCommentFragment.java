@@ -19,6 +19,7 @@ import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
 import pro.luxun.luxunanimation.utils.RxUtils;
+import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.view.view.CommentItem;
 import pro.luxun.luxunanimation.view.view.CommentItem_;
 import rx.Subscriber;
@@ -67,26 +68,28 @@ public class LikeCommentFragment extends BaseFragment {
     }
 
     public void refresh(final IOnRefreshComplete refreshComplete){
-        mApiService.getlikeComment(RetrofitClient.URL_LIKE_COMMENT).compose(RxUtils.<List<Comment>>applySchedulers())
-                .subscribe(new Subscriber<List<Comment>>() {
-                    @Override
-                    public void onCompleted() {
-                        if(null != refreshComplete){
-                            refreshComplete.onComplete();
+        if(UserInfoHelper.isLogin()){
+            mApiService.getlikeComment(RetrofitClient.URL_LIKE_COMMENT).compose(RxUtils.<List<Comment>>applySchedulers())
+                    .subscribe(new Subscriber<List<Comment>>() {
+                        @Override
+                        public void onCompleted() {
+                            if(null != refreshComplete){
+                                refreshComplete.onComplete();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        mMApplication.showToast(mNetErrorStr, MApplication.TOAST_ALERT);
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                            e.printStackTrace();
+                            mMApplication.showToast(mNetErrorStr, MApplication.TOAST_ALERT);
+                        }
 
-                    @Override
-                    public void onNext(List<Comment> comments) {
-                        mAdapter.refresh(comments);
-                    }
-                });
+                        @Override
+                        public void onNext(List<Comment> comments) {
+                            mAdapter.refresh(comments);
+                        }
+                    });
+        }
     }
 
     public interface IOnRefreshComplete{

@@ -49,6 +49,7 @@ public class Utils {
         return simpleDateFormat.format(date);
     }
 
+    //这里是用的是10位的时间戳，不是一般的13位
     public static String commentTimeFormat(long l){
         StringBuilder formatedTime = new StringBuilder();
         long dif = (System.currentTimeMillis()/1000 - l);

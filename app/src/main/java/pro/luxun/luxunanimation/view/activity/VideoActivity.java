@@ -1,9 +1,7 @@
 package pro.luxun.luxunanimation.view.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -35,7 +33,6 @@ public class VideoActivity extends BaseActivity {
         mVideoView.initPlayer(orgTitle, videoUrl);
         mVideoView.initDanmaku(videoTitle, videCur);
 
-        mVideoView.startPlayer();
         mVideoView.resumePlayer();
         Log.d("VideoActivity", "onResume");
         super.onResume();
