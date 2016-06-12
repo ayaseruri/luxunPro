@@ -188,7 +188,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
         switch (playbackState){
             case PlaybackState.STATE_PLAYING:
                 mProgressWheel.setVisibility(GONE);
-                mDanmakuView.start();
+                mDanmakuView.start(mSeekBar.getProgress());
                 startUitimer();
                 hideSystemUI();
                 mPlayBtn.setOnCheckedChangeListener(null);
@@ -247,7 +247,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
 
     @SeekBarProgressChange(R.id.seek_bar)
     void onSeekBarProgress(){
-        mTime.setText(String.format(mVideoTime, Utils.videoTimeFormat(mPlayer.getCurrentPosition())
+        mTime.setText(String.format(mVideoTime, Utils.videoTimeFormat(mSeekBar.getProgress())
                 , Utils.videoTimeFormat(mPlayer.getDuration())));
     }
 
@@ -465,7 +465,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
 
     public void resumePlayer(){
         mPlayer.prepare(mVideoRender, mAudioRender);
-        mDanmakuView.start();
+        mDanmakuView.resume();
         startUitimer();
     }
 
@@ -496,7 +496,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
             mDanmakuView.pause();
         }else {
             mPlayerControl.start();
-            mDanmakuView.start();
+            mDanmakuView.start(mSeekBar.getProgress());
         }
     }
 }

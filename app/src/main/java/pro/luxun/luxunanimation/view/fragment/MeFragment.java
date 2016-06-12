@@ -74,8 +74,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     private MaterialProgressBar mProgressBar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-    private BangumiFragment mBangumiFragment;
-    private LikeCommentFragment mLikeCommentFragment;
+    private ViewPagerAdapter pagerAdapter;
 
     @Nullable
     @Override
@@ -132,13 +131,10 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             }
         });
 
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        pagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        mBangumiFragment = BangumiFragment_.builder().build();
-        mLikeCommentFragment = LikeCommentFragment_.builder().build();
-
-        pagerAdapter.add(mBangumiFragment, "我的追番");
-        pagerAdapter.add(mLikeCommentFragment, "喜欢番评");
+        pagerAdapter.add(new BangumiFragment(), "我的追番");
+        pagerAdapter.add(new LikeCommentFragment(), "喜欢番评");
 
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -151,7 +147,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         return mRootView;
     }
 
-    private void initUserHeader(){
+    private void initUserInfo(){
         if(UserInfoHelper.isLogin()){
             final Auth.UserEntity userEntity = UserInfoHelper.getUserInfo();
             Glide.with(mActivity).load(userEntity.getAvatar()).centerCrop().crossFade().into(mAvatar);
@@ -219,7 +215,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                         @Override
                         public void onNext(Auth auth) {
                             UserInfoHelper.save(auth.getUser());
-                            initUserHeader();
+                            onRefresh();
                         }
 
                         @Override
@@ -228,7 +224,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                         }
                     });
         }else {
-            initUserHeader();
+            initUserInfo();
         }
     }
 
@@ -240,27 +236,21 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
 
     @Override
     public void onRefresh() {
-        initUserHeader();
-        int tabSelected = mTabLayout.getSelectedTabPosition();
-        switch (tabSelected){
-            case POSTION_BANGUMI:
-                mBangumiFragment.refresh(new BangumiFragment.IOnRefreshComplete() {
+        initUserInfo();
+        ((BangumiFragment)pagerAdapter.instantiateItem(mViewPager, POSTION_BANGUMI))
+                .refresh(new BangumiFragment.IOnRefreshComplete() {
                     @Override
                     public void onComplete() {
                         mRefreshLayout.setRefreshing(false);
                     }
                 });
-                break;
-            case POSTION_LIKE_COMMENT:
-                mLikeCommentFragment.refresh(new LikeCommentFragment.IOnRefreshComplete() {
+
+        ((LikeCommentFragment)pagerAdapter.instantiateItem(mViewPager, POSTION_LIKE_COMMENT))
+                .refresh(new LikeCommentFragment.IOnRefreshComplete() {
                     @Override
                     public void onComplete() {
                         mRefreshLayout.setRefreshing(false);
                     }
                 });
-                break;
-            default:
-                break;
-        }
     }
 }

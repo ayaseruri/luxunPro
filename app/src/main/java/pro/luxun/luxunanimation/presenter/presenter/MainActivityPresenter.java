@@ -1,14 +1,17 @@
 package pro.luxun.luxunanimation.presenter.presenter;
 
+import java.util.ArrayList;
+
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.model.INetCacheModel;
 import pro.luxun.luxunanimation.model.MainActivityModel;
+import pro.luxun.luxunanimation.net.RetrofitClient;
+import pro.luxun.luxunanimation.utils.JsonUtils;
 import pro.luxun.luxunanimation.utils.MainJasonHelper;
 import pro.luxun.luxunanimation.utils.RxUtils;
+import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.view.activity.INetCacheData;
 import rx.Subscriber;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 /**
  * Created by wufeiyang on 16/5/7.
@@ -39,9 +42,33 @@ public class MainActivityPresenter {
                 }
 
                 @Override
-                public void onNext(MainJson mainJson) {
+                public void onNext(final MainJson mainJson) {
                     MainJasonHelper.saveMainJson(mainJson);
-                    mainActivity.onGetJsonSuccessNet(mainJson);
+                    if(UserInfoHelper.isLogin()){
+                        RetrofitClient.getApiService().getBangumis(RetrofitClient.URL_BANGUMI)
+                                .compose(RxUtils.<ArrayList<String>>applySchedulers())
+                                .subscribe(new Subscriber<ArrayList<String>>() {
+                                    @Override
+                                    public void onCompleted() {
+
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        e.printStackTrace();
+                                        mainActivity.onGetJsonErrorNet();
+                                    }
+
+                                    @Override
+                                    public void onNext(ArrayList<String> list) {
+                                        MainJasonHelper.saveBangumis(list);
+                                        JsonUtils.animationNames2Infos(list);
+                                        mainActivity.onGetJsonSuccessNet(mainJson);
+                                    }
+                                });
+                    }else {
+                        mainActivity.onGetJsonSuccessNet(mainJson);
+                    }
                 }
 
                 @Override
@@ -53,32 +80,55 @@ public class MainActivityPresenter {
 
     public void getMainJsonNetSilent(){
         mainActivityModel.getJsonNet()
-                .map(new Func1<MainJson, MainJson>() {
-                    @Override
-                    public MainJson call(MainJson mainJson) {
-                        MainJasonHelper.saveMainJson(mainJson);
-                        return mainJson;
-                    }
-                })
                 .compose(RxUtils.<MainJson>applySchedulers())
-                .subscribe(new Action1<MainJson>() {
+                .subscribe(new Subscriber<MainJson>() {
                     @Override
-                    public void call(MainJson mainJson) {
+                    public void onCompleted() {
 
                     }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
 
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(final MainJson mainJson) {
+                        MainJasonHelper.saveMainJson(mainJson);
+                        if(UserInfoHelper.isLogin()){
+                            RetrofitClient.getApiService().getBangumis(RetrofitClient.URL_BANGUMI)
+                                    .compose(RxUtils.<ArrayList<String>>applySchedulers())
+                                    .subscribe(new Subscriber<ArrayList<String>>() {
+                                        @Override
+                                        public void onCompleted() {
+
+                                        }
+
+                                        @Override
+                                        public void onError(Throwable e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        @Override
+                                        public void onNext(ArrayList<String> list) {
+                                            MainJasonHelper.saveBangumis(list);
+                                            JsonUtils.animationNames2Infos(list);
+                                        }
+                                    });
+                        }
                     }
                 });
     }
 
     public void getMainJsonCache(){
         MainJson mainJson = MainJasonHelper.getMainJsonCache();
+        ArrayList bangumis = MainJasonHelper.getBangumisCache();
         if(null == mainJson){
             mainActivity.onGetJsonCacheFailed();
         }else {
+            if(null != bangumis){
+                JsonUtils.animationNames2Infos(bangumis);
+            }
             mainActivity.onGetJsonCacheSuccess(mainJson);
         }
     }

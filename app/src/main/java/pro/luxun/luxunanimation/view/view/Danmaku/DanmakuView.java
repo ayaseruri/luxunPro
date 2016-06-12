@@ -38,10 +38,10 @@ public class DanmakuView extends master.flame.danmaku.ui.widget.DanmakuView{
 
     private void initDanmuConfig() {
         // 设置最大显示行数
-        HashMap<Integer, Integer> maxLinesPair = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> maxLinesPair = new HashMap<>();
         maxLinesPair.put(BaseDanmaku.TYPE_SCROLL_RL, 4); // 滚动弹幕最大显示4行
         // 设置是否禁止重叠
-        HashMap<Integer, Boolean> overlappingEnablePair = new HashMap<Integer, Boolean>();
+        HashMap<Integer, Boolean> overlappingEnablePair = new HashMap<>();
         overlappingEnablePair.put(BaseDanmaku.TYPE_SCROLL_RL, true);
         overlappingEnablePair.put(BaseDanmaku.TYPE_FIX_TOP, true);
 
@@ -81,6 +81,7 @@ public class DanmakuView extends master.flame.danmaku.ui.widget.DanmakuView{
                 return new Danmakus();
             }
         }, mDanmakuContext);
+
         enableDanmakuDrawingCache(true);
     }
 

@@ -1,6 +1,7 @@
 package pro.luxun.luxunanimation.view.view;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -25,6 +26,8 @@ import pro.luxun.luxunanimation.global.MApplication;
 import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.RxUtils;
+import pro.luxun.luxunanimation.utils.StartUtils;
+import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
 import rx.Subscriber;
 
@@ -78,6 +81,17 @@ public class CommentItem extends RelativeLayout{
         mHeartView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(!UserInfoHelper.isLogin()){
+                    Snackbar.make(getRootView(), "登录之后才能喜欢…", Snackbar.LENGTH_LONG).setAction("登录", new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            StartUtils.startMainActivity(getContext(), 0);
+                        }
+                    }).show();
+                    return;
+                }
+
                 mApiService.likeComment(RetrofitClient.URL_LIKE, Utils.str2RequestBody("cid"), Utils.str2RequestBody(comment.getCid()))
                         .compose(RxUtils.<PostLikeComment>applySchedulers())
                         .subscribe(new Subscriber<PostLikeComment>() {

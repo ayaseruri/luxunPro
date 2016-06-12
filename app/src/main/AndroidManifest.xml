@@ -20,7 +20,8 @@
         <meta-data android:value="574c4fb767e58e8520001624" android:name="UMENG_APPKEY" />
         <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/>
 
-        <activity android:name=".view.activity.MainActivity_">
+        <activity android:name=".view.activity.MainActivity_"
+            android:launchMode="singleTask">
             <intent-filter>
                 <data android:scheme="luxun" />
 

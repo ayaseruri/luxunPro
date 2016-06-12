@@ -1,6 +1,7 @@
 package pro.luxun.luxunanimation.view.view;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -27,6 +28,7 @@ import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.StartUtils;
+import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
 import rx.Subscriber;
 
@@ -90,6 +92,18 @@ public class MFAnimationItem extends FrameLayout{
         mFavrite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+
+                if(!UserInfoHelper.isLogin()){
+                    Snackbar.make(getRootView(), "需要登录TAT…", Snackbar.LENGTH_LONG).setAction("登录", new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            StartUtils.startMainActivity(getContext(), 0);
+                        }
+                    }).show();
+                    mFavrite.setChecked(!isChecked);
+                    return;
+                }
+
                 RequestBody requestBody;
                 if(isChecked){
                     requestBody = Utils.str2RequestBody("1");
@@ -116,7 +130,9 @@ public class MFAnimationItem extends FrameLayout{
 
                             @Override
                             public void onNext(LikeBangumi likeBangumi) {
-
+                                if(TextUtils.isEmpty(likeBangumi.getType())){
+                                    mFavrite.setChecked(!isChecked);
+                                }
                             }
                         });
             }

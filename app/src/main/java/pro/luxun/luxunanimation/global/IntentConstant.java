@@ -7,4 +7,6 @@ public class IntentConstant {
     public static final String INTENT_UPDATING_ENTITY = "updating_entity";
 
     public static final String INTENT_VIDEO_SET_ENTITY = "video_setentity";
+
+    public static final String INTENT_MAIN_FRAGMENT_POS = "main_fragment_pos";
 }

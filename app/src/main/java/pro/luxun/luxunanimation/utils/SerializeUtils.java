@@ -23,6 +23,7 @@ public class SerializeUtils {
     public static final String TAG_MAIN_JSON = "main_json";
     public static final String TAG_TOPIC_JSON = "topic_json";
     public static final String TAG_USER_INFO = "user_info";
+    public static final String TAG_BANGUMIS = "bangumis";
 
     private static Context sContext;
 

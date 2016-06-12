@@ -1,5 +1,6 @@
 package pro.luxun.luxunanimation.net;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.RequestBody;
@@ -48,7 +49,7 @@ public interface ApiService {
             , @Part("text") RequestBody comment);
 
     @GET
-    Observable<List<String>> getBangumis(@Url String url);
+    Observable<ArrayList<String>> getBangumis(@Url String url);
 
     @Multipart
     @POST
@@ -78,5 +79,5 @@ public interface ApiService {
 
     @Multipart
     @POST
-    Observable<Object> refreshAuth(@Url String url, @Part("sss") RequestBody sss);
+    Observable<Auth.UserEntity> refreshAuth(@Url String url, @Part("sss") RequestBody sss);
 }

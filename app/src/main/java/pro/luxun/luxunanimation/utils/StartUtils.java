@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.view.activity.AnimationDetailActivity_;
+import pro.luxun.luxunanimation.view.activity.MainActivity_;
 import pro.luxun.luxunanimation.view.activity.VideoActivity_;
 
 /**
@@ -17,6 +18,12 @@ import pro.luxun.luxunanimation.view.activity.VideoActivity_;
 public class StartUtils {
 
     public static final int REQUEST_LOCAL_BORWSER = 0;
+
+    public static void startMainActivity(Context context, int fragmentPos){
+        Intent intent = new Intent(context, MainActivity_.class);
+        intent.putExtra(IntentConstant.INTENT_MAIN_FRAGMENT_POS, fragmentPos);
+        context.startActivity(intent);
+    }
 
     public static void startAnimationDetailActivity(Context context, MainJson.UpdatingEntity updatingEntity){
         Intent intent = new Intent(context, AnimationDetailActivity_.class);

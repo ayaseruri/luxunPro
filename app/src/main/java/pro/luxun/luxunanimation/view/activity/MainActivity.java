@@ -1,5 +1,6 @@
 package pro.luxun.luxunanimation.view.activity;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +15,9 @@ import org.androidannotations.annotations.res.StringRes;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import pro.luxun.luxunanimation.R;
+import pro.luxun.luxunanimation.bean.Auth;
 import pro.luxun.luxunanimation.bean.MainJson;
+import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.ViewPagerAdapter;
 import pro.luxun.luxunanimation.presenter.presenter.MainActivityPresenter;
@@ -69,11 +72,11 @@ public class MainActivity extends BaseActivity implements INetCacheData<MainJson
         if(UserInfoHelper.isLogin()){
             RetrofitClient.getApiService().refreshAuth(RetrofitClient.URL_REFRESH_AUTH
                     , Utils.str2RequestBody(UserInfoHelper.getUserInfo().getSss()))
-                    .compose(RxUtils.applySchedulers())
-                    .subscribe(new Action1<Object>() {
+                    .compose(RxUtils.<Auth.UserEntity>applySchedulers())
+                    .subscribe(new Action1<Auth.UserEntity>() {
                         @Override
-                        public void call(Object o) {
-
+                        public void call(Auth.UserEntity userEntity) {
+                            UserInfoHelper.save(userEntity);
                         }
                     }, new Action1<Throwable>() {
                         @Override
@@ -128,13 +131,21 @@ public class MainActivity extends BaseActivity implements INetCacheData<MainJson
         mMainActivityPresenter.getMainJsonNet();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        init();
+    }
+
     private void initMain(){
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.add(MeFragment_.builder().build(), mMainTabTitles[0]);
         viewPagerAdapter.add(MainFragment_.builder().build(), mMainTabTitles[1]);
         viewPagerAdapter.add(TopicFragment_.builder().build(), mMainTabTitles[3]);
         mViewPager.setAdapter(viewPagerAdapter);
-        mViewPager.setCurrentItem(1);
+
+        mViewPager.setCurrentItem(getIntent().getIntExtra(IntentConstant.INTENT_MAIN_FRAGMENT_POS, 1));
 
         mTabLayout.setVisibility(View.VISIBLE);
         mTabLayout.setupWithViewPager(mViewPager);

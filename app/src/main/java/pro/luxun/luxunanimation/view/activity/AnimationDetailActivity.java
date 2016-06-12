@@ -3,6 +3,7 @@ package pro.luxun.luxunanimation.view.activity;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,7 +36,9 @@ import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.global.MApplication;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.RxUtils;
+import pro.luxun.luxunanimation.utils.StartUtils;
 import pro.luxun.luxunanimation.utils.TranslucentStatusHelper;
+import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
 import pro.luxun.luxunanimation.view.view.AnimationSets;
 import pro.luxun.luxunanimation.view.view.VideoComment;
@@ -132,6 +135,16 @@ public class AnimationDetailActivity extends BaseActivity {
 
     @Click(R.id.favrite)
     void onActionBtn(){
+        if(!UserInfoHelper.isLogin()){
+            Snackbar.make(mScrollView, "请先登录…", Snackbar.LENGTH_LONG).setAction("登录", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StartUtils.startMainActivity(AnimationDetailActivity.this, 0);
+                }
+            }).show();
+            return;
+        }
+
         RequestBody requestBody;
         if(!mUpdatingEntity.isSub()){
             requestBody = Utils.str2RequestBody("1");

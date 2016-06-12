@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -30,6 +31,8 @@ import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
 import pro.luxun.luxunanimation.utils.RxUtils;
+import pro.luxun.luxunanimation.utils.StartUtils;
+import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
 import rx.Subscriber;
 import rx.functions.Action1;
@@ -96,6 +99,16 @@ public class VideoComment extends RelativeLayout{
 
     @Click(R.id.submit_btn)
     void onSubmit(){
+        if(!UserInfoHelper.isLogin()){
+            Snackbar.make(getRootView(), "登录之后才能评论…", Snackbar.LENGTH_LONG).setAction("登录", new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StartUtils.startMainActivity(getContext(), 0);
+                }
+            }).show();
+            return;
+        }
+
         if(TextUtils.isEmpty(mCommentUrl) || -1 ==mCur){
             throw new IllegalArgumentException("需要调用initComment来初始化评论url参数");
         }
