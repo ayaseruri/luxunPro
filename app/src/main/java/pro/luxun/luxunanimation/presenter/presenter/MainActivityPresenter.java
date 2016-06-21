@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.model.INetCacheModel;
 import pro.luxun.luxunanimation.model.MainActivityModel;
-import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.JsonUtils;
 import pro.luxun.luxunanimation.utils.MainJasonHelper;
 import pro.luxun.luxunanimation.utils.RxUtils;
-import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.view.activity.INetCacheData;
 import rx.Subscriber;
 
@@ -44,31 +42,7 @@ public class MainActivityPresenter {
                 @Override
                 public void onNext(final MainJson mainJson) {
                     MainJasonHelper.saveMainJson(mainJson);
-                    if(UserInfoHelper.isLogin()){
-                        RetrofitClient.getApiService().getBangumis(RetrofitClient.URL_BANGUMI)
-                                .compose(RxUtils.<ArrayList<String>>applySchedulers())
-                                .subscribe(new Subscriber<ArrayList<String>>() {
-                                    @Override
-                                    public void onCompleted() {
-
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        e.printStackTrace();
-                                        mainActivity.onGetJsonErrorNet();
-                                    }
-
-                                    @Override
-                                    public void onNext(ArrayList<String> list) {
-                                        MainJasonHelper.saveBangumis(list);
-                                        JsonUtils.animationNames2Infos(list);
-                                        mainActivity.onGetJsonSuccessNet(mainJson);
-                                    }
-                                });
-                    }else {
-                        mainActivity.onGetJsonSuccessNet(mainJson);
-                    }
+                    mainActivity.onGetJsonSuccessNet(mainJson);
                 }
 
                 @Override
@@ -95,27 +69,6 @@ public class MainActivityPresenter {
                     @Override
                     public void onNext(final MainJson mainJson) {
                         MainJasonHelper.saveMainJson(mainJson);
-                        if(UserInfoHelper.isLogin()){
-                            RetrofitClient.getApiService().getBangumis(RetrofitClient.URL_BANGUMI)
-                                    .compose(RxUtils.<ArrayList<String>>applySchedulers())
-                                    .subscribe(new Subscriber<ArrayList<String>>() {
-                                        @Override
-                                        public void onCompleted() {
-
-                                        }
-
-                                        @Override
-                                        public void onError(Throwable e) {
-                                            e.printStackTrace();
-                                        }
-
-                                        @Override
-                                        public void onNext(ArrayList<String> list) {
-                                            MainJasonHelper.saveBangumis(list);
-                                            JsonUtils.animationNames2Infos(list);
-                                        }
-                                    });
-                        }
                     }
                 });
     }

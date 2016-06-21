@@ -87,6 +87,7 @@ public class MFAnimationItem extends FrameLayout{
             }
         });
 
+        mFavrite.setOnCheckedChangeListener(null);
         mFavrite.setChecked(updatingEntity.isSub());
 
         mFavrite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -82,7 +82,7 @@ public class BangumiFragment extends BaseFragment {
             }
         }else {
             mEmptyText.setVisibility(View.VISIBLE);
-            mEmptyText.setText("没有数据…");
+            mEmptyText.setText("尚未登录…");
         }
     }
 
@@ -126,9 +126,7 @@ public class BangumiFragment extends BaseFragment {
                         @Override
                         public void onNext(ArrayList<String> list) {
                             MainJasonHelper.saveBangumis(list);
-                            List<MainJson.UpdatingEntity> updatingEntities =
-                                    JsonUtils.animationNames2Infos(list);
-                            mAdapter.refresh(updatingEntities);
+                            mAdapter.refresh(JsonUtils.animationNames2Infos(list));
                         }
                     });
         }else {

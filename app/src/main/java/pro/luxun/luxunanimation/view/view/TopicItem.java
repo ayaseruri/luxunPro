@@ -24,6 +24,8 @@ import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.bean.TopicJson;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
 import pro.luxun.luxunanimation.utils.JsonUtils;
+import pro.luxun.luxunanimation.utils.MainJasonHelper;
+import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
 
 /**
@@ -70,6 +72,13 @@ public class TopicItem extends CardView{
 
             @Override
             protected void onBindView(MFAnimationItem mfAnimationItem, MainJson.UpdatingEntity updatingEntity) {
+                if(UserInfoHelper.isLogin()){
+                    ArrayList<String> bangumis = MainJasonHelper.getBangumisCache();
+                    if(null != bangumis){
+                        updatingEntity.setSub(bangumis.contains(updatingEntity.getTitle()));
+                    }
+                }
+
                 mfAnimationItem.bind(updatingEntity, "");
             }
         };

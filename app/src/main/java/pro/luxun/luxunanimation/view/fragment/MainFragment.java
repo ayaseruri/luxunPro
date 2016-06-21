@@ -79,4 +79,12 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     }
                 });
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(null != mAdapter){
+            mAdapter.notifyDataSetChanged();
+        }
+    }
 }

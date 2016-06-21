@@ -7,12 +7,14 @@ import android.text.Editable;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.utils.JsonUtils;
 import pro.luxun.luxunanimation.utils.MainJasonHelper;
 import pro.luxun.luxunanimation.utils.SimpleTextWatcher;
+import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.view.view.MFAnimationItem_;
 import pro.luxun.luxunanimation.view.view.MFBottomItem_;
 import pro.luxun.luxunanimation.view.view.MFHeadItem_;
@@ -70,7 +72,14 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
         }else {
             switch (getItemViewType(position)){
                 case TYPE_NORMAL:
-                    ((MFAnimationItem_) holder.itemView).bind(mUpdatingEntities.get(position - 1), mKeywords);
+                    MainJson.UpdatingEntity updatingEntity = mUpdatingEntities.get(position - 1);
+                    if(UserInfoHelper.isLogin()){
+                        ArrayList<String> bangumis = MainJasonHelper.getBangumisCache();
+                        if(null != bangumis){
+                            updatingEntity.setSub(bangumis.contains(updatingEntity.getTitle()));
+                        }
+                    }
+                    ((MFAnimationItem_) holder.itemView).bind(updatingEntity, mKeywords);
                     break;
                 case TYPE_BLOCK_HEAD:
                     ((MFHeadItem_) holder.itemView).bind(mUpdatingEntities.get(position - 1).getTitle());

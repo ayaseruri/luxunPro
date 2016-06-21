@@ -28,21 +28,22 @@ public class DanmakuSetting implements View.OnClickListener{
     private IOnColorPaletteClick mIOnColorPaletteClick;
 
     private String mDanmakuType;
+    private View mContentView;
 
     public DanmakuSetting(Context context) {
         mContext = context;
-        View contentView = LayoutInflater.from(mContext).inflate(R.layout.danmaku_setting, null);
-        contentView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+        mContentView = LayoutInflater.from(mContext).inflate(R.layout.danmaku_setting, null);
+        mContentView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
 
-        mPopWidth = contentView.getMeasuredWidth();
-        mPopHeight = contentView.getMeasuredHeight();
+        mPopWidth = mContentView.getMeasuredWidth();
+        mPopHeight = mContentView.getMeasuredHeight();
 
-        mColorPalette = (ColorPalette) contentView.findViewById(R.id.color_palette);
+        mColorPalette = (ColorPalette) mContentView.findViewById(R.id.color_palette);
 
-        mRLButton = (Button) contentView.findViewById(R.id.RL_btn);
-        mLRButton = (Button) contentView.findViewById(R.id.LR_btn);
-        mTopButton = (Button) contentView.findViewById(R.id.top_btn);
+        mRLButton = (Button) mContentView.findViewById(R.id.RL_btn);
+        mLRButton = (Button) mContentView.findViewById(R.id.LR_btn);
+        mTopButton = (Button) mContentView.findViewById(R.id.top_btn);
 
         mRLButton.setOnClickListener(this);
         mRLButton.setSelected(true);
@@ -58,13 +59,13 @@ public class DanmakuSetting implements View.OnClickListener{
                 if(null != mIOnColorPaletteClick){
                     mIOnColorPaletteClick.onColorClick(mDanmakuType, color);
                 }
+                mPopupWindow.dismiss();
             }
         });
-
-        mPopupWindow = new PopupWindow(contentView, mPopWidth, mPopHeight, true);
     }
 
     public void show(View athor){
+        mPopupWindow = new PopupWindow(mContentView, mPopWidth, mPopHeight, true);
         mPopupWindow.showAsDropDown(athor, - mPopWidth/2, - mPopHeight - LocalDisplay.dp2px(22));
     }
 

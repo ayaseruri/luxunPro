@@ -115,7 +115,9 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="请在这里输入弹幕biu~"
+                    android:inputType="text"
                     android:imeOptions="flagNoExtractUi"
+                    android:singleLine="true"
                     android:textColorHint="@color/text_color_dark_gray"
                     android:textColor="@color/text_color_dark_gray"/>
             </RelativeLayout>

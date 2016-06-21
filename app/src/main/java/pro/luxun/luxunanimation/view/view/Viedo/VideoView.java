@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -49,6 +50,7 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.EditorAction;
 import org.androidannotations.annotations.FocusChange;
 import org.androidannotations.annotations.SeekBarProgressChange;
 import org.androidannotations.annotations.SeekBarTouchStart;
@@ -181,6 +183,9 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
         mSubmitBtn.setEnabled(false);
 
         mPlayBtn.setOnCheckedChangeListener(this);
+
+        mDanmakuView.pause();
+        mDanmakuET.setImeActionLabel("biu~", EditorInfo.IME_ACTION_DONE);
     }
 
     @Override
@@ -188,7 +193,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
         switch (playbackState){
             case PlaybackState.STATE_PLAYING:
                 mProgressWheel.setVisibility(GONE);
-                mDanmakuView.start(mSeekBar.getProgress());
+                mDanmakuView.resume();
                 startUitimer();
                 hideSystemUI();
                 mPlayBtn.setOnCheckedChangeListener(null);
@@ -228,16 +233,25 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
         mDanmakuView.setVisibility(isChecked ? VISIBLE : GONE);
     }
 
+    @EditorAction(R.id.danmaku_et)
+    void onDanmakuETAction(TextView danmakuET, int actionId){
+        if(actionId == EditorInfo.IME_ACTION_DONE){
+            onSubmitDanmaku();
+        }
+    }
+
     @FocusChange(R.id.danmaku_et)
     void onDanmakuETFocus(View danmakuET, boolean hasFocus){
         if(hasFocus){
             mPlayerControl.pause();
+            mDanmakuView.pause();
             mPlayBtn.setOnCheckedChangeListener(null);
             mPlayBtn.setChecked(true);
             mPlayBtn.setOnCheckedChangeListener(this);
             stopUiTimer();
         }else {
             mPlayerControl.start();
+            mDanmakuView.resume();
             mPlayBtn.setOnCheckedChangeListener(null);
             mPlayBtn.setChecked(false);
             mPlayBtn.setOnCheckedChangeListener(this);
@@ -286,7 +300,12 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
                 , Utils.str2RequestBody(mDanmakuType)).compose(RxUtils.<Danmaku>applySchedulers()).subscribe(new Subscriber<Danmaku>() {
             @Override
             public void onCompleted() {
-
+                if (null != mActivity.getCurrentFocus()) {
+                    ((InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE))
+                            .hideSoftInputFromWindow(mActivity.getCurrentFocus().getWindowToken()
+                                    , InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+                mDanmakuET.clearFocus();
             }
 
             @Override
@@ -458,8 +477,8 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
     }
 
     public void pausePlayer(){
-        mPlayer.stop();
-        mDanmakuView.stop();
+        mPlayerControl.pause();
+        mDanmakuView.pause();
         stopUiTimer();
     }
 
@@ -496,7 +515,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
             mDanmakuView.pause();
         }else {
             mPlayerControl.start();
-            mDanmakuView.start(mSeekBar.getProgress());
+            mDanmakuView.resume();
         }
     }
 }
