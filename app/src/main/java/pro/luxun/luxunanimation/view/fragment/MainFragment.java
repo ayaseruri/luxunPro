@@ -1,20 +1,20 @@
 package pro.luxun.luxunanimation.view.fragment;
 
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.presenter.adapter.MainFragmentAdapter;
 import pro.luxun.luxunanimation.utils.MainJasonHelper;
-import pro.luxun.luxunanimation.utils.RxUtils;
-import rx.Subscriber;
+import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
 /**
  * Created by wufeiyang on 16/5/7.
@@ -60,10 +60,16 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public void onRefresh() {
         MainJasonHelper.getMainJsonNet()
                 .compose(RxUtils.<MainJson>applySchedulers())
-                .subscribe(new Subscriber<MainJson>() {
+                .subscribe(new Observer<MainJson>() {
                     @Override
-                    public void onCompleted() {
-                        mRefreshLayout.setRefreshing(false);
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(MainJson mainJson) {
+                        MainJasonHelper.saveMainJson(mActivity, mainJson);
+                        mAdapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -73,9 +79,8 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     }
 
                     @Override
-                    public void onNext(MainJson mainJson) {
-                        MainJasonHelper.saveMainJson(mainJson);
-                        mAdapter.notifyDataSetChanged();
+                    public void onComplete() {
+                        mRefreshLayout.setRefreshing(false);
                     }
                 });
     }

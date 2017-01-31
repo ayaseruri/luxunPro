@@ -1,10 +1,11 @@
 package pro.luxun.luxunanimation.net;
 
-import java.util.concurrent.TimeUnit;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import android.content.Context;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import ykooze.ayaseruri.codesslib.net.OkHttpBuilder;
 
 /**
  * Created by wufeiyang on 16/5/7.
@@ -27,25 +28,37 @@ public class RetrofitClient {
     public static final String URL_SOURCE = "http://0.luxun.pro:12580/";
     public static final String URL_REFERER = "http://luxun.pro/";
 
-    private static OkHttpClient sOkHttpClient;
-
-    static {
-        sOkHttpClient = new OkHttpClient.Builder().addInterceptor(new Interceptor())
-                .cookieJar(new CookieManager())
-                .connectTimeout(30, TimeUnit.SECONDS).build();
-    }
+    private static volatile OkHttpClient sOkHttpClient;
+    private static volatile ApiService sApiService;
 
     public static ApiService getApiService(){
-        return SingleApiService.INSTANCE;
+        if(null == sApiService){
+            synchronized(RetrofitClient.class){
+                if(null == sApiService){
+                    sApiService = new Retrofit.Builder()
+                            .baseUrl(URL_BASE)
+                            .addConverterFactory(FastJsonConverterFactory.create())
+                            .client(sOkHttpClient)
+                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                            .build().create(ApiService.class);
+                }
+            }
+        }
+        return sApiService;
     }
 
-    public static OkHttpClient getOkHttpClient() {
+    public static OkHttpClient getOkHttpClient(Context context) {
+        if(null == sOkHttpClient){
+            synchronized(RetrofitClient.class){
+                if(null == sOkHttpClient){
+                    sOkHttpClient = new OkHttpBuilder()
+                            .withCookie(new CookieManager())
+                            .withInterceptor(new HeaderInterceptor())
+                            .withDefalutCache()
+                            .getClient(context);
+                }
+            }
+        }
         return sOkHttpClient;
-    }
-
-    private static class SingleApiService{
-        private static final ApiService INSTANCE = new Retrofit.Builder().baseUrl(URL_BASE).addConverterFactory(FastJsonConverterFactory.create())
-                .client(sOkHttpClient).addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build().create(ApiService.class);
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BaseRecyclerView">
+        <attr name="recycler_error_view" format="reference"/>
+        <attr name="recycler_empty_view" format="reference"/>
+        <attr name="recycler_loading_view" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="PromptView">
+        <attr name="prompt_error_view" format="reference"/>
+        <attr name="prompt_empty_view" format="reference"/>
+        <attr name="prompt_loading_view" format="reference"/>
+    </declare-styleable>
+</resources>

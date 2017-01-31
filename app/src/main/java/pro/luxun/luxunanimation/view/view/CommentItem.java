@@ -1,5 +1,13 @@
 package pro.luxun.luxunanimation.view.view;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.ViewById;
+
+import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
+
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
@@ -10,26 +18,19 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.makeramen.roundedimageview.RoundedImageView;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.App;
-import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.ViewById;
-
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.Comment;
 import pro.luxun.luxunanimation.bean.PostLikeComment;
 import pro.luxun.luxunanimation.global.MApplication;
 import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
-import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.StartUtils;
 import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
-import rx.Subscriber;
+import ykooze.ayaseruri.codesslib.others.ToastUtils;
+import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
 /**
  * Created by wufeiyang on 16/5/19.
@@ -82,7 +83,7 @@ public class CommentItem extends RelativeLayout{
             @Override
             public void onClick(View v) {
 
-                if(!UserInfoHelper.isLogin()){
+                if(!UserInfoHelper.isLogin(getContext())){
                     Snackbar.make(getRootView(), "登录之后才能喜欢…", Snackbar.LENGTH_LONG).setAction("登录", new OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -94,17 +95,10 @@ public class CommentItem extends RelativeLayout{
 
                 mApiService.likeComment(RetrofitClient.URL_LIKE, Utils.str2RequestBody("cid"), Utils.str2RequestBody(comment.getCid()))
                         .compose(RxUtils.<PostLikeComment>applySchedulers())
-                        .subscribe(new Subscriber<PostLikeComment>() {
+                        .subscribe(new Observer<PostLikeComment>() {
                             @Override
-                            public void onCompleted() {
-
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                e.printStackTrace();
-                                mHeartView.setSelected(false);
-                                mMApplication.showToast("喜欢操作失败", MApplication.TOAST_ALERT);
+                            public void onSubscribe(Disposable d) {
+                                mHeartView.setSelected(true);
                             }
 
                             @Override
@@ -115,8 +109,15 @@ public class CommentItem extends RelativeLayout{
                             }
 
                             @Override
-                            public void onStart() {
-                                mHeartView.setSelected(true);
+                            public void onError(Throwable e) {
+                                e.printStackTrace();
+                                mHeartView.setSelected(false);
+                                ToastUtils.showTost(getContext(), ToastUtils.TOAST_ALERT, "喜欢操作失败");
+                            }
+
+                            @Override
+                            public void onComplete() {
+
                             }
                         });
             }

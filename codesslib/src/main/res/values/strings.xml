@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CodessLib</string>
+    <string name="update_begin">正在检查更新</string>
+    <string name="update_ing">正在下载更新…</string>
+    <string name="update_failed">更新失败,请稍后重试</string>
+    <string name="click_to_update">点击更新</string>
+</resources>

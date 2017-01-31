@@ -1,12 +1,5 @@
 package pro.luxun.luxunanimation.view.view.Viedo;
 
-import com.google.android.exoplayer.C;
-import com.google.android.exoplayer.upstream.DataSpec;
-import com.google.android.exoplayer.upstream.HttpDataSource;
-import com.google.android.exoplayer.upstream.TransferListener;
-import com.google.android.exoplayer.util.Assertions;
-import com.google.android.exoplayer.util.Predicate;
-
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+
+import com.google.android.exoplayer.C;
+import com.google.android.exoplayer.upstream.DataSpec;
+import com.google.android.exoplayer.upstream.HttpDataSource;
+import com.google.android.exoplayer.upstream.TransferListener;
+import com.google.android.exoplayer.util.Assertions;
+import com.google.android.exoplayer.util.Predicate;
 
 import okhttp3.CacheControl;
 import okhttp3.HttpUrl;
@@ -143,7 +143,7 @@ public class OkHttpDataSource implements HttpDataSource {
             response = okHttpClient.newCall(request).execute();
             responseByteStream = response.body().byteStream();
         } catch (IOException e) {
-            throw new HttpDataSourceException("Unable to connect to " + dataSpec.uri.toString(), e, dataSpec);
+            throw new HttpDataSourceException(dataSpec, -1);
         }
 
         int responseCode = response.code();
@@ -188,7 +188,7 @@ public class OkHttpDataSource implements HttpDataSource {
             skipInternal();
             return readInternal(buffer, offset, readLength);
         } catch (IOException e) {
-            throw new HttpDataSourceException(e, dataSpec);
+            throw new HttpDataSourceException(dataSpec, -1);
         }
     }
 

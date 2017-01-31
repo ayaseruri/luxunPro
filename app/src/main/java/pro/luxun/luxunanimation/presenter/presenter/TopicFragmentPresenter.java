@@ -1,52 +1,54 @@
 package pro.luxun.luxunanimation.presenter.presenter;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import android.content.Context;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import pro.luxun.luxunanimation.bean.TopicJson;
 import pro.luxun.luxunanimation.model.INetCacheModel;
 import pro.luxun.luxunanimation.model.TopicFragmentModel;
-import pro.luxun.luxunanimation.utils.RxUtils;
-import pro.luxun.luxunanimation.utils.SerializeUtils;
 import pro.luxun.luxunanimation.view.activity.INetCacheData;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import ykooze.ayaseruri.codesslib.io.SerializeUtils;
+import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
 /**
  * Created by wufeiyang on 16/5/16.
  */
 public class TopicFragmentPresenter {
 
-    private INetCacheData<List<TopicJson>> mTopicFragment;
-    private INetCacheModel<List<TopicJson>> mTopicModel;
+    private static final String TAG_TOPIC_JSON = "topic_json";
 
-    public TopicFragmentPresenter(INetCacheData<List<TopicJson>> topicFragment) {
+    private INetCacheData<ArrayList<TopicJson>> mTopicFragment;
+    private INetCacheModel<ArrayList<TopicJson>> mTopicModel;
+    private Context mContext;
+
+    public TopicFragmentPresenter(Context context, INetCacheData<ArrayList<TopicJson>> topicFragment) {
         mTopicFragment = topicFragment;
         mTopicModel = new TopicFragmentModel();
+        mContext = context;
     }
 
     public void getTopicJsonNetSilent(){
-        mTopicModel.getJsonNet().subscribeOn(Schedulers.io())
-                .subscribe(new Action1<List<TopicJson>>() {
-                    @Override
-                    public void call(List<TopicJson> topicJsons) {
-                        SerializeUtils.serialization(SerializeUtils.TAG_TOPIC_JSON, topicJsons);
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
+        mTopicModel.getJsonNet()
+                .compose(RxUtils.<ArrayList<TopicJson>>applySchedulers())
+                .compose(RxUtils.<ArrayList<TopicJson>>applyCache(mContext, TAG_TOPIC_JSON))
+                .subscribe();
 
-                    }
-                });
     }
 
     public void getTopicJsonNet(){
-        mTopicModel.getJsonNet().compose(RxUtils.<List<TopicJson>>applySchedulers())
-                .subscribe(new Subscriber<List<TopicJson>>() {
+        mTopicModel.getJsonNet()
+                .compose(RxUtils.<ArrayList<TopicJson>>applySchedulers())
+                .subscribe(new Observer<ArrayList<TopicJson>>() {
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Disposable d) {
+                        mTopicFragment.onStartGetJsonNet();
+                    }
 
+                    @Override
+                    public void onNext(ArrayList<TopicJson> topicJsons) {
+                        mTopicFragment.onGetJsonSuccessNet(topicJsons);
                     }
 
                     @Override
@@ -55,19 +57,16 @@ public class TopicFragmentPresenter {
                     }
 
                     @Override
-                    public void onNext(List<TopicJson> topicJsons) {
-                        mTopicFragment.onGetJsonSuccessNet(topicJsons);
-                    }
+                    public void onComplete() {
 
-                    @Override
-                    public void onStart() {
-                        mTopicFragment.onStartGetJsonNet();
                     }
                 });
     }
 
     public void getTopicJsonCache(){
-        ArrayList<TopicJson> topicJson = (ArrayList<TopicJson>) SerializeUtils.deserialization(SerializeUtils.TAG_TOPIC_JSON, true);
+        ArrayList<TopicJson> topicJson =
+                (ArrayList<TopicJson>) SerializeUtils
+                        .deserializationSync(mContext , TAG_TOPIC_JSON, true);
         if(null == topicJson){
             getTopicJsonNet();
         }else {

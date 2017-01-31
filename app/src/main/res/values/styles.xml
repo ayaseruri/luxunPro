@@ -22,7 +22,7 @@
 
     <style name="AppTheme.SplashTheme" >
         <item name="colorPrimaryDark">@android:color/white</item>
-        <item name="android:background">@mipmap/splash_bg</item>
+        <item name="android:background">@android:color/white</item>
     </style>
 
     <style name="RatingBar" parent="@android:style/Widget.RatingBar">

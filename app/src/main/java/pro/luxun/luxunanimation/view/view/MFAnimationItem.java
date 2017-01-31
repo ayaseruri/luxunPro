@@ -1,5 +1,12 @@
 package pro.luxun.luxunanimation.view.view;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.ViewById;
+
+import com.bumptech.glide.Glide;
+
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
@@ -11,26 +18,19 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.App;
-import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.ViewById;
-
+import io.reactivex.functions.Consumer;
 import okhttp3.RequestBody;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.LikeBangumi;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.global.MApplication;
 import pro.luxun.luxunanimation.net.RetrofitClient;
-import pro.luxun.luxunanimation.utils.LocalDisplay;
-import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.StartUtils;
 import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
-import rx.Subscriber;
+import ykooze.ayaseruri.codesslib.others.ToastUtils;
+import ykooze.ayaseruri.codesslib.rx.RxUtils;
+import ykooze.ayaseruri.codesslib.ui.LocalDisplay;
 
 /**
  * Created by wufeiyang on 16/5/7.
@@ -94,7 +94,7 @@ public class MFAnimationItem extends FrameLayout{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
 
-                if(!UserInfoHelper.isLogin()){
+                if(!UserInfoHelper.isLogin(getContext())){
                     Snackbar.make(getRootView(), "需要登录TAT…", Snackbar.LENGTH_LONG).setAction("登录", new OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -116,24 +116,19 @@ public class MFAnimationItem extends FrameLayout{
 
                 RetrofitClient.getApiService().subscribe(RetrofitClient.URL_BANGUMI + Utils.encodeURIComponent(title), requestBody)
                         .compose(RxUtils.<LikeBangumi>applySchedulers())
-                        .subscribe(new Subscriber<LikeBangumi>() {
+                        .subscribe(new Consumer<LikeBangumi>() {
                             @Override
-                            public void onCompleted() {
-
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                mMApplication.showToast(isChecked ?"订阅 " : "取消订阅 " + title + " 失败,请稍后重试", MApplication.TOAST_ALERT);
-                                mFavrite.setChecked(!isChecked);
-                                updatingEntity.setSub(mFavrite.isChecked());
-                            }
-
-                            @Override
-                            public void onNext(LikeBangumi likeBangumi) {
-                                if(TextUtils.isEmpty(likeBangumi.getType())){
+                            public void accept(LikeBangumi likeBangumi) throws Exception {
+                                if (TextUtils.isEmpty(likeBangumi.getType())) {
                                     mFavrite.setChecked(!isChecked);
                                 }
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                ToastUtils.showTost(getContext(), ToastUtils.TOAST_ALERT, isChecked ?"订阅 " : "取消订阅 " + title + " 失败,请稍后重试");
+                                mFavrite.setChecked(!isChecked);
+                                updatingEntity.setSub(mFavrite.isChecked());
                             }
                         });
             }

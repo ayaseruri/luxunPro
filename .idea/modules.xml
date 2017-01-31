@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LuXunAnimation.iml" filepath="$PROJECT_DIR$/LuXunAnimation.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/codesslib/codesslib.iml" filepath="$PROJECT_DIR$/codesslib/codesslib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exoplayer/exoplayer.iml" filepath="$PROJECT_DIR$/exoplayer/exoplayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/luxunPro.iml" filepath="$PROJECT_DIR$/luxunPro.iml" />
     </modules>
   </component>

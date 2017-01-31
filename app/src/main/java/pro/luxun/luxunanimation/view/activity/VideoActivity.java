@@ -1,19 +1,19 @@
 package pro.luxun.luxunanimation.view.activity;
 
-import android.util.Log;
-
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import android.util.Log;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.Utils;
 import pro.luxun.luxunanimation.view.view.Viedo.VideoView;
+import ykooze.ayaseruri.codesslib.rx.RxActivity;
 
 @EActivity(R.layout.activity_video)
-public class VideoActivity extends BaseActivity {
+public class VideoActivity extends RxActivity {
 
     @ViewById(R.id.video)
     VideoView mVideoView;

@@ -1,12 +1,11 @@
 package pro.luxun.luxunanimation.view.view.Danmaku;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.util.AttributeSet;
-
 import java.util.HashMap;
 import java.util.List;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.util.AttributeSet;
 import master.flame.danmaku.controller.DrawHandler;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
 import master.flame.danmaku.danmaku.model.DanmakuTimer;
@@ -16,8 +15,8 @@ import master.flame.danmaku.danmaku.model.android.DanmakuContext;
 import master.flame.danmaku.danmaku.model.android.Danmakus;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import pro.luxun.luxunanimation.bean.Danmaku;
-import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.utils.Utils;
+import ykooze.ayaseruri.codesslib.ui.LocalDisplay;
 
 /**
  * Created by wufeiyang on 16/5/23.
@@ -121,7 +120,6 @@ public class DanmakuView extends master.flame.danmaku.ui.widget.DanmakuView{
         baseDanmaku.index = i;
         baseDanmaku.priority = isLocal ? (byte) 1 : (byte) 0;
         baseDanmaku.isLive = false;
-        baseDanmaku.time = (long) (danmaku.getStart() * 1000);
         baseDanmaku.textSize = LocalDisplay.dp2px(16);
         if(isLocal){
             baseDanmaku.borderColor = Color.WHITE;

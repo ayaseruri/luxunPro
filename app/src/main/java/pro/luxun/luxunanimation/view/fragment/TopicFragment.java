@@ -1,10 +1,6 @@
 package pro.luxun.luxunanimation.view.fragment;
 
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
+import java.util.ArrayList;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.App;
@@ -12,24 +8,29 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
 
-import java.util.List;
-
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.TopicJson;
 import pro.luxun.luxunanimation.global.MApplication;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
 import pro.luxun.luxunanimation.presenter.presenter.TopicFragmentPresenter;
 import pro.luxun.luxunanimation.utils.GridSpacingItemDecoration;
-import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.view.activity.INetCacheData;
 import pro.luxun.luxunanimation.view.view.TopicItem;
 import pro.luxun.luxunanimation.view.view.TopicItem_;
+import ykooze.ayaseruri.codesslib.others.ToastUtils;
+import ykooze.ayaseruri.codesslib.ui.LocalDisplay;
 
 /**
  * Created by wufeiyang on 16/5/16.
  */
 @EFragment(R.layout.fragment_topic)
-public class TopicFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, INetCacheData<List<TopicJson>>{
+public class TopicFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
+        INetCacheData<ArrayList<TopicJson>>{
 
     @ViewById(R.id.recycler)
     RecyclerView mRecyclerView;
@@ -64,7 +65,7 @@ public class TopicFragment extends BaseFragment implements SwipeRefreshLayout.On
         mRecyclerView.setAdapter(mBaseRecyclerAdapter);
         mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(1, LocalDisplay.dp2px(4), true));
 
-        mTopicFragmentPresenter = new TopicFragmentPresenter(this);
+        mTopicFragmentPresenter = new TopicFragmentPresenter(mActivity, this);
         mTopicFragmentPresenter.getTopicJsonNetSilent();
         mTopicFragmentPresenter.getTopicJsonCache();
     }
@@ -75,7 +76,7 @@ public class TopicFragment extends BaseFragment implements SwipeRefreshLayout.On
     }
 
     @Override
-    public void onGetJsonSuccessNet(List<TopicJson> topicJsons) {
+    public void onGetJsonSuccessNet(ArrayList<TopicJson> topicJsons) {
         mRefreshLayout.setRefreshing(false);
         mBaseRecyclerAdapter.refresh(topicJsons);
     }
@@ -83,11 +84,11 @@ public class TopicFragment extends BaseFragment implements SwipeRefreshLayout.On
     @Override
     public void onGetJsonErrorNet() {
         mRefreshLayout.setRefreshing(false);
-        mMApplication.showToast(mNetError, MApplication.TOAST_ALERT);
+        ToastUtils.showTost(mActivity, ToastUtils.TOAST_ALERT, mNetError);
     }
 
     @Override
-    public void onGetJsonCacheSuccess(List<TopicJson> topicJsons) {
+    public void onGetJsonCacheSuccess(ArrayList<TopicJson> topicJsons) {
         mBaseRecyclerAdapter.refresh(topicJsons);
     }
 

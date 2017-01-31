@@ -1,5 +1,16 @@
 package pro.luxun.luxunanimation.view.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.ViewById;
+
+import com.pnikosis.materialishprogress.ProgressWheel;
+
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,18 +22,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
-
-import com.pnikosis.materialishprogress.ProgressWheel;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.App;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.ViewById;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.Comment;
 import pro.luxun.luxunanimation.bean.SubComment;
@@ -30,12 +32,11 @@ import pro.luxun.luxunanimation.global.MApplication;
 import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
-import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.StartUtils;
 import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
-import rx.Subscriber;
-import rx.functions.Action1;
+import ykooze.ayaseruri.codesslib.others.ToastUtils;
+import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
 /**
  * Created by wufeiyang on 16/5/12.
@@ -99,7 +100,7 @@ public class VideoComment extends RelativeLayout{
 
     @Click(R.id.submit_btn)
     void onSubmit(){
-        if(!UserInfoHelper.isLogin()){
+        if(!UserInfoHelper.isLogin(getContext())){
             Snackbar.make(getRootView(), "登录之后才能评论…", Snackbar.LENGTH_LONG).setAction("登录", new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -122,12 +123,15 @@ public class VideoComment extends RelativeLayout{
         mApiService.submitComment(mCommentUrl, (int) mRatingBar.getRating()
                 , mCur, Utils.str2RequestBody("0.00"), Utils.str2RequestBody(comment))
                 .compose(RxUtils.<SubComment>applySchedulers())
-                .subscribe(new Subscriber<SubComment>() {
+                .subscribe(new Observer<SubComment>() {
                     @Override
-                    public void onCompleted() {
-                        mCommentET.setText("");
-                        mProgressSubmit.setVisibility(GONE);
-                        initCommentList();
+                    public void onSubscribe(Disposable d) {
+                        mProgressSubmit.setVisibility(VISIBLE);
+                    }
+
+                    @Override
+                    public void onNext(SubComment subComment) {
+                        ToastUtils.showTost(getContext(), ToastUtils.TOAST_CONFIRM, "评论成功");
                     }
 
                     @Override
@@ -137,13 +141,10 @@ public class VideoComment extends RelativeLayout{
                     }
 
                     @Override
-                    public void onNext(SubComment subComment) {
-                        mMApplication.showToast("评论成功", MApplication.TOAST_CONFIRM);
-                    }
-
-                    @Override
-                    public void onStart() {
-                        mProgressSubmit.setVisibility(VISIBLE);
+                    public void onComplete() {
+                        mCommentET.setText("");
+                        mProgressSubmit.setVisibility(GONE);
+                        initCommentList();
                     }
                 });
     }
@@ -155,25 +156,26 @@ public class VideoComment extends RelativeLayout{
     }
 
     public void initCommentList(){
-        mApiService.getlikeCommentIds(RetrofitClient.URL_LIKE).compose(RxUtils.<List<Integer>>applySchedulers())
-                .subscribe(new Action1<List<Integer>>() {
+        mApiService.getlikeCommentIds(RetrofitClient.URL_LIKE)
+                .compose(RxUtils.<List<Integer>>applySchedulers())
+                .subscribe(new Consumer<List<Integer>>() {
                     @Override
-                    public void call(List<Integer> integers) {
+                    public void accept(List<Integer> integers) throws Exception {
                         mLikedCommentsId.clear();
                         mLikedCommentsId.addAll(integers);
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-
                     }
                 });
 
         mApiService.getCommentList(mCommentUrl).compose(RxUtils.<List<Comment>>applySchedulers())
-                .subscribe(new Subscriber<List<Comment>>() {
+                .subscribe(new Observer<List<Comment>>() {
                     @Override
-                    public void onCompleted() {
-                        mProgressList.setVisibility(INVISIBLE);
+                    public void onSubscribe(Disposable d) {
+                        mProgressList.setVisibility(VISIBLE);
+                    }
+
+                    @Override
+                    public void onNext(List<Comment> comments) {
+                        mAdapter.refresh(comments);
                     }
 
                     @Override
@@ -183,13 +185,8 @@ public class VideoComment extends RelativeLayout{
                     }
 
                     @Override
-                    public void onNext(List<Comment> commentItems) {
-                        mAdapter.refresh(commentItems);
-                    }
-
-                    @Override
-                    public void onStart() {
-                        mProgressList.setVisibility(VISIBLE);
+                    public void onComplete() {
+                        mProgressList.setVisibility(INVISIBLE);
                     }
                 });
     }

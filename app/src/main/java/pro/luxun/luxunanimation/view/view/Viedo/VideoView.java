@@ -1,5 +1,37 @@
 package pro.luxun.luxunanimation.view.view.Viedo;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.App;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.CheckedChange;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.EditorAction;
+import org.androidannotations.annotations.FocusChange;
+import org.androidannotations.annotations.SeekBarProgressChange;
+import org.androidannotations.annotations.SeekBarTouchStart;
+import org.androidannotations.annotations.SeekBarTouchStop;
+import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.exoplayer.BuildConfig;
+import com.google.android.exoplayer.ExoPlaybackException;
+import com.google.android.exoplayer.ExoPlayer;
+import com.google.android.exoplayer.MediaCodecAudioTrackRenderer;
+import com.google.android.exoplayer.MediaCodecSelector;
+import com.google.android.exoplayer.MediaCodecVideoTrackRenderer;
+import com.google.android.exoplayer.extractor.ExtractorSampleSource;
+import com.google.android.exoplayer.extractor.mp4.Mp4Extractor;
+import com.google.android.exoplayer.upstream.DefaultAllocator;
+import com.google.android.exoplayer.util.PlayerControl;
+import com.nineoldandroids.animation.Animator;
+import com.pnikosis.materialishprogress.ProgressWheel;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -29,54 +61,22 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-import com.google.android.exoplayer.BuildConfig;
-import com.google.android.exoplayer.ExoPlaybackException;
-import com.google.android.exoplayer.ExoPlayer;
-import com.google.android.exoplayer.MediaCodecAudioTrackRenderer;
-import com.google.android.exoplayer.MediaCodecVideoTrackRenderer;
-import com.google.android.exoplayer.extractor.ExtractorSampleSource;
-import com.google.android.exoplayer.extractor.mp4.Mp4Extractor;
-import com.google.android.exoplayer.upstream.DefaultAllocator;
-import com.google.android.exoplayer.util.PlayerControl;
-import com.nineoldandroids.animation.Animator;
-import com.pnikosis.materialishprogress.ProgressWheel;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.App;
-import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.CheckedChange;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.EditorAction;
-import org.androidannotations.annotations.FocusChange;
-import org.androidannotations.annotations.SeekBarProgressChange;
-import org.androidannotations.annotations.SeekBarTouchStart;
-import org.androidannotations.annotations.SeekBarTouchStop;
-import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.StringRes;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.Danmaku;
 import pro.luxun.luxunanimation.global.MApplication;
-import pro.luxun.luxunanimation.global.MApplication_;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.utils.DanmakuSettingHelper;
 import pro.luxun.luxunanimation.utils.JsonUtils;
-import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.SimpleAnimationListener;
 import pro.luxun.luxunanimation.utils.Utils;
 import pro.luxun.luxunanimation.view.view.Danmaku.DanmakuSetting;
 import pro.luxun.luxunanimation.view.view.Danmaku.DanmakuView;
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Action1;
+import ykooze.ayaseruri.codesslib.others.ToastUtils;
+import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
 /**
  * Created by wufeiyang on 16/5/9.
@@ -93,7 +93,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
     private ExoPlayer mPlayer = ExoPlayer.Factory.newInstance(2);
 
     private PlayerControl mPlayerControl;
-    private Subscription mUiTimer;
+    private Disposable mUiTimer;
     private String userAgent, mDanmakuType, mDanmakuUrl;
 
     private boolean isHudConutDis = false;
@@ -211,7 +211,7 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
             case PlaybackState.STATE_STOPPED:
                 break;
             case PlaybackState.STATE_ERROR:
-                MApplication_.getInstance().showToast("播放出现问题", MApplication.TOAST_ALERT);
+
                 break;
             default:
                 break;
@@ -297,29 +297,35 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
                 , Utils.str2RequestBody(danmakuStr)
                 , Utils.str2RequestBody(String.format("#%06X", 0xFFFFFF & mDanmakuColor))
                 , 19
-                , Utils.str2RequestBody(mDanmakuType)).compose(RxUtils.<Danmaku>applySchedulers()).subscribe(new Subscriber<Danmaku>() {
-            @Override
-            public void onCompleted() {
-                if (null != mActivity.getCurrentFocus()) {
-                    ((InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE))
-                            .hideSoftInputFromWindow(mActivity.getCurrentFocus().getWindowToken()
-                                    , InputMethodManager.HIDE_NOT_ALWAYS);
-                }
-                mDanmakuET.clearFocus();
-            }
+                , Utils.str2RequestBody(mDanmakuType)).compose(RxUtils.<Danmaku>applySchedulers())
+                .subscribe(new Observer<Danmaku>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-                mMApplication.showToast("弹幕发送失败", MApplication.TOAST_ALERT);
-            }
+                    }
 
-            @Override
-            public void onNext(Danmaku danmaku) {
-                mDanmakuView.addDanmaku(danmaku);
-                mDanmakuET.setText("");
-            }
-        });
+                    @Override
+                    public void onNext(Danmaku danmaku) {
+                        mDanmakuView.addDanmaku(danmaku);
+                        mDanmakuET.setText("");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        ToastUtils.showTost(getContext(), ToastUtils.TOAST_ALERT, "弹幕发送失败");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        if (null != mActivity.getCurrentFocus()) {
+                            ((InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE))
+                                    .hideSoftInputFromWindow(mActivity.getCurrentFocus().getWindowToken()
+                                            , InputMethodManager.HIDE_NOT_ALWAYS);
+                        }
+                        mDanmakuET.clearFocus();
+                    }
+                });
     }
 
     @Override
@@ -359,13 +365,14 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
     }
 
     private void startUitimer(){
-        if(null != mUiTimer && !mUiTimer.isUnsubscribed()){
+        if(null != mUiTimer && !mUiTimer.isDisposed()){
             return;
         }
-        mUiTimer = Observable.interval(1, TimeUnit.SECONDS).compose(RxUtils.applySchedulers())
-                .subscribe(new Action1<Object>() {
+        mUiTimer = Observable.interval(1, TimeUnit.SECONDS)
+                .compose(RxUtils.<Long>applySchedulers())
+                .subscribe(new Consumer<Long>() {
                     @Override
-                    public void call(Object o) {
+                    public void accept(Long aLong) throws Exception {
                         mSeekBar.setMax((int) mPlayer.getDuration());
                         mSeekBar.setProgress((int) mPlayer.getCurrentPosition());
 
@@ -374,17 +381,12 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
                             hideSystemUI();
                         }
                     }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-
-                    }
                 });
     }
 
     private void stopUiTimer(){
-        if(null != mUiTimer && !mUiTimer.isUnsubscribed()){
-            mUiTimer.unsubscribe();
+        if(null != mUiTimer && !mUiTimer.isDisposed()){
+            mUiTimer.dispose();
         }
     }
 
@@ -413,19 +415,9 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
         mDanmakuUrl = RetrofitClient.URL_DM + Utils.encodeURIComponent("lx:" + title + cur);
         RetrofitClient.getApiService().getDm(mDanmakuUrl)
                 .compose(RxUtils.<List<List>>applySchedulers())
-                .subscribe(new Subscriber<List<List>>() {
+                .subscribe(new Consumer<List<List>>() {
                     @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<List> danmakulists) {
+                    public void accept(List<List> danmakulists) throws Exception {
                         mDanmakuView.refreshDanmaku(JsonUtils.parserDanmaku(danmakulists));
                     }
                 });
@@ -462,15 +454,19 @@ public class VideoView extends FrameLayout implements ExoPlayer.Listener, Compou
 
     private void initRender(String url){
         Uri uri = Uri.parse(url);
-        OkHttpDataSource okHttpDataSource = new OkHttpDataSource(RetrofitClient.getOkHttpClient()
+        OkHttpDataSource okHttpDataSource = new OkHttpDataSource(RetrofitClient.getOkHttpClient(getContext())
                 ,userAgent , null);
         okHttpDataSource.setRequestProperty("Referer", RetrofitClient.URL_REFERER);
 
         ExtractorSampleSource sampleSource = new ExtractorSampleSource(uri, okHttpDataSource, new DefaultAllocator(5 * K), 5 * K * K, new Mp4Extractor());
 
 
-        mVideoRender = new MediaCodecVideoTrackRenderer(sampleSource, MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT, 5 * K);
-        mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource);
+        mVideoRender = new MediaCodecVideoTrackRenderer(getContext()
+                , sampleSource
+                , MediaCodecSelector.DEFAULT
+                , MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT);
+        mAudioRender = new MediaCodecAudioTrackRenderer(sampleSource
+                , MediaCodecSelector.DEFAULT);
 
         mPlayer.sendMessage(mVideoRender, MediaCodecVideoTrackRenderer.MSG_SET_SURFACE, mSurfaceView.getHolder().getSurface());
         mPlayer.setPlayWhenReady(true);

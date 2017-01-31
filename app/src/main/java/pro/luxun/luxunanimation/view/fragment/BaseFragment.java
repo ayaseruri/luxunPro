@@ -2,18 +2,8 @@ package pro.luxun.luxunanimation.view.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.umeng.analytics.MobclickAgent;
-
-import rx.Observable;
-import rx.subjects.BehaviorSubject;
 
 /**
  * @author ayaseruri
@@ -33,12 +23,10 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart(this.getClass().getName());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd(this.getClass().getName());
     }
 }

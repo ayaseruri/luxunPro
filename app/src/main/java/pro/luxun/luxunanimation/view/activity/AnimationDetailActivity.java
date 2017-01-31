@@ -1,22 +1,5 @@
 package pro.luxun.luxunanimation.view.activity;
 
-import android.graphics.Bitmap;
-import android.os.Build;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.commit451.nativestackblur.NativeStackBlur;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
-
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Click;
@@ -26,8 +9,26 @@ import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.res.DimensionRes;
 import org.androidannotations.annotations.res.StringRes;
 
-import java.util.concurrent.ExecutionException;
+import com.bumptech.glide.Glide;
+import com.commit451.nativestackblur.NativeStackBlur;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
+import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Consumer;
 import okhttp3.RequestBody;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.LikeBangumi;
@@ -35,20 +36,17 @@ import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.global.MApplication;
 import pro.luxun.luxunanimation.net.RetrofitClient;
-import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.StartUtils;
 import pro.luxun.luxunanimation.utils.TranslucentStatusHelper;
 import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
 import pro.luxun.luxunanimation.view.view.AnimationSets;
 import pro.luxun.luxunanimation.view.view.VideoComment;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
-
+import ykooze.ayaseruri.codesslib.rx.RxActivity;
+import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
 @EActivity(R.layout.activity_animation_detail)
-public class AnimationDetailActivity extends BaseActivity {
+public class AnimationDetailActivity extends RxActivity {
 
     @ViewById(R.id.observable_scroll_view)
     ObservableScrollView mScrollView;
@@ -135,7 +133,7 @@ public class AnimationDetailActivity extends BaseActivity {
 
     @Click(R.id.favrite)
     void onActionBtn(){
-        if(!UserInfoHelper.isLogin()){
+        if(!UserInfoHelper.isLogin(this)){
             Snackbar.make(mScrollView, "请先登录…", Snackbar.LENGTH_LONG).setAction("登录", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -157,24 +155,7 @@ public class AnimationDetailActivity extends BaseActivity {
 
         RetrofitClient.getApiService().subscribe(RetrofitClient.URL_BANGUMI + Utils.encodeURIComponent(mUpdatingEntity.getTitle()), requestBody)
                 .compose(RxUtils.<LikeBangumi>applySchedulers())
-                .subscribe(new Subscriber<LikeBangumi>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        mMApplication.showToast(mUpdatingEntity.isSub() ? "订阅 " : "取消订阅 " + mUpdatingEntity.getTitle() + " 失败,请稍后重试", MApplication.TOAST_ALERT);
-                        mUpdatingEntity.setSub(!mUpdatingEntity.isSub());
-                        mActionButton.setSelected(mUpdatingEntity.isSub());
-                    }
-
-                    @Override
-                    public void onNext(LikeBangumi likeBangumi) {
-
-                    }
-                });
+                .subscribe();
     }
 
     private void initTranslucentStatus(){
@@ -202,33 +183,21 @@ public class AnimationDetailActivity extends BaseActivity {
     }
 
     private void initHeaderBlur(final String url){
-        Observable.create(new Observable.OnSubscribe<Bitmap>() {
+        Observable.create(new ObservableOnSubscribe<Bitmap>() {
             @Override
-            public void call(Subscriber<? super Bitmap> subscriber) {
-                try {
-                    Bitmap bitmap = Glide.with(AnimationDetailActivity.this)
-                            .load(url).asBitmap().into(400, 400).get();
-                    bitmap = NativeStackBlur.process(bitmap, 30);
-                    subscriber.onNext(bitmap);
-                    subscriber.onCompleted();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    subscriber.onError(e);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                    subscriber.onError(e);
-                }
+            public void subscribe(ObservableEmitter<Bitmap> e) throws Exception {
+                Bitmap bitmap = Glide.with(AnimationDetailActivity.this)
+                        .load(url).asBitmap().into(400, 400).get();
+                bitmap = NativeStackBlur.process(bitmap, 30);
+                e.onNext(bitmap);
+                e.onComplete();
             }
-        }).compose(RxUtils.<Bitmap>applySchedulers()).subscribe(new Action1<Bitmap>() {
-            @Override
-            public void call(Bitmap bitmap) {
-                mHeaderImg.setImageBitmap(bitmap);
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
-
-            }
-        });
+        }).compose(RxUtils.<Bitmap>applySchedulers())
+                .subscribe(new Consumer<Bitmap>() {
+                    @Override
+                    public void accept(Bitmap bitmap) throws Exception {
+                        mHeaderImg.setImageBitmap(bitmap);
+                    }
+                });
     }
 }

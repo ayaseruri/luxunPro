@@ -2,74 +2,51 @@ package pro.luxun.luxunanimation.utils;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+import io.reactivex.Observable;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.net.RetrofitClient;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
+import ykooze.ayaseruri.codesslib.io.SerializeUtils;
 
 /**
  * Created by wufeiyang on 16/5/16.
  */
 public class MainJasonHelper {
 
+    private static final String TAG_MAIN_JSON = "main_json";
+    private static final String TAG_BANGUMIS = "bangumis";
+
     private static MainJson sMainJson;
     private static ArrayList<String> sBangumis;
 
-    public static void saveMainJson(final MainJson mainJson){
+    public static void saveMainJson(Context context, final MainJson mainJson){
         sMainJson = mainJson;
-        Observable.create(new Observable.OnSubscribe<Boolean>() {
-            @Override
-            public void call(Subscriber<? super Boolean> subscriber) {
-                SerializeUtils.serialization(SerializeUtils.TAG_MAIN_JSON, mainJson);
-                subscriber.onNext(true);
-                subscriber.onCompleted();
-            }
-        }).compose(RxUtils.<Boolean>applySchedulers()).subscribe(new Action1<Boolean>() {
-            @Override
-            public void call(Boolean aBoolean) {
-
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
-
-            }
-        });
+        SerializeUtils.serialization(context, TAG_MAIN_JSON, mainJson);
     }
 
-    public static void saveBangumis(final ArrayList<String> bangumis){
+    public static void saveBangumis(Context context, final ArrayList<String> bangumis){
         sBangumis = bangumis;
-        Observable.create(new Observable.OnSubscribe<Boolean>() {
-            @Override
-            public void call(Subscriber<? super Boolean> subscriber) {
-                SerializeUtils.serialization(SerializeUtils.TAG_BANGUMIS, bangumis);
-                subscriber.onNext(true);
-                subscriber.onCompleted();
-            }
-        }).compose(RxUtils.<Boolean>applySchedulers()).subscribe(new Action1<Boolean>() {
-            @Override
-            public void call(Boolean aBoolean) {
-
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
-
-            }
-        });
+        SerializeUtils.serialization(context, TAG_BANGUMIS, bangumis);
     }
 
-    public static MainJson getMainJsonCache() {
+    public static MainJson getMainJsonCache(Context context) {
         if(null == sMainJson){
-            sMainJson = (MainJson) SerializeUtils.deserialization(SerializeUtils.TAG_MAIN_JSON, true);
+            synchronized(MainJasonHelper.class){
+                if(null == sMainJson){
+                    sMainJson = (MainJson) SerializeUtils.deserializationSync(context, TAG_MAIN_JSON, true);
+                }
+            }
         }
         return sMainJson;
     }
 
-    public static ArrayList<String> getBangumisCache(){
+    public static ArrayList<String> getBangumisCache(Context context){
         if(null == sBangumis){
-            sBangumis = (ArrayList<String>) SerializeUtils.deserialization(SerializeUtils.TAG_BANGUMIS, true);
+            synchronized(MainJasonHelper.class){
+                if(null == sBangumis){
+                    sBangumis = (ArrayList<String>) SerializeUtils.deserializationSync(context, TAG_BANGUMIS, true);
+                }
+            }
         }
         return sBangumis;
     }

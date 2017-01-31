@@ -1,10 +1,9 @@
 package pro.luxun.luxunanimation.utils;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.Danmaku;
 import pro.luxun.luxunanimation.bean.MainJson;
@@ -55,9 +54,9 @@ public class JsonUtils {
         return updatingEntities;
     }
 
-    public static ArrayList<MainJson.UpdatingEntity> animationNames2Infos(List<String> names){
+    public static ArrayList<MainJson.UpdatingEntity> animationNames2Infos(Context context, ArrayList<String> names){
         ArrayList<MainJson.UpdatingEntity> entities = new ArrayList<>();
-        MainJson mainJson = MainJasonHelper.getMainJsonCache();
+        MainJson mainJson = MainJasonHelper.getMainJsonCache(context);
 
         for(String name : names){
             for(MainJson.UpdatingEntity updatingEntity : mainJson.getUpdating()){

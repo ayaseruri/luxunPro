@@ -1,11 +1,5 @@
 package pro.luxun.luxunanimation.view.activity;
 
-import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
@@ -13,7 +7,13 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringArrayRes;
 import org.androidannotations.annotations.res.StringRes;
 
+import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import io.reactivex.functions.Consumer;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.Auth;
 import pro.luxun.luxunanimation.bean.MainJson;
@@ -21,17 +21,17 @@ import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.ViewPagerAdapter;
 import pro.luxun.luxunanimation.presenter.presenter.MainActivityPresenter;
-import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
 import pro.luxun.luxunanimation.view.fragment.MainFragment_;
 import pro.luxun.luxunanimation.view.fragment.MeFragment_;
 import pro.luxun.luxunanimation.view.fragment.TopicFragment_;
 import pro.luxun.luxunanimation.view.view.Update;
-import rx.functions.Action1;
+import ykooze.ayaseruri.codesslib.rx.RxActivity;
+import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity implements INetCacheData<MainJson> {
+public class MainActivity extends RxActivity implements INetCacheData<MainJson> {
 
     @ViewById(R.id.toolbar)
     Toolbar mToolbar;
@@ -58,7 +58,7 @@ public class MainActivity extends BaseActivity implements INetCacheData<MainJson
         mToolbar.setTitle(R.string.app_name);
         setSupportActionBar(mToolbar);
 
-        mMainActivityPresenter = new MainActivityPresenter(this);
+        mMainActivityPresenter = new MainActivityPresenter(this, this);
 
         mMainActivityPresenter.getMainJsonNetSilent();
         mMainActivityPresenter.getMainJsonCache();
@@ -69,19 +69,14 @@ public class MainActivity extends BaseActivity implements INetCacheData<MainJson
     @Override
     protected void onResume() {
         super.onResume();
-        if(UserInfoHelper.isLogin()){
+        if(UserInfoHelper.isLogin(this)){
             RetrofitClient.getApiService().refreshAuth(RetrofitClient.URL_REFRESH_AUTH
-                    , Utils.str2RequestBody(UserInfoHelper.getUserInfo().getSss()))
+                    , Utils.str2RequestBody(UserInfoHelper.getUserInfo(this).getSss()))
                     .compose(RxUtils.<Auth.UserEntity>applySchedulers())
-                    .subscribe(new Action1<Auth.UserEntity>() {
+                    .subscribe(new Consumer<Auth.UserEntity>() {
                         @Override
-                        public void call(Auth.UserEntity userEntity) {
-                            UserInfoHelper.save(userEntity);
-                        }
-                    }, new Action1<Throwable>() {
-                        @Override
-                        public void call(Throwable throwable) {
-
+                        public void accept(Auth.UserEntity userEntity) throws Exception {
+                            UserInfoHelper.save(MainActivity.this, userEntity);
                         }
                     });
 
@@ -149,9 +144,5 @@ public class MainActivity extends BaseActivity implements INetCacheData<MainJson
 
         mTabLayout.setVisibility(View.VISIBLE);
         mTabLayout.setupWithViewPager(mViewPager);
-    }
-
-    public MainActivityPresenter getMainActivityPresenter() {
-        return mMainActivityPresenter;
     }
 }

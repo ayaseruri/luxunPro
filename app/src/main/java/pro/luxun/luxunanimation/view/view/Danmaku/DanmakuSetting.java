@@ -1,16 +1,15 @@
 package pro.luxun.luxunanimation.view.view.Danmaku;
 
+import org.androidannotations.annotations.EBean;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
-
-import org.androidannotations.annotations.EBean;
-
 import pro.luxun.luxunanimation.R;
-import pro.luxun.luxunanimation.utils.LocalDisplay;
 import pro.luxun.luxunanimation.view.view.ColorPalette;
+import ykooze.ayaseruri.codesslib.ui.LocalDisplay;
 
 /**
  * Created by wufeiyang on 16/5/24.

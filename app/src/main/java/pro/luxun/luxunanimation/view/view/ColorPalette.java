@@ -1,18 +1,17 @@
 package pro.luxun.luxunanimation.view.view;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.res.IntArrayRes;
+
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.res.IntArrayRes;
-
 import pro.luxun.luxunanimation.R;
-import pro.luxun.luxunanimation.utils.LocalDisplay;
+import ykooze.ayaseruri.codesslib.ui.LocalDisplay;
 
 /**
  * Created by wufeiyang on 16/5/24.

@@ -1,5 +1,12 @@
 package pro.luxun.luxunanimation.view.fragment;
 
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.res.ColorRes;
+import org.androidannotations.annotations.res.StringRes;
+
+import com.bumptech.glide.Glide;
+import com.commit451.nativestackblur.NativeStackBlur;
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,16 +23,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.commit451.nativestackblur.NativeStackBlur;
-
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.res.ColorRes;
-import org.androidannotations.annotations.res.StringRes;
-
-import java.util.concurrent.ExecutionException;
-
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.Auth;
@@ -34,12 +37,9 @@ import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.ViewPagerAdapter;
 import pro.luxun.luxunanimation.utils.AuthInfoHelper;
-import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.StartUtils;
 import pro.luxun.luxunanimation.utils.UserInfoHelper;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
+import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
 /**
  * Created by wufeiyang on 16/5/17.
@@ -97,16 +97,10 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             @Override
             public void onClick(View v) {
             mApiService.getToken(RetrofitClient.URL_AUTH_JSON, AUTH_STR).compose(RxUtils.<GetToken>applySchedulers())
-                    .subscribe(new Subscriber<GetToken>() {
+                    .subscribe(new Observer<GetToken>() {
                         @Override
-                        public void onCompleted() {
-                            mProgressBar.setVisibility(View.GONE);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            Snackbar.make(mRelativeLayout, mAuthFailed, Snackbar.LENGTH_LONG).show();
-                            mProgressBar.setVisibility(View.GONE);
+                        public void onSubscribe(Disposable d) {
+                            mProgressBar.setVisibility(View.VISIBLE);
                         }
 
                         @Override
@@ -124,8 +118,14 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                         }
 
                         @Override
-                        public void onStart() {
-                            mProgressBar.setVisibility(View.VISIBLE);
+                        public void onError(Throwable e) {
+                            Snackbar.make(mRelativeLayout, mAuthFailed, Snackbar.LENGTH_LONG).show();
+                            mProgressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            mProgressBar.setVisibility(View.GONE);
                         }
                     });
             }
@@ -148,8 +148,8 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     }
 
     private void initUserInfo(){
-        if(UserInfoHelper.isLogin()){
-            final Auth.UserEntity userEntity = UserInfoHelper.getUserInfo();
+        if(UserInfoHelper.isLogin(mActivity)){
+            final Auth.UserEntity userEntity = UserInfoHelper.getUserInfo(mActivity);
             Glide.with(mActivity).load(userEntity.getAvatar()).centerCrop().crossFade().into(mAvatar);
 
             mLoginBtn.setVisibility(View.GONE);
@@ -159,30 +159,17 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             mUserName.setText(userEntity.getName());
             mUserDes.setText(TextUtils.isEmpty(userEntity.getDes()) ? "暂无简介" : userEntity.getDes());
 
-            Observable.create(new Observable.OnSubscribe<Bitmap>() {
+            Observable.create(new ObservableOnSubscribe<Bitmap>() {
                 @Override
-                public void call(Subscriber<? super Bitmap> subscriber) {
-                    try {
-                        Bitmap bitmap = Glide.with(mActivity).load(userEntity.getAvatar()).asBitmap().into(400, 400).get();
-                        subscriber.onNext(NativeStackBlur.process(bitmap, 30));
-                        subscriber.onCompleted();
-                    } catch (InterruptedException e) {
-                        subscriber.onError(e);
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        subscriber.onError(e);
-                        e.printStackTrace();
-                    }
+                public void subscribe(ObservableEmitter<Bitmap> e) throws Exception {
+                    Bitmap bitmap = Glide.with(mActivity).load(userEntity.getAvatar()).asBitmap().into(400, 400).get();
+                    e.onNext(NativeStackBlur.process(bitmap, 30));
+                    e.onComplete();
                 }
-            }).compose(RxUtils.<Bitmap>applySchedulers()).subscribe(new Action1<Bitmap>() {
+            }).compose(RxUtils.<Bitmap>applySchedulers()).subscribe(new Consumer<Bitmap>() {
                 @Override
-                public void call(Bitmap bitmap) {
+                public void accept(Bitmap bitmap) throws Exception {
                     mHeaderImg.setImageBitmap(bitmap);
-                }
-            }, new Action1<Throwable>() {
-                @Override
-                public void call(Throwable throwable) {
-
                 }
             });
         }else {
@@ -200,10 +187,16 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             mTmpToken = AuthInfoHelper.getAuthToken();
             Snackbar.make(mRelativeLayout, mAuthIng, Snackbar.LENGTH_LONG).show();
             mApiService.auth(RetrofitClient.URL_AUTH_JSON + mTmpToken).compose(RxUtils.<Auth>applySchedulers())
-                    .subscribe(new Subscriber<Auth>() {
+                    .subscribe(new Observer<Auth>() {
                         @Override
-                        public void onCompleted() {
-                            mProgressBar.setVisibility(View.GONE);
+                        public void onSubscribe(Disposable d) {
+                            mProgressBar.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onNext(Auth auth) {
+                            UserInfoHelper.save(mActivity, auth.getUser());
+                            onRefresh();
                         }
 
                         @Override
@@ -213,14 +206,8 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                         }
 
                         @Override
-                        public void onNext(Auth auth) {
-                            UserInfoHelper.save(auth.getUser());
-                            onRefresh();
-                        }
-
-                        @Override
-                        public void onStart() {
-                            mProgressBar.setVisibility(View.VISIBLE);
+                        public void onComplete() {
+                            mProgressBar.setVisibility(View.GONE);
                         }
                     });
         }else {

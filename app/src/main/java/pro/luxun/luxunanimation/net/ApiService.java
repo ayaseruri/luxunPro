@@ -3,8 +3,8 @@ package pro.luxun.luxunanimation.net;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import pro.luxun.luxunanimation.bean.Auth;
 import pro.luxun.luxunanimation.bean.Comment;
 import pro.luxun.luxunanimation.bean.Danmaku;
@@ -14,12 +14,12 @@ import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.bean.PostLikeComment;
 import pro.luxun.luxunanimation.bean.SubComment;
 import pro.luxun.luxunanimation.bean.TopicJson;
+import pro.luxun.luxunanimation.bean.Update;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Url;
-import rx.Observable;
 
 /**
  * Created by wufeiyang on 16/5/7.
@@ -29,7 +29,7 @@ public interface ApiService {
     Observable<MainJson> getMainJson(@Url String url);
 
     @GET
-    Observable<List<TopicJson>> getTopicJson(@Url String url);
+    Observable<ArrayList<TopicJson>> getTopicJson(@Url String url);
 
     @Multipart
     @POST
@@ -75,7 +75,7 @@ public interface ApiService {
             , @Part("type") RequestBody type);
 
     @GET
-    Observable<ResponseBody> checkUpdate(@Url String url);
+    Observable<Update> checkUpdate(@Url String url);
 
     @Multipart
     @POST

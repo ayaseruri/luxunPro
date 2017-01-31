@@ -1,15 +1,14 @@
 package pro.luxun.luxunanimation.presenter.adapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.support.annotation.UiThread;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.utils.JsonUtils;
 import pro.luxun.luxunanimation.utils.MainJasonHelper;
@@ -32,9 +31,11 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
 
     private String mKeywords;
     private List<MainJson.UpdatingEntity> mUpdatingEntities;
+    private Context mContext;
 
     public MainFragmentAdapter(Context context) {
-        this.mUpdatingEntities = JsonUtils.formatMF(context, MainJasonHelper.getMainJsonCache());
+        mContext = context;
+        this.mUpdatingEntities = JsonUtils.formatMF(context, MainJasonHelper.getMainJsonCache(context));
     }
 
     @Override
@@ -73,8 +74,8 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
             switch (getItemViewType(position)){
                 case TYPE_NORMAL:
                     MainJson.UpdatingEntity updatingEntity = mUpdatingEntities.get(position - 1);
-                    if(UserInfoHelper.isLogin()){
-                        ArrayList<String> bangumis = MainJasonHelper.getBangumisCache();
+                    if(UserInfoHelper.isLogin(mContext)){
+                        ArrayList<String> bangumis = MainJasonHelper.getBangumisCache(mContext);
                         if(null != bangumis){
                             updatingEntity.setSub(bangumis.contains(updatingEntity.getTitle()));
                         }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<ImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="pro.luxun.luxunanimation.view.activity.SplashActivity">
-
-</merge>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@mipmap/splash_bg"
+    android:scaleType="centerCrop"
+    tools:context="pro.luxun.luxunanimation.view.activity.SplashActivity"/>

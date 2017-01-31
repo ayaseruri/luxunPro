@@ -1,5 +1,7 @@
 package pro.luxun.luxunanimation.view.fragment;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,21 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.List;
-
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.Comment;
-import pro.luxun.luxunanimation.global.MApplication;
-import pro.luxun.luxunanimation.global.MApplication_;
 import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
 import pro.luxun.luxunanimation.presenter.adapter.BaseRecyclerAdapter;
-import pro.luxun.luxunanimation.utils.RxUtils;
 import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.view.view.CommentItem;
 import pro.luxun.luxunanimation.view.view.CommentItem_;
-import rx.Subscriber;
+import ykooze.ayaseruri.codesslib.others.ToastUtils;
+import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
 /**
  * Created by wufeiyang on 16/5/21.
@@ -79,7 +78,7 @@ public class LikeCommentFragment extends BaseFragment {
     }
 
     public void refresh(final IOnRefreshComplete refreshComplete){
-        if(UserInfoHelper.isLogin()){
+        if(UserInfoHelper.isLogin(mActivity)){
             if(null == mEmptyText){
                 return;
             }
@@ -89,26 +88,31 @@ public class LikeCommentFragment extends BaseFragment {
                 return;
             }
             mApiService.getlikeComment(RetrofitClient.URL_LIKE_COMMENT).compose(RxUtils.<List<Comment>>applySchedulers())
-                    .subscribe(new Subscriber<List<Comment>>() {
+                    .subscribe(new Observer<List<Comment>>() {
                         @Override
-                        public void onCompleted() {
-                            if(null != refreshComplete){
-                                refreshComplete.onComplete();
-                            }
-                        }
+                        public void onSubscribe(Disposable d) {
 
-                        @Override
-                        public void onError(Throwable e) {
-                            e.printStackTrace();
-                            MApplication_.getInstance().showToast("加载失败…", MApplication.TOAST_ALERT);
-                            if(null != refreshComplete){
-                                refreshComplete.onComplete();
-                            }
                         }
 
                         @Override
                         public void onNext(List<Comment> comments) {
                             mAdapter.refresh(comments);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            e.printStackTrace();
+                            ToastUtils.showTost(mActivity, ToastUtils.TOAST_ALERT, "加载失败…");
+                            if(null != refreshComplete){
+                                refreshComplete.onComplete();
+                            }
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            if(null != refreshComplete){
+                                refreshComplete.onComplete();
+                            }
                         }
                     });
         }else {

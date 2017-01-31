@@ -1,5 +1,13 @@
 package pro.luxun.luxunanimation.view.view;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EViewGroup;
+import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.ColorRes;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -10,15 +18,6 @@ import android.text.Html;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EViewGroup;
-import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.ColorRes;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import pro.luxun.luxunanimation.R;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.bean.TopicJson;
@@ -72,8 +71,8 @@ public class TopicItem extends CardView{
 
             @Override
             protected void onBindView(MFAnimationItem mfAnimationItem, MainJson.UpdatingEntity updatingEntity) {
-                if(UserInfoHelper.isLogin()){
-                    ArrayList<String> bangumis = MainJasonHelper.getBangumisCache();
+                if(UserInfoHelper.isLogin(getContext())){
+                    ArrayList<String> bangumis = MainJasonHelper.getBangumisCache(getContext());
                     if(null != bangumis){
                         updatingEntity.setSub(bangumis.contains(updatingEntity.getTitle()));
                     }
@@ -93,7 +92,8 @@ public class TopicItem extends CardView{
         mTitle.setText(Html.fromHtml(topicJson.getTitle()));
         mDetails.setText(Html.fromHtml(topicJson.getText()));
 
-        ArrayList<MainJson.UpdatingEntity> infos = JsonUtils.animationNames2Infos(Arrays.asList(topicJson.getBangumis().split("\n")));
+        ArrayList<MainJson.UpdatingEntity> infos = JsonUtils.animationNames2Infos(getContext(),
+                new ArrayList<>(Arrays.asList(topicJson.getBangumis().split("\n"))));
 
         int bgColor = Color.parseColor("#" + infos.get(0).getColor());
         setCardBackgroundColor(bgColor);
