@@ -88,6 +88,11 @@ public class TopicFragment extends BaseFragment implements SwipeRefreshLayout.On
     }
 
     @Override
+    public void onGetJsonCacheStart() {
+
+    }
+
+    @Override
     public void onGetJsonCacheSuccess(ArrayList<TopicJson> topicJsons) {
         mBaseRecyclerAdapter.refresh(topicJsons);
     }

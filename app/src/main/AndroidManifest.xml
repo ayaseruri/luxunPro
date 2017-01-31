@@ -17,38 +17,35 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
-        <meta-data android:value="574c4fb767e58e8520001624" android:name="UMENG_APPKEY" />
-        <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/>
-
-        <activity android:name=".view.activity.MainActivity_"
-            android:launchMode="singleTask">
-            <intent-filter>
-                <data android:scheme="luxun" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".view.activity.AnimationDetailActivity_"
-                  android:windowSoftInputMode="adjustPan">
-        </activity>
-        <activity
-            android:name=".view.activity.VideoActivity_"
-            android:theme="@style/AppTheme.VideoTheme"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
         <activity android:name=".view.activity.SplashActivity_"
             android:theme="@style/AppTheme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
 
+        <activity android:name=".view.activity.MainActivity_"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <data android:scheme="luxun" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".view.activity.AnimationDetailActivity_"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
+            android:name=".view.activity.VideoActivity_"
+            android:theme="@style/AppTheme.VideoTheme"
+            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"/>
+    </application>
 </manifest>

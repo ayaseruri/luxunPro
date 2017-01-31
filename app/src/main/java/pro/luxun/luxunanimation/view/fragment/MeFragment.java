@@ -35,10 +35,10 @@ import pro.luxun.luxunanimation.bean.Auth;
 import pro.luxun.luxunanimation.bean.GetToken;
 import pro.luxun.luxunanimation.net.ApiService;
 import pro.luxun.luxunanimation.net.RetrofitClient;
-import pro.luxun.luxunanimation.presenter.adapter.ViewPagerAdapter;
 import pro.luxun.luxunanimation.utils.AuthInfoHelper;
 import pro.luxun.luxunanimation.utils.StartUtils;
 import pro.luxun.luxunanimation.utils.UserInfoHelper;
+import ykooze.ayaseruri.codesslib.adapter.ViewPagerFragmentAdapter;
 import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
 /**
@@ -74,7 +74,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     private MaterialProgressBar mProgressBar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-    private ViewPagerAdapter pagerAdapter;
+    private ViewPagerFragmentAdapter mPagerAdapter;
 
     @Nullable
     @Override
@@ -131,12 +131,12 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             }
         });
 
-        pagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        mPagerAdapter = new ViewPagerFragmentAdapter(getChildFragmentManager());
 
-        pagerAdapter.add(new BangumiFragment(), "我的追番");
-        pagerAdapter.add(new LikeCommentFragment(), "喜欢番评");
+        mPagerAdapter.add(new BangumiFragment(), "我的追番");
+        mPagerAdapter.add(new LikeCommentFragment(), "喜欢番评");
 
-        mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setAdapter(mPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
         mApiService = RetrofitClient.getApiService();
@@ -224,7 +224,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     @Override
     public void onRefresh() {
         initUserInfo();
-        ((BangumiFragment)pagerAdapter.instantiateItem(mViewPager, POSTION_BANGUMI))
+        ((BangumiFragment)mPagerAdapter.instantiateItem(mViewPager, POSTION_BANGUMI))
                 .refresh(new BangumiFragment.IOnRefreshComplete() {
                     @Override
                     public void onComplete() {
@@ -232,7 +232,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                     }
                 });
 
-        ((LikeCommentFragment)pagerAdapter.instantiateItem(mViewPager, POSTION_LIKE_COMMENT))
+        ((LikeCommentFragment)mPagerAdapter.instantiateItem(mViewPager, POSTION_LIKE_COMMENT))
                 .refresh(new LikeCommentFragment.IOnRefreshComplete() {
                     @Override
                     public void onComplete() {

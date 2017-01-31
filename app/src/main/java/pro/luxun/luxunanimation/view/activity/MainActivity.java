@@ -19,7 +19,6 @@ import pro.luxun.luxunanimation.bean.Auth;
 import pro.luxun.luxunanimation.bean.MainJson;
 import pro.luxun.luxunanimation.global.IntentConstant;
 import pro.luxun.luxunanimation.net.RetrofitClient;
-import pro.luxun.luxunanimation.presenter.adapter.ViewPagerAdapter;
 import pro.luxun.luxunanimation.presenter.presenter.MainActivityPresenter;
 import pro.luxun.luxunanimation.utils.UserInfoHelper;
 import pro.luxun.luxunanimation.utils.Utils;
@@ -27,6 +26,7 @@ import pro.luxun.luxunanimation.view.fragment.MainFragment_;
 import pro.luxun.luxunanimation.view.fragment.MeFragment_;
 import pro.luxun.luxunanimation.view.fragment.TopicFragment_;
 import pro.luxun.luxunanimation.view.view.Update;
+import ykooze.ayaseruri.codesslib.adapter.ViewPagerFragmentAdapter;
 import ykooze.ayaseruri.codesslib.rx.RxActivity;
 import ykooze.ayaseruri.codesslib.rx.RxUtils;
 
@@ -60,8 +60,8 @@ public class MainActivity extends RxActivity implements INetCacheData<MainJson> 
 
         mMainActivityPresenter = new MainActivityPresenter(this, this);
 
-        mMainActivityPresenter.getMainJsonNetSilent();
         mMainActivityPresenter.getMainJsonCache();
+        mMainActivityPresenter.getMainJsonNet();
 
         mUpdate.checkUpdate(true);
     }
@@ -85,19 +85,12 @@ public class MainActivity extends RxActivity implements INetCacheData<MainJson> 
 
     @Override
     public void onStartGetJsonNet() {
-        mAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        mAlertDialog.setTitleText(mLoadingStr);
-        mAlertDialog.show();
+
     }
 
     @Override
     public void onGetJsonSuccessNet(MainJson mainJson) {
-        if(null != mAlertDialog && mAlertDialog.isShowing()){
-            mAlertDialog.dismiss();
-        }
-
-        //初始化Fragments
-        initMain();
+        onGetJsonCacheSuccess(mainJson);
     }
 
     @Override
@@ -106,18 +99,42 @@ public class MainActivity extends RxActivity implements INetCacheData<MainJson> 
             mAlertDialog.changeAlertType(SweetAlertDialog.ERROR_TYPE);
             mAlertDialog.setTitleText(mNetError);
             mAlertDialog.setConfirmText(mRetry);
-            mAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            mAlertDialog.showCancelButton(true);
+            mAlertDialog.setCancelText("退出");
+            mAlertDialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                 @Override
                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                     mAlertDialog.dismiss();
+                    finish();
+                }
+            });
+            mAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    mAlertDialog.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
+                    mAlertDialog.setTitleText(mLoadingStr);
                     mMainActivityPresenter.getMainJsonNet();
                 }
             });
+        }else {
+            finish();
         }
     }
 
     @Override
+    public void onGetJsonCacheStart() {
+        mAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        mAlertDialog.setTitleText(mLoadingStr);
+        mAlertDialog.show();
+    }
+
+    @Override
     public void onGetJsonCacheSuccess(MainJson mainJson) {
+        if(null != mAlertDialog && mAlertDialog.isShowing()){
+            mAlertDialog.dismiss();
+        }
+
+        //初始化Fragments
         initMain();
     }
 
@@ -134,7 +151,7 @@ public class MainActivity extends RxActivity implements INetCacheData<MainJson> 
     }
 
     private void initMain(){
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ViewPagerFragmentAdapter viewPagerAdapter = new ViewPagerFragmentAdapter(getSupportFragmentManager());
         viewPagerAdapter.add(MeFragment_.builder().build(), mMainTabTitles[0]);
         viewPagerAdapter.add(MainFragment_.builder().build(), mMainTabTitles[1]);
         viewPagerAdapter.add(TopicFragment_.builder().build(), mMainTabTitles[3]);

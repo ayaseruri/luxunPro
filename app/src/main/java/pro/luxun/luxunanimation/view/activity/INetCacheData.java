@@ -7,6 +7,7 @@ public interface INetCacheData<T> {
     void onStartGetJsonNet();
     void onGetJsonSuccessNet(T t);
     void onGetJsonErrorNet();
+    void onGetJsonCacheStart();
     void onGetJsonCacheSuccess(T t);
     void onGetJsonCacheFailed();
 }

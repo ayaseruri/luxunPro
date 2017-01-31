@@ -15,7 +15,7 @@ import ykooze.ayaseruri.codesslib.rx.RxActivity;
 @EActivity(R.layout.activity_splash)
 public class SplashActivity extends RxActivity {
 
-    private static final int TIME_SPLASH = 0;
+    private static final short TIME_SPLASH = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
